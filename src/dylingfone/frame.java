@@ -37,6 +37,7 @@ public class frame extends JFrame implements ActionListener {
 	private JPanel Backpanel;
 	private JPanel contacts;
 	private JPanel gallery;
+	public String navState ;
 	
 
 	/**
@@ -134,14 +135,14 @@ public class frame extends JFrame implements ActionListener {
 		btnGallery.addActionListener(this);
 		btnGallery.setActionCommand("openGallery");
 		
-		initializeBackPannel();
+		initializeBackPannel(navState);
 		initializecontacts();
 		initializegallery();	
 	
 		
 	}
 	
-	private void initializeBackPannel() {
+	private void initializeBackPannel(String args) {
 		
 		Backpanel = new JPanel();
 		Backpanel.setBounds(23, 88, 320, 44);
@@ -157,7 +158,7 @@ public class frame extends JFrame implements ActionListener {
 		btnBack.addActionListener(this);
 		btnBack.setActionCommand("back");
 		
-			JLabel label_1 = new JLabel("appName");
+			JLabel label_1 = new JLabel(args);
 			label_1.setBounds(130, 14, 56, 16);
 			Backpanel.add(label_1);
 	
@@ -173,16 +174,12 @@ public class frame extends JFrame implements ActionListener {
 		contacts.setBackground(Color.RED);
 		contacts.setVisible(false);
 
-		
-		
 	}
+	
+	
 	private void initializegallery() {
 		
-		
-		
-			
-			
-		
+	
 		gallery = new JPanel();
 		gallery.setBounds(23, 88, 320, 553);
 		frame.getContentPane().add(gallery);
@@ -208,25 +205,36 @@ public class frame extends JFrame implements ActionListener {
 
 		if (action.equals("Unlock")) {
 
+			navState = "home";
+			
+			
 			lockScreen.setVisible(false);
+			
 			
 		}
 
 		if (action.equals("openContacts")) {
 			
-
+			navState = "Contacts";
+			Backpanel.repaint();
+			
 			homeScreen.setVisible(false);
 			contacts.setVisible(true);
 			Backpanel.setVisible(true);
+			
 
 
 		}
 		
 		if (action.equals("openGallery")) {
 			
+			navState = "Gallery";
+			Backpanel.repaint();
+			
 			homeScreen.setVisible(false);
 			gallery.setVisible(true);
 			Backpanel.setVisible(true);
+			
 
 		}
 		
@@ -241,8 +249,6 @@ public class frame extends JFrame implements ActionListener {
 		
 		
 		
-		
-	
 	}
 
 	public Color getFrameContentPaneBackground() {
