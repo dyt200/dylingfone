@@ -28,6 +28,13 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import javax.swing.SwingConstants;
+import javax.swing.JSpinner;
+
+
 
 public class frame extends JFrame implements ActionListener {
 
@@ -37,7 +44,11 @@ public class frame extends JFrame implements ActionListener {
 	private JPanel Backpanel;
 	private JPanel contacts;
 	private JPanel gallery;
-	public String navState ;
+	public String navState = "appName" ;
+	private JButton galleryButton;
+	private JButton contactButton;
+	private JButton button;
+	private JPanel blackPanel;
 	
 
 	/**
@@ -83,8 +94,32 @@ public class frame extends JFrame implements ActionListener {
 		/**
 		 * Generates the image of the iPhone
 		 */
+		
+		blackPanel = new JPanel();
+		blackPanel.setBackground(Color.BLACK);
+		blackPanel.setLayout(null);
+		blackPanel.setBounds(23, 87, 321, 553);
+		frame.getContentPane().add(blackPanel);
+	
+		
+		JButton homeBtn = new JButton("back");
+		homeBtn.setBounds(144, 638, 91, 68);
+		frame.getContentPane().add(homeBtn);
+		
+		Image backBtnIcon = new ImageIcon(this.getClass().getResource("/Home-Button.png")).getImage();
+		Image scaledBackBtnIcon = backBtnIcon.getScaledInstance(60, 60,  java.awt.Image.SCALE_SMOOTH);
+		homeBtn.setIcon(new ImageIcon(scaledBackBtnIcon) );
+		
+		homeBtn.setBorderPainted(false);
+		homeBtn.setFocusPainted(false);
+		homeBtn.setContentAreaFilled(false);
+		homeBtn.addActionListener(this);
+		homeBtn.setActionCommand("goToHome");
+		
+		
+		
+		
 		JLabel label = new JLabel();
-
 		label.setBounds(0, -35, 393, 794);
 		Image Outline = new ImageIcon(this.getClass().getResource("/iPhone-frame.png")).getImage();
 		label.setIcon(new ImageIcon(Outline));
@@ -104,44 +139,86 @@ public class frame extends JFrame implements ActionListener {
 
 	private void initializeHomeScreen() {
 		
-				lockScreen = new JPanel();
-				lockScreen.setBounds(23, 88, 320, 553);
-				frame.getContentPane().add(lockScreen);
-				lockScreen.setLayout(null);
-				
+		lockScreen = new JPanel();
+		lockScreen.setBounds(23, 88, 320, 553);
+		frame.getContentPane().add(lockScreen);
+		lockScreen.setLayout(null);
+		
+		
+		
 
-				JButton btnEnter = new JButton("Enter");
+		JButton btnEnter = new JButton("Enter");
+		
+				btnEnter.setBounds(105, 515, 97, 25);
+				lockScreen.add(btnEnter);
+				btnEnter.addActionListener(this);
+				btnEnter.setActionCommand("Unlock");
+
+		
 				
-						btnEnter.setBounds(105, 515, 97, 25);
-						lockScreen.add(btnEnter);
-						btnEnter.addActionListener(this);
-						btnEnter.setActionCommand("Unlock");
+				homeScreen = new JPanel();
+				homeScreen.setBackground(Color.DARK_GRAY);
+				homeScreen.setBounds(23, 88, 320, 553);
+				frame.getContentPane().add(homeScreen);
+				GridBagLayout gbl_homeScreen = new GridBagLayout();
+				gbl_homeScreen.columnWidths = new int[] {45, 45, 45, 45, 45, 45};
+				gbl_homeScreen.rowHeights = new int[]{38, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+				gbl_homeScreen.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+				gbl_homeScreen.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+				homeScreen.setLayout(gbl_homeScreen);
+
+			
+				
+				Image contactIcon = new ImageIcon(this.getClass().getResource("/contactIcon.png")).getImage();
+				Image scaledContactIcon = contactIcon.getScaledInstance(60, 60,  java.awt.Image.SCALE_SMOOTH);
+				
+	
+				contactButton = new JButton();
+				contactButton.setBackground(Color.BLACK);
+				contactButton.setIcon(new ImageIcon(scaledContactIcon) );
+				
+				contactButton.setBorderPainted(false);
+				contactButton.setFocusPainted(false);
+				contactButton.setContentAreaFilled(false);
+				contactButton.addActionListener(this);
+				contactButton.setRolloverEnabled(false);
+				contactButton.setActionCommand("openContacts");
+				
+				GridBagConstraints gbc_contactButton = new GridBagConstraints();
+				gbc_contactButton.insets = new Insets(0, 0, 5, 5);
+				gbc_contactButton.gridx = 1;
+				gbc_contactButton.gridy = 1; 
+				homeScreen.add(contactButton, gbc_contactButton);
+			
+				
+				
+				galleryButton = new JButton();
+				Image galleryIcon = new ImageIcon(this.getClass().getResource("/galleryIcon.png")).getImage();
+				Image scaledGalleryIcon = galleryIcon.getScaledInstance(60, 60,  java.awt.Image.SCALE_SMOOTH);
+				
+				galleryButton.setIcon(new ImageIcon(scaledGalleryIcon) );
+				GridBagConstraints gbc_galleryButton = new GridBagConstraints();
+				
+				galleryButton.setBorderPainted(false);
+				galleryButton.setFocusPainted(false);
+				galleryButton.setContentAreaFilled(false);
+				galleryButton.setRolloverEnabled(false);
+				galleryButton.addActionListener(this);
+				galleryButton.setActionCommand("openGallery");
+				
+				gbc_galleryButton.insets = new Insets(0, 0, 5, 5);
+				gbc_galleryButton.gridx = 2;
+				gbc_galleryButton.gridy = 1;
+				homeScreen.add(galleryButton, gbc_galleryButton);
 		
-		homeScreen = new JPanel();
-		homeScreen.setBounds(23, 88, 320, 553);
-		frame.getContentPane().add(homeScreen);
-		homeScreen.setLayout(null);
-		
-		
-		JButton btnContacts = new JButton("c");
-		btnContacts.setBounds(38, 38, 45, 25);
-		homeScreen.add(btnContacts);
-		btnContacts.addActionListener(this);
-		btnContacts.setActionCommand("openContacts");
-		
-		JButton btnGallery = new JButton("g");
-		btnGallery.setBounds(84, 38, 45, 25);
-		homeScreen.add(btnGallery);
-		btnGallery.addActionListener(this);
-		btnGallery.setActionCommand("openGallery");
-		
+			
 		initializeBackPannel(navState);
 		initializecontacts();
 		initializegallery();	
 	
 		
 	}
-	
+
 	private void initializeBackPannel(String args) {
 		
 		Backpanel = new JPanel();
@@ -173,6 +250,8 @@ public class frame extends JFrame implements ActionListener {
 		frame.getContentPane().add(contacts);
 		contacts.setBackground(Color.RED);
 		contacts.setVisible(false);
+		
+		
 
 	}
 	
@@ -184,6 +263,16 @@ public class frame extends JFrame implements ActionListener {
 		gallery.setBounds(23, 88, 320, 553);
 		frame.getContentPane().add(gallery);
 		gallery.setBackground(Color.CYAN);
+		
+		button = new JButton("");
+		button.setBackground(Color.BLACK);
+	
+		button.setBounds(254, 3, 47, 8);
+		
+		button.setBorderPainted(false);
+		
+		
+				frame.getContentPane().add(button);
 		gallery.setVisible(false);
 			
 		
@@ -238,7 +327,7 @@ public class frame extends JFrame implements ActionListener {
 
 		}
 		
-	if (action.equals("back")) {
+	if (action.equals("goToHome") ) {
 		
 			homeScreen.setVisible(true);
 			contacts.setVisible(false);
@@ -246,6 +335,15 @@ public class frame extends JFrame implements ActionListener {
 			Backpanel.setVisible(false);
 			
 		}
+	
+	if (action.equals("back") ) {
+		
+		homeScreen.setVisible(true);
+		contacts.setVisible(false);
+		gallery.setVisible(false);
+		Backpanel.setVisible(false);
+		
+	}
 		
 		
 		
