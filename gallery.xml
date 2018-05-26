@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<gallery>
+	<image id="1">
+		<file>./images/mario.jpg</file>
+		<title>My First Picture</title>
+		<description>This is my very first picture!</description>
+	</image>
+</gallery>

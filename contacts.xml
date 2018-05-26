@@ -1,0 +1,175 @@
+<contacts>
+    	
+    <contact id="1">
+        		
+        <firstName>Ben</firstName>
+        		
+        <lastName>Pocklington</lastName>
+        		
+        <birthDate>17.03.1988</birthDate>
+        		
+        <email>benpocklington@aol.com</email>
+        		
+        <telMobile>0798687594</telMobile>
+        		
+        <telHome>01775725994</telHome>
+        		
+        <pic/>
+        	
+    </contact>
+    	
+    <contact id="2">
+        		
+        <firstName>Dylan</firstName>
+        		
+        <lastName>Thompson</lastName>
+        		
+        <birthDate>22.06.1995</birthDate>
+        		
+        <email>dylan@jizzmop.com</email>
+        		
+        <telMobile>079861234</telMobile>
+        		
+        <telHome>23775725994</telHome>
+        		
+        <pic/>
+        	
+    </contact>
+    
+    <contact id="3">
+                
+        <firstName>ben</firstName>
+                
+        <lastName>pock</lastName>
+                
+        <birthDate>01.01.1901</birthDate>
+                
+        <email>a@a.com</email>
+                
+        <telMobile>0101010</telMobile>
+                
+        <telHome>010101</telHome>
+            
+    </contact>
+    
+    <contact id="4">
+                
+        <firstName>ben</firstName>
+                
+        <lastName>pock</lastName>
+                
+        <birthDate>01.01.1901</birthDate>
+                
+        <email>a@a.com</email>
+                
+        <telMobile>0101010</telMobile>
+                
+        <telHome>010101</telHome>
+            
+    </contact>
+    
+    <contact id="5">
+                
+        <firstName>ben</firstName>
+                
+        <lastName>pock</lastName>
+                
+        <birthDate>01.01.1901</birthDate>
+                
+        <email>a@a.com</email>
+                
+        <telMobile>0101010</telMobile>
+                
+        <telHome>010101</telHome>
+            
+    </contact>
+    
+    <contact id="6">
+                
+        <firstName>ben</firstName>
+                
+        <lastName>pock</lastName>
+                
+        <birthDate>01.01.1901</birthDate>
+                
+        <email>a@a.com</email>
+                
+        <telMobile>0101010</telMobile>
+                
+        <telHome>010101</telHome>
+            
+    </contact>
+    
+    <contact id="7">
+                
+        <firstName>ben</firstName>
+                
+        <lastName>pock</lastName>
+                
+        <birthDate>01.01.1901</birthDate>
+                
+        <email>a@a.com</email>
+                
+        <telMobile>0101010</telMobile>
+                
+        <telHome>010101</telHome>
+            
+    </contact>
+    
+    <contact id="8">
+                
+        <firstName>ben</firstName>
+                
+        <lastName>pock</lastName>
+                
+        <birthDate>01.01.1901</birthDate>
+                
+        <email>a@a.com</email>
+                
+        <telMobile>0101010</telMobile>
+                
+        <telHome>010101</telHome>
+            
+    </contact>
+    
+    <contact id="9">
+                
+        <firstName>ben</firstName>
+                
+        <lastName>pock</lastName>
+                
+        <birthDate>01.01.1901</birthDate>
+                
+        <email>a@a.com</email>
+                
+        <telMobile>0101010</telMobile>
+                
+        <telHome>010101</telHome>
+            
+    </contact>
+    
+    <contact id="10">
+                
+        <firstName>ben</firstName>
+                
+        <lastName>pock</lastName>
+                
+        <birthDate>01.01.1901</birthDate>
+                
+        <email>a@a.com</email>
+                
+        <telMobile>0101010</telMobile>
+                
+        <telHome>010101</telHome>
+            
+    </contact>
+    
+    <contact id="11">
+        <firstName>ben</firstName>
+        <lastName>pock</lastName>
+        <birthDate>01.01.1901</birthDate>
+        <email>a@a.com</email>
+        <telMobile>0101010</telMobile>
+        <telHome>010101</telHome>
+    </contact>
+</contacts>

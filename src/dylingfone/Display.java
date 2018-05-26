@@ -4,42 +4,13 @@ import java.awt.EventQueue;
 
 import javax.swing.*;
 import java.awt.*;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.Label;
-import javax.swing.JProgressBar;
-import java.awt.FlowLayout;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Window.Type;
-import javax.swing.JPanel;
-import java.awt.image.*;
-import javax.swing.JButton;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import javax.swing.UIManager;
-import javax.swing.JTextField;
-import java.awt.event.ActionListener;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.layout.FormSpecs;
-import org.eclipse.wb.swing.FocusTraversalOnArray;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import javax.swing.SwingConstants;
-import javax.swing.JSpinner;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+
+import java.awt.event.*;
 
 
 public class Display extends JFrame implements ActionListener {
+	
+	
 
 	private JFrame frame;
 	private JPanel lockScreen;
@@ -81,6 +52,8 @@ public class Display extends JFrame implements ActionListener {
 		generateSkeleton();
 
 	}
+	
+	
 
 	/**
 	 * Initialize the contents of the frame.
