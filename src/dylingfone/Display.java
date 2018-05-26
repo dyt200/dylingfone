@@ -36,7 +36,7 @@ import javax.swing.JSpinner;
 
 
 
-public class frame extends JFrame implements ActionListener {
+public class Display extends JFrame implements ActionListener {
 
 	private JFrame frame;
 	private JPanel lockScreen;
@@ -44,13 +44,17 @@ public class frame extends JFrame implements ActionListener {
 	private JPanel Backpanel;
 	private JPanel contacts;
 	private JPanel gallery;
-	public String navState = "appName" ;
+	public String precNavState ;
 	private JButton galleryButton;
 	private JButton contactButton;
-	private JButton button;
+	private JButton lockButton;
 	private JPanel blackPanel;
+	private boolean isOff = true;
+	private boolean isLocked = true;
 	
-
+	private JPanel activePanel;
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -58,7 +62,7 @@ public class frame extends JFrame implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					frame window = new frame();
+					Display window = new Display();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -70,14 +74,16 @@ public class frame extends JFrame implements ActionListener {
 	/**
 	 * Create the application.
 	 */
-	public frame() {
-		initialize();
+	public Display() {
+		
+		generateSkeleton();
+		
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void generateSkeleton() {
 
 		frame = new JFrame();
 		frame.getContentPane().setIgnoreRepaint(true);
@@ -95,21 +101,12 @@ public class frame extends JFrame implements ActionListener {
 		 * Generates the image of the iPhone
 		 */
 		
-		blackPanel = new JPanel();
-		blackPanel.setBackground(Color.BLACK);
-		blackPanel.setLayout(null);
-		blackPanel.setBounds(23, 87, 321, 553);
-		frame.getContentPane().add(blackPanel);
-	
-		
-		JButton homeBtn = new JButton("back");
-		homeBtn.setBounds(144, 638, 91, 68);
+		JButton homeBtn = new JButton();
+		homeBtn.setBounds(139, 638, 91, 68);
 		frame.getContentPane().add(homeBtn);
-		
 		Image backBtnIcon = new ImageIcon(this.getClass().getResource("/Home-Button.png")).getImage();
 		Image scaledBackBtnIcon = backBtnIcon.getScaledInstance(60, 60,  java.awt.Image.SCALE_SMOOTH);
 		homeBtn.setIcon(new ImageIcon(scaledBackBtnIcon) );
-		
 		homeBtn.setBorderPainted(false);
 		homeBtn.setFocusPainted(false);
 		homeBtn.setContentAreaFilled(false);
@@ -117,37 +114,66 @@ public class frame extends JFrame implements ActionListener {
 		homeBtn.setActionCommand("goToHome");
 		
 		
-		
-		
 		JLabel label = new JLabel();
 		label.setBounds(0, -35, 393, 794);
 		Image Outline = new ImageIcon(this.getClass().getResource("/iPhone-frame.png")).getImage();
 		label.setIcon(new ImageIcon(Outline));
-
 		frame.getContentPane().add(label);
-
-		initializeHomeScreen();	
+		
+	
+		
+		lockButton = new JButton("");
+		lockButton.setBackground(Color.BLACK);
+		lockButton.setBounds(254, 3, 47, 8);
+		lockButton.setBorderPainted(false);
+		frame.getContentPane().add(lockButton);
+		
+		generateBlackPannel();
+		
+		lockButton.addActionListener(this);
+		lockButton.setActionCommand("Unlock");
+		
+	
 
 	}
 	
+	private void generateBlackPannel(){
+		
+	
+		
+		blackPanel = new JPanel();
+		blackPanel.setBackground(Color.BLACK);
+		blackPanel.setLayout(null);
+		blackPanel.setBounds(23, 87, 321, 553);
+		frame.getContentPane().add(blackPanel);
+		
+		activePanel = blackPanel ;
+		
+	}
 	
 
-	private void initializeHomeScreen() {
+	private void generatelockScreen() {
+		
+	
 		
 		lockScreen = new JPanel();
 		lockScreen.setBounds(23, 88, 320, 553);
 		frame.getContentPane().add(lockScreen);
 		lockScreen.setLayout(null);
 		
-		
-		
-
 		JButton btnEnter = new JButton("Enter");
 		
 				btnEnter.setBounds(105, 515, 97, 25);
 				lockScreen.add(btnEnter);
 				btnEnter.addActionListener(this);
-				btnEnter.setActionCommand("Unlock");
+				btnEnter.setActionCommand("Enter");
+				
+		activePanel = lockScreen ;
+				
+				
+	}
+	
+	private void generateHomeScreen() {
 
 		
 				
@@ -173,7 +199,6 @@ public class frame extends JFrame implements ActionListener {
 				contactButton.setIcon(new ImageIcon(scaledContactIcon) );
 				
 				contactButton.setBorderPainted(false);
-				contactButton.setFocusPainted(false);
 				contactButton.setContentAreaFilled(false);
 				contactButton.addActionListener(this);
 				contactButton.setRolloverEnabled(false);
@@ -185,7 +210,6 @@ public class frame extends JFrame implements ActionListener {
 				gbc_contactButton.gridy = 1; 
 				homeScreen.add(contactButton, gbc_contactButton);
 			
-				
 				
 				galleryButton = new JButton();
 				Image galleryIcon = new ImageIcon(this.getClass().getResource("/galleryIcon.png")).getImage();
@@ -205,16 +229,16 @@ public class frame extends JFrame implements ActionListener {
 				gbc_galleryButton.gridx = 2;
 				gbc_galleryButton.gridy = 1;
 				homeScreen.add(galleryButton, gbc_galleryButton);
-		
+				
+				activePanel = homeScreen ;
+				
+				
 			
-		initializeBackPannel(navState);
-		initializecontacts();
-		initializegallery();	
 	
 		
 	}
 
-	private void initializeBackPannel(String args) {
+	/*private void generateBackPannel() {
 		
 		Backpanel = new JPanel();
 		Backpanel.setBounds(23, 88, 320, 44);
@@ -230,28 +254,28 @@ public class frame extends JFrame implements ActionListener {
 		btnBack.addActionListener(this);
 		btnBack.setActionCommand("back");
 		
-			JLabel label_1 = new JLabel(args);
+			JLabel label_1 = new JLabel();
 			label_1.setBounds(130, 14, 56, 16);
 			Backpanel.add(label_1);
 	
 		
-	}
+	}*/
+	
 	
 
-	private void initializecontacts() {
+	private void generatecontacts() {
 		
 		contacts = new JPanel();
 		contacts.setBounds(23, 88, 320, 553);
 		frame.getContentPane().add(contacts);
 		contacts.setBackground(Color.RED);
-		contacts.setVisible(false);
 		
-		
+		activePanel = contacts ;
 
 	}
 	
 	
-	private void initializegallery() {
+	private void generategallery() {
 		
 	
 		gallery = new JPanel();
@@ -259,18 +283,9 @@ public class frame extends JFrame implements ActionListener {
 		frame.getContentPane().add(gallery);
 		gallery.setBackground(Color.CYAN);
 		
-		button = new JButton("");
-		button.setBackground(Color.BLACK);
-	
-		button.setBounds(254, 3, 47, 8);
+		activePanel = gallery ;
 		
-		button.setBorderPainted(false);
-		
-		
-				frame.getContentPane().add(button);
-		gallery.setVisible(false);
-			
-		
+
 		
 	}
 	
@@ -281,57 +296,94 @@ public class frame extends JFrame implements ActionListener {
 
 		String action = ae.getActionCommand();
 		
+		
 		//Component[] components = frame.getContentPane().getComponents();		
 		//Component[] homeScreenComponenets = homeScreen.getComponents();	
-		
-		
-		System.out.println();
-
-		if (action.equals("Unlock")) {
-
-			navState = "home";
-			
-			
-			lockScreen.setVisible(false);
-			
-			
-		}
-
-		if (action.equals("openContacts")) {
-			
-			navState = "Contacts";
-			Backpanel.repaint();
-			
-			homeScreen.setVisible(false);
-			contacts.setVisible(true);
-			Backpanel.setVisible(true);
-			
-
-
-		}
-		
-		if (action.equals("openGallery")) {
-			
-			navState = "Gallery";
-			Backpanel.repaint();
-			
-			homeScreen.setVisible(false);
-			gallery.setVisible(true);
-			Backpanel.setVisible(true);
-			
-
-		}
-		
-	if (action.equals("goToHome") ) {
-		
-			homeScreen.setVisible(true);
-			contacts.setVisible(false);
-			gallery.setVisible(false);
-			Backpanel.setVisible(false);
-			
-		}
 	
-	if (action.equals("back") ) {
+		
+				
+		System.out.println(action);
+		
+		frame.remove(activePanel);
+		
+	switch (action) {
+		
+		case "Unlock":
+			
+			if (isOff == true) {
+				
+			
+				generatelockScreen();
+				isOff = false;
+				
+				
+			}
+			else if (isOff == false) {
+				
+				generateBlackPannel();
+				isOff = true;
+				isLocked = true;
+				
+			}
+			
+			System.out.println(isOff);
+			
+			break;
+			
+		case "Enter":
+			
+			generateHomeScreen();
+			isLocked = false;
+			
+			break;
+			
+		case "openContacts":
+			
+			generatecontacts();
+		
+			break;
+			
+		case "openGallery":
+			
+			generategallery();
+		
+			break;
+			
+		case "goToHome":
+			
+			if (isLocked == true && isOff == true) {
+				
+				generatelockScreen();
+				
+				
+			}
+			else if (isLocked == true) {
+			
+				generatelockScreen();
+				
+			}
+			else if (isOff == false) {
+				
+				generateHomeScreen();
+		
+			}
+		
+			isOff = false;			
+		
+			break;
+		
+
+		default:
+			
+			System.out.println("no action");
+			break;
+			
+			
+		} 
+		frame.validate();
+		frame.repaint();
+	
+	/*if (action.equals("back") ) {
 		
 		homeScreen.setVisible(true);
 		contacts.setVisible(false);
@@ -339,7 +391,7 @@ public class frame extends JFrame implements ActionListener {
 		Backpanel.setVisible(false);
 		
 	}
-		
+		*/
 		
 		
 	}
