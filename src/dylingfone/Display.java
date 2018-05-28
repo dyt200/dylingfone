@@ -1,14 +1,26 @@
 package dylingfone;
 
-import java.awt.EventQueue;
-
 import javax.swing.*;
-import java.awt.*;
+import javax.swing.event.ChangeEvent;
 
+import java.text.SimpleDateFormat;
+import java.time.Clock;
+import java.time.Instant;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.awt.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimerTask;
 import java.awt.event.*;
 
 
+
 public class Display extends JFrame implements ActionListener {
+	
+   
 	
 	
 
@@ -23,10 +35,15 @@ public class Display extends JFrame implements ActionListener {
 	private JButton contactButton;
 	private JButton lockButton;
 	private JPanel blackPanel;
+	private JLabel hourLabel;
+	private String timeStamp;
 	private boolean isOff = true;
 	private boolean isLocked = true;
 
 	private JPanel activePanel;
+	
+	
+
 
 	/**
 	 * Launch the application.
@@ -96,10 +113,9 @@ public class Display extends JFrame implements ActionListener {
 		label.setIcon(new ImageIcon(Outline));
 		frame.getContentPane().add(label);
 
-		lockButton = new JButton("");
+		lockButton = new JButton();
 		lockButton.setBackground(Color.BLACK);
 		lockButton.setBounds(254, 3, 47, 8);
-		lockButton.setBorderPainted(false);
 		frame.getContentPane().add(lockButton);
 
 		generateBlackPannel();
@@ -112,6 +128,9 @@ public class Display extends JFrame implements ActionListener {
           frame.addMouseMotionListener(frameDragListener);
 
 	}
+	
+
+
 
 	private void generateBlackPannel() {
 
@@ -126,22 +145,81 @@ public class Display extends JFrame implements ActionListener {
 	}
 
 	private void generatelockScreen() {
-
+		
+	
 		lockScreen = new JPanel();
 		lockScreen.setBounds(23, 88, 320, 553);
+		lockScreen.setBackground(Color.DARK_GRAY);
 		frame.getContentPane().add(lockScreen);
 		lockScreen.setLayout(null);
+		
+		generateClock();
+		
+		JSlider slider = new JSlider(JSlider.HORIZONTAL, 0,100,0);
+		slider.setBounds(56, 485, 190, 29);
+		lockScreen.add(slider);
+		
 
-		JButton btnEnter = new JButton("Enter");
+		slider.addChangeListener(new javax.swing.event.ChangeListener() {
+			
+			int unlockValue = 100;
+			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				
+				 JSlider source = (JSlider)e.getSource();
+				 
+				 
+				 if (unlockValue == source.getValue()) {
+					 
+					 frame.remove(activePanel);
+					 
+						generateHomeScreen();
+						isLocked = false;
 
-		btnEnter.setBounds(105, 515, 97, 25);
-		lockScreen.add(btnEnter);
-		btnEnter.addActionListener(this);
-		btnEnter.setActionCommand("Enter");
+						frame.validate();
+						frame.repaint();
 
+					 
+				 }
+				
+			}
+		});
+	
+		
 		activePanel = lockScreen;
+		
 
 	}
+	
+	private void generateClock() {
+		
+
+		hourLabel = new JLabel();
+		setdate();
+		hourLabel.setForeground(Color.WHITE);
+		hourLabel.setBackground(Color.WHITE);
+		hourLabel.setFont(new Font("Apple SD Gothic Neo", Font.PLAIN, 78));
+		hourLabel.setBounds(84, 58, 200, 69);
+		lockScreen.add(hourLabel);
+
+	}
+	public void setdate() {
+		
+		ActionListener actionDate = new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				java.util.Date myDate = new Date();
+				hourLabel.setText(myDate.getHours() + ":" + myDate.getMinutes());
+				
+			}
+		};
+		
+		new javax.swing.Timer(10, actionDate).start();
+		
+	}
+	
 
 	private void generateHomeScreen() {
 
@@ -150,15 +228,15 @@ public class Display extends JFrame implements ActionListener {
 		homeScreen.setBounds(23, 88, 320, 553);
 		frame.getContentPane().add(homeScreen);
 		GridBagLayout gbl_homeScreen = new GridBagLayout();
-		gbl_homeScreen.columnWidths = new int[] { 45, 45, 45, 45, 45, 45 };
-		gbl_homeScreen.rowHeights = new int[] { 38, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		gbl_homeScreen.columnWidths = new int[] { 32, 64, 64, 64, 64, 32 };
+		gbl_homeScreen.rowHeights = new int[] { 20, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 		gbl_homeScreen.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
 		gbl_homeScreen.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				0.0, Double.MIN_VALUE };
 		homeScreen.setLayout(gbl_homeScreen);
 
 		Image contactIcon = new ImageIcon(this.getClass().getResource("/contactIcon.png")).getImage();
-		Image scaledContactIcon = contactIcon.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
+		Image scaledContactIcon = contactIcon.getScaledInstance(64, 64, java.awt.Image.SCALE_SMOOTH);
 
 		contactButton = new JButton();
 		contactButton.setBackground(Color.BLACK);
@@ -171,14 +249,14 @@ public class Display extends JFrame implements ActionListener {
 		contactButton.setActionCommand("openContacts");
 
 		GridBagConstraints gbc_contactButton = new GridBagConstraints();
-		gbc_contactButton.insets = new Insets(0, 0, 5, 5);
+		gbc_contactButton.insets = new Insets(0, 0, 0, 0);
 		gbc_contactButton.gridx = 1;
 		gbc_contactButton.gridy = 1;
 		homeScreen.add(contactButton, gbc_contactButton);
 
 		galleryButton = new JButton();
 		Image galleryIcon = new ImageIcon(this.getClass().getResource("/galleryIcon.png")).getImage();
-		Image scaledGalleryIcon = galleryIcon.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
+		Image scaledGalleryIcon = galleryIcon.getScaledInstance(64, 64, java.awt.Image.SCALE_SMOOTH);
 
 		galleryButton.setIcon(new ImageIcon(scaledGalleryIcon));
 		GridBagConstraints gbc_galleryButton = new GridBagConstraints();
@@ -190,7 +268,7 @@ public class Display extends JFrame implements ActionListener {
 		galleryButton.addActionListener(this);
 		galleryButton.setActionCommand("openGallery");
 
-		gbc_galleryButton.insets = new Insets(0, 0, 5, 5);
+		gbc_galleryButton.insets = new Insets(0, 0, 0, 0);
 		gbc_galleryButton.gridx = 2;
 		gbc_galleryButton.gridy = 1;
 		homeScreen.add(galleryButton, gbc_galleryButton);
@@ -273,13 +351,6 @@ public class Display extends JFrame implements ActionListener {
 
 			break;
 
-		case "Enter":
-
-			generateHomeScreen();
-			isLocked = false;
-
-			break;
-
 		case "openContacts":
 
 			generatecontacts();
@@ -331,6 +402,8 @@ public class Display extends JFrame implements ActionListener {
 		 */
 
 	}
+	
+	
 
 	public Color getFrameContentPaneBackground() {
 		return frame.getContentPane().getBackground();
@@ -362,6 +435,6 @@ public class Display extends JFrame implements ActionListener {
             frame.setLocation(currCoords.x - mouseDownCompCoords.x, currCoords.y - mouseDownCompCoords.y);
         }
     }
-
+    
 }
 

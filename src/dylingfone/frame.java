@@ -21,11 +21,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.UIManager;
+import javax.swing.event.ChangeEvent;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+
+import javafx.beans.value.ChangeListener;
+import javafx.geometry.HorizontalDirection;
+
 import com.jgoodies.forms.layout.FormSpecs;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 import java.awt.GridBagLayout;
@@ -33,11 +38,25 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.SwingConstants;
 import javax.swing.JSpinner;
+import java.awt.Font;
+import java.awt.ComponentOrientation;
+import java.awt.Dimension;
+import java.awt.Event;
+
+import javax.swing.SpringLayout;
+import java.awt.CardLayout;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
+import javax.swing.JSlider;
 
 
 
 public class frame extends JFrame implements ActionListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JFrame frame;
 	private JPanel lockScreen;
 	private JPanel homeScreen;
@@ -49,6 +68,8 @@ public class frame extends JFrame implements ActionListener {
 	private JButton contactButton;
 	private JButton button;
 	private JPanel blackPanel;
+	private JScrollPane scrollPane;
+	private JPanel panel;
 	
 
 	/**
@@ -95,6 +116,78 @@ public class frame extends JFrame implements ActionListener {
 		 * Generates the image of the iPhone
 		 */
 		
+		
+		
+		lockScreen = new JPanel();
+		lockScreen.setBackground(Color.DARK_GRAY);
+		lockScreen.setBounds(23, 88, 320, 553);
+		frame.getContentPane().add(lockScreen);
+		lockScreen.setLayout(null);
+		
+		
+
+		JButton btnEnter = new JButton("Enter");
+		
+				btnEnter.setBounds(105, 515, 97, 25);
+				lockScreen.add(btnEnter);
+				btnEnter.addActionListener(this);
+				btnEnter.setActionCommand("Unlock");
+				
+				JLabel hourLabel = new JLabel("11:23");
+				hourLabel.setForeground(Color.WHITE);
+				hourLabel.setBackground(Color.WHITE);
+				hourLabel.setFont(new Font("Apple SD Gothic Neo", Font.PLAIN, 78));
+				hourLabel.setBounds(84, 58, 167, 69);
+				lockScreen.add(hourLabel);
+				
+				JSlider slider = new JSlider(JSlider.HORIZONTAL, 0,100,0);
+				slider.setBounds(56, 451, 190, 29);
+				lockScreen.add(slider);
+				
+		
+				slider.addChangeListener(new javax.swing.event.ChangeListener() {
+					
+					int unlockValue = 100;
+					
+					@Override
+					public void stateChanged(ChangeEvent e) {
+						
+						 JSlider source = (JSlider)e.getSource();
+						 
+						 System.out.println(source.getValue());
+						 
+						 if (unlockValue == source.getValue()) {
+							 
+							 System.out.println("hello world");
+							 
+						 }
+						 
+						 
+						
+					}
+				});
+				
+				
+				
+		
+		contacts = new JPanel();
+		contacts.setBounds(23, 88, 320, 553);
+		frame.getContentPane().add(contacts);
+		contacts.setBackground(Color.RED);
+		contacts.setLayout(null);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(0, 0, 308, 541);
+		contacts.add(scrollPane);
+		
+		panel = new JPanel();
+		panel.setBackground(Color.DARK_GRAY);
+		panel.setSize(30, 30);
+		scrollPane.setViewportView(panel);
+		
+		
+		contacts.setVisible(false);
+		
 		blackPanel = new JPanel();
 		blackPanel.setBackground(Color.BLACK);
 		blackPanel.setLayout(null);
@@ -133,21 +226,6 @@ public class frame extends JFrame implements ActionListener {
 	
 
 	private void initializeHomeScreen() {
-		
-		lockScreen = new JPanel();
-		lockScreen.setBounds(23, 88, 320, 553);
-		frame.getContentPane().add(lockScreen);
-		lockScreen.setLayout(null);
-		
-		
-		
-
-		JButton btnEnter = new JButton("Enter");
-		
-				btnEnter.setBounds(105, 515, 97, 25);
-				lockScreen.add(btnEnter);
-				btnEnter.addActionListener(this);
-				btnEnter.setActionCommand("Unlock");
 
 		
 				
@@ -240,12 +318,6 @@ public class frame extends JFrame implements ActionListener {
 
 	private void initializecontacts() {
 		
-		contacts = new JPanel();
-		contacts.setBounds(23, 88, 320, 553);
-		frame.getContentPane().add(contacts);
-		contacts.setBackground(Color.RED);
-		contacts.setVisible(false);
-		
 		
 
 	}
@@ -290,8 +362,6 @@ public class frame extends JFrame implements ActionListener {
 		if (action.equals("Unlock")) {
 
 			navState = "home";
-			
-			
 			lockScreen.setVisible(false);
 			
 			
