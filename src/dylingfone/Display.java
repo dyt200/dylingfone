@@ -1,7 +1,10 @@
 package dylingfone;
 
 import javax.swing.*;
+import javafx.*;
 import javax.swing.event.ChangeEvent;
+
+import javafx.scene.control.ScrollPane;
 
 import java.text.SimpleDateFormat;
 import java.time.Clock;
@@ -86,7 +89,7 @@ public class Display extends JFrame implements ActionListener {
 		frame.setBackground(new Color(0, 0,0,0)); // Uncomment to set the background
 
 		// transpatrent
-		frame.getContentPane().setLayout(null);
+		 frame.getContentPane().setLayout(null);
 
 		/**
 		 * Generates the image of the iPhone
@@ -154,6 +157,8 @@ public class Display extends JFrame implements ActionListener {
 		
 		JSlider slider = new JSlider(JSlider.HORIZONTAL, 0,100,0);
 		slider.setBounds(56, 485, 190, 29);
+		slider.setBackground(new Color(0, 0, 0,0));
+		//slider.
 		lockScreen.add(slider);
 		
 
@@ -297,10 +302,34 @@ public class Display extends JFrame implements ActionListener {
 	private void generatecontacts() {
 
 		contacts = new JPanel();
-		contacts.setBounds(23, 88, 320, 553);
+		contacts.setBounds(23, 88, 315, 553);
+		contacts.setLayout(getLayout());
 		frame.getContentPane().add(contacts);
 		contacts.setBackground(Color.RED);
+		
+		JPanel contactList = new JPanel();
+		contactList.setBounds(23, 88, 315, 553);
+		
+		
+		for (int i = 0 ; i < 1200 ; i++) {
+			
+			JPanel panTest = new JPanel();
+			panTest.setPreferredSize(new Dimension(280, 75));
+			panTest.setBackground(Color.RED);
+			contactList.add(panTest);
+			
+			
+		}
+			
+			contactList.setPreferredSize(new Dimension(280, (75*1200)+100));
+		
+			JScrollPane scrollPane = new JScrollPane(contactList);
+			//scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+			
+			contacts.add(scrollPane);
 
+			
+			
 		activePanel = contacts;
 
 	}
@@ -308,10 +337,33 @@ public class Display extends JFrame implements ActionListener {
 	private void generategallery() {
 
 		gallery = new JPanel();
-		gallery.setBounds(23, 88, 320, 553);
+		gallery.setBounds(23, 88, 315, 553);
+		gallery.setLayout(getLayout());
 		frame.getContentPane().add(gallery);
 		gallery.setBackground(Color.CYAN);
-
+		
+		JPanel contactList = new JPanel();
+		contactList.setBounds(23, 88, 315, 553);
+		
+		
+		for (int i = 0 ; i < 1200 ; i++) {
+			
+			JPanel panTest = new JPanel();
+			panTest.setPreferredSize(new Dimension(65, 65));
+			panTest.setBackground(Color.BLUE);
+			contactList.add(panTest);
+			
+			
+		}
+			
+			contactList.setPreferredSize(new Dimension(280, (75*1200)/4));
+		
+			JScrollPane scrollPane = new JScrollPane(contactList);
+			//scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+			
+			gallery.add(scrollPane);
+		
+	
 		activePanel = gallery;
 
 	}
