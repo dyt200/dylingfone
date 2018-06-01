@@ -10,8 +10,6 @@ import java.awt.event.*;
 
 public class Display extends JFrame implements ActionListener {
 	
-	
-
 	private JFrame frame;
 	private JPanel lockScreen;
 	private JPanel homeScreen;

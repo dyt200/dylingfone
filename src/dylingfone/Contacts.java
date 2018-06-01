@@ -19,6 +19,7 @@ import org.w3c.dom.NodeList;
 public class Contacts extends Page{
 	private Contact[] contacts;
 	
+	
 	public Contacts() {	
 		String[] path = {"contacts", "contact"};
 		super.setXml(new File("./contacts.xml"));
@@ -29,8 +30,10 @@ public class Contacts extends Page{
 	public void dumpData() {
 		System.out.println("START OF CONTACTS DATA : ");
 		System.out.println();
-		for (int i = 0; i < this.contacts.length; i++) {
+		for (int i = 1 ; i >= this.contacts.length ; i++) {
+		
 		   System.out.println("=====================");
+		   System.out.println("Pointer :" + i );
 		   System.out.println("id : "+this.contacts[i].getId());
 		   System.out.println("name : "+this.contacts[i].getFirstName());
 		   System.out.println("last name : "+this.contacts[i].getLastName());
@@ -40,6 +43,14 @@ public class Contacts extends Page{
 		   System.out.println("home : "+this.contacts[i].getTelHome());
 		   System.out.println("=====================");
 		}
+	}
+	
+	public void  getContactsById(int id) {
+		
+		
+
+		
+		
 	}
 	
 	public void addContact(int id, String firstName, String lastName, String birthDate, String email, String telMoblie, String telHome) {

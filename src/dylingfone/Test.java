@@ -4,12 +4,22 @@ public class Test {
 	
 	public static void main(String[] args) {
 		System.out.println("STARTING...");
+		
+		
+		
 		try {
 			Gallery gallery = new Gallery();
 			gallery.dumpData();
 			
 			Contacts contacts = new Contacts();
 			contacts.dumpData();
+			
+	
+			
+	
+			
+			
+		
 			
 			contacts.addXmlElements(new String[][]{
 												{"firstName", "ben"}, 
