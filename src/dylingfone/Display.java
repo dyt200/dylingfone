@@ -324,7 +324,7 @@ public class Display extends JFrame implements ActionListener {
 			contactList.setPreferredSize(new Dimension(280, (75*1200)+100));
 		
 			JScrollPane scrollPane = new JScrollPane(contactList);
-			//scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+			//scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);;
 			
 			contacts.add(scrollPane);
 
