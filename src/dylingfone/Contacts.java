@@ -30,7 +30,7 @@ public class Contacts extends Page{
 	public void dumpData() {
 		System.out.println("START OF CONTACTS DATA : ");
 		System.out.println();
-		for (int i = 1 ; i >= this.contacts.length ; i++) {
+		for (int i = 0; i < contacts.length ; i++) {
 		
 		   System.out.println("=====================");
 		   System.out.println("Pointer :" + i );
@@ -45,10 +45,61 @@ public class Contacts extends Page{
 		}
 	}
 	
+	
+	//I dont even haha
 	public void  getContactById(int id) {
 		
+	}
+	
+	public void deleteContact(int id) {
+	
+		System.out.println("%%%%%%% STARTING DELETION %%%%%%%%%%%%%%%%%%%");
+		int tempId;
+		Node tempNode;
 		
-
+		try {
+			
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			Document doc = dBuilder.parse(super.xml);
+	        
+	        doc.getDocumentElement().normalize();
+		    NodeList list = doc.getElementsByTagName("contact");
+		    
+		  /*  NodeList nList = doc.getElementsByTagName("staff"); 
+		    for (int i = 0; i < nList.getLength(); i++) { 
+		    	Node node=nList.item(i); 
+		    	if (node.getNodeType()==Element.ELEMENT_NODE) { 
+		    		Element eElement=(Element) node;
+		    		System.out.println(eElement.getAttribute("id"));
+		    		if (eElement.getAttribute("id").equals("1")) { 
+		    			System.err.println("sdsd"); 
+		    			node.getParentNode().removeChild(node); 
+		    		}
+		    	}
+		    }*/
+		    
+		    System.out.println("Number of elements in list : "+list.getLength());
+		    
+		    for (int i = 0; i < list.getLength(); i++) {
+		    	tempId = -1;
+			    Element contact = (Element)list.item(i);
+			    
+			    tempId = Integer.parseInt(contact.getAttribute("id"));
+			    
+			    if (id == tempId) {
+			    	tempNode=list.item(i);
+			    	System.out.println("%%%%%%%%%%%%%%%% DELETED "+contact.getElementsByTagName("firstName").item(0).getTextContent()+"!!!!!!!! %%%%%%%%%%%%%%%%%");
+			       // contact.getParentNode().removeChild(contact);
+			        tempNode.getParentNode().removeChild(contact);
+			        contacts = getContactsFromFile();
+			    } else {
+			    	System.out.println("%%%%%%%%%% ID NOT FOUND %%%%%%%%%%%%%%");
+			    }
+		    }
+		} catch(Exception e) {
+			System.out.println("ERROR IN deleteContact : "+e);
+		}
 		
 		
 	}

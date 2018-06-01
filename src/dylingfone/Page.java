@@ -24,7 +24,7 @@ import org.xml.sax.InputSource;
 
 public class Page {
 	
-	protected  File xml;
+	protected File xml;
 	protected String[] path;
 	
 	public void formatXml() {
