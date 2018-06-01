@@ -1,5 +1,7 @@
 package dylingfone;
 
+import java.util.Date;
+
 public class Test {
 	
 	public static void main(String[] args) {
@@ -14,6 +16,19 @@ public class Test {
 			Contacts contacts = new Contacts();
 			contacts.dumpData();
 			
+			
+			Contact[] array = contacts.getContacts();
+			
+			for (Contact contact : array) {
+				contact.getId();
+				contact.getFirstName();
+				contact.getLastName();
+				contact.getBirthDate();
+				contact.getEmail();
+				contact.getTelMobile();
+				contact.getTelHome();
+				contact.getPic();
+			}
 	
 			
 	

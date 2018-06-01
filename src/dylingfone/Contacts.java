@@ -45,7 +45,7 @@ public class Contacts extends Page{
 		}
 	}
 	
-	public void  getContactsById(int id) {
+	public void  getContactById(int id) {
 		
 		
 
@@ -146,6 +146,7 @@ public class Contacts extends Page{
 	public Contact[] getContacts() {
 		return contacts;
 	}
+	
 	public void setContacts(Contact[] contacts) {
 		this.contacts = contacts;
 	}
