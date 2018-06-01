@@ -10,13 +10,18 @@ public class Test {
 		
 		
 		try {
-			Gallery gallery = new Gallery();
-			gallery.dumpData();
+			//creation of gallery object ( funtions the same as contacts )
+			//Gallery gallery = new Gallery();
 			
+			//For printing whole gallery
+			//gallery.dumpData();
+			
+			
+			
+			//DYLAN START HERE
+
 			Contacts contacts = new Contacts();
-			contacts.dumpData();
-			
-			
+		
 			Contact[] array = contacts.getContacts();
 			
 			for (Contact contact : array) {
@@ -30,19 +35,18 @@ public class Test {
 				contact.getPic();
 			}
 	
-			
+			//DYLAN FINSIH HERE
 	
+			//for printing all contacts
+			//contacts.dumpData();
 			
-			
-		
-			
-			contacts.addXmlElements(new String[][]{
+			/*contacts.addXmlElements(new String[][]{
 												{"firstName", "ben"}, 
 												{"lastName", "pock"},
 												{"birthDate", "01.01.1901"}, 
 												{"email", "a@a.com"}, 
 												{"telMobile", "0101010"}, 
-												{"telHome", "010101"}});
+												{"telHome", "010101"}});*/
 			
 			//this isn't finished
 			//contacts.deleteElementById(3);
