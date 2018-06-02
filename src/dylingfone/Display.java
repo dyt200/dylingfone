@@ -310,18 +310,51 @@ public class Display extends JFrame implements ActionListener {
 		JPanel contactList = new JPanel();
 		contactList.setBounds(23, 88, 315, 553);
 		
+		Contacts contactsObj = new Contacts();	
 		
-		for (int i = 0 ; i < 1200 ; i++) {
+		Contact[] array = contactsObj.getContacts();
+		
+		
+		
+	/*	for (int i = 0 ; i < 200 ; i++) {
 			
 			JPanel panTest = new JPanel();
 			panTest.setPreferredSize(new Dimension(280, 75));
 			panTest.setBackground(Color.RED);
+			JLabel jlabel = new JLabel(Integer.toString(i));
+			//jlabel.setFont(new Font("Verdana",1,20));
+			panTest.add(jlabel);
 			contactList.add(panTest);
 			
 			
+		} */
+		
+		for (Contact contact : array) {
+			
+			
+			JPanel panTest = new JPanel();
+			panTest.setPreferredSize(new Dimension(280, 75));
+			panTest.setBackground(Color.RED);
+			JLabel jlabel = new JLabel(Integer.toString(contact.getId()) + contact.getFirstName() + contact.getLastName() );
+			panTest.add(jlabel);
+			contactList.add(panTest);
+			
+			contact.getId();
+
+	//		System.out.println(contact.getId());
+			contact.getFirstName();
+
+	//		System.out.println(contact.getFirstName());
+			contact.getLastName();
+			contact.getBirthDate();
+			contact.getEmail();
+			contact.getTelMobile();
+			contact.getTelHome();
+			contact.getPic();
+			
 		}
 			
-			contactList.setPreferredSize(new Dimension(280, (75*1200)+100));
+			contactList.setPreferredSize(new Dimension(280, (75*array.length)+ (array.length*5) + 5));
 		
 			JScrollPane scrollPane = new JScrollPane(contactList);
 			//scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);;
@@ -346,7 +379,7 @@ public class Display extends JFrame implements ActionListener {
 		contactList.setBounds(23, 88, 315, 553);
 		
 		
-		for (int i = 0 ; i < 1200 ; i++) {
+		for (int i = 0 ; i < 200 ; i++) {
 			
 			JPanel panTest = new JPanel();
 			panTest.setPreferredSize(new Dimension(65, 65));
@@ -356,7 +389,7 @@ public class Display extends JFrame implements ActionListener {
 			
 		}
 			
-			contactList.setPreferredSize(new Dimension(280, (75*1200)/4));
+			contactList.setPreferredSize(new Dimension(280, ((65*200) + (5*200))/4 + 5 ));
 		
 			JScrollPane scrollPane = new JScrollPane(contactList);
 			//scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
