@@ -29,12 +29,14 @@ public class Test {
 			
 			
 			for (Contact contact : array) {
+
+
 				contact.getId();
-
 				System.out.println(contact.getId());
-				contact.getFirstName();
 
+				contact.getFirstName();
 				System.out.println(contact.getFirstName());
+				
 				contact.getLastName();
 				contact.getBirthDate();
 				contact.getEmail();
