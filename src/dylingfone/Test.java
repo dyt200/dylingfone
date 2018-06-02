@@ -29,7 +29,6 @@ public class Test {
 			
 			
 			for (Contact contact : array) {
-				
 				contact.getId();
 				System.out.println(contact.getId());
 				
