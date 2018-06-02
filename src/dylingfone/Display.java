@@ -341,7 +341,7 @@ public class Display extends JFrame implements ActionListener {
 			
 			contact.getId();
 
-	//		System.out.println(contact.getId());
+	//		System.out.println(contact.getId());j
 			contact.getFirstName();
 
 	//		System.out.println(contact.getFirstName());
