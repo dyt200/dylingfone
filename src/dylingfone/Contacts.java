@@ -6,6 +6,7 @@ import java.util.Date;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -17,43 +18,36 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 // HELLO WORLDD
 public class Contacts extends Page{
-	private Contact[] contacts;
+	private Contact[] contactList;
 	
 	
 	public Contacts() {	
 		String[] path = {"contacts", "contact"};
 		super.setXml(new File("./contacts.xml"));
 		super.setPath(path);
-		this.contacts = getContactsFromFile();
+		this.contactList = getContactsFromFile();
 	}
 	
 	public void dumpData() {
 		System.out.println("START OF CONTACTS DATA : ");
 		System.out.println();
-		for (int i = 0; i < contacts.length ; i++) {
+		for (int i = 0; i < contactList.length ; i++) {
 		
 		   System.out.println("=====================");
 		   System.out.println("Pointer :" + i );
-		   System.out.println("id : "+this.contacts[i].getId());
-		   System.out.println("name : "+this.contacts[i].getFirstName());
-		   System.out.println("last name : "+this.contacts[i].getLastName());
-		   System.out.println("dob : "+this.contacts[i].getBirthDate());
-		   System.out.println("email : "+this.contacts[i].getEmail());
-		   System.out.println("mob : "+this.contacts[i].getTelMobile());
-		   System.out.println("home : "+this.contacts[i].getTelHome());
+		   System.out.println("id : "+this.contactList[i].getId());
+		   System.out.println("name : "+this.contactList[i].getFirstName());
+		   System.out.println("last name : "+this.contactList[i].getLastName());
+		   System.out.println("dob : "+this.contactList[i].getBirthDate());
+		   System.out.println("email : "+this.contactList[i].getEmail());
+		   System.out.println("mob : "+this.contactList[i].getTelMobile());
+		   System.out.println("home : "+this.contactList[i].getTelHome());
 		   System.out.println("=====================");
 		}
 	}
 	
-	
-	//I dont even haha
-	public void  getContactById(int id) {
-		
-	}
-	
 	public void deleteContact(int id) {
-	
-		System.out.println("%%%%%%% STARTING DELETION %%%%%%%%%%%%%%%%%%%");
+		
 		int tempId;
 		Node tempNode;
 		
@@ -66,19 +60,6 @@ public class Contacts extends Page{
 	        doc.getDocumentElement().normalize();
 		    NodeList list = doc.getElementsByTagName("contact");
 		    
-		  /*  NodeList nList = doc.getElementsByTagName("staff"); 
-		    for (int i = 0; i < nList.getLength(); i++) { 
-		    	Node node=nList.item(i); 
-		    	if (node.getNodeType()==Element.ELEMENT_NODE) { 
-		    		Element eElement=(Element) node;
-		    		System.out.println(eElement.getAttribute("id"));
-		    		if (eElement.getAttribute("id").equals("1")) { 
-		    			System.err.println("sdsd"); 
-		    			node.getParentNode().removeChild(node); 
-		    		}
-		    	}
-		    }*/
-		    
 		    System.out.println("Number of elements in list : "+list.getLength());
 		    
 		    for (int i = 0; i < list.getLength(); i++) {
@@ -88,14 +69,23 @@ public class Contacts extends Page{
 			    tempId = Integer.parseInt(contact.getAttribute("id"));
 			    
 			    if (id == tempId) {
+			    	
+			    	//Selects node and file
 			    	tempNode=list.item(i);
-			    	System.out.println("%%%%%%%%%%%%%%%% DELETED "+contact.getElementsByTagName("firstName").item(0).getTextContent()+"!!!!!!!! %%%%%%%%%%%%%%%%%");
-			       // contact.getParentNode().removeChild(contact);
 			        tempNode.getParentNode().removeChild(contact);
-			        contacts = getContactsFromFile();
-			    } else {
-			    	System.out.println("%%%%%%%%%% ID NOT FOUND %%%%%%%%%%%%%%");
-			    }
+			        DOMSource source = new DOMSource(doc);
+			        
+			        //changes the actual file
+		            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+		            Transformer transformer = transformerFactory.newTransformer();
+		            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+
+		            StreamResult result = new StreamResult(getXml());
+		            transformer.transform(source, result);
+		            
+		            //reloads the data after modifications
+			        contactList = getContactsFromFile();
+			    } 
 		    }
 		} catch(Exception e) {
 			System.out.println("ERROR IN deleteContact : "+e);
@@ -144,6 +134,7 @@ public class Contacts extends Page{
 
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             StreamResult result = new StreamResult(getXml());
             transformer.transform(source, result);
             
@@ -194,11 +185,11 @@ public class Contacts extends Page{
 		return contactsFF;
 	}
 
-	public Contact[] getContacts() {
-		return contacts;
+	public Contact[] getContactList() {
+		return contactList;
 	}
 	
 	public void setContacts(Contact[] contacts) {
-		this.contacts = contacts;
+		this.contactList = contacts;
 	}
 }
