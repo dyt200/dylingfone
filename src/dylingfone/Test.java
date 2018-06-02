@@ -29,13 +29,13 @@ public class Test {
 			
 			
 			for (Contact contact : array) {
+				
 				contact.getId();
-<<<<<<< HEAD
 				System.out.println(contact.getId());
+				
 				contact.getFirstName();
-=======
->>>>>>> branch 'master' of https://github.com/dyt200/dylingfone
 				System.out.println(contact.getFirstName());
+				
 				contact.getLastName();
 				contact.getBirthDate();
 				contact.getEmail();
