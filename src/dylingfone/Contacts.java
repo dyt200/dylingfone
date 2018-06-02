@@ -18,30 +18,30 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 // HELLO WORLDD
 public class Contacts extends Page{
-	private Contact[] contacts;
+	private Contact[] contactList;
 	
 	
 	public Contacts() {	
 		String[] path = {"contacts", "contact"};
 		super.setXml(new File("./contacts.xml"));
 		super.setPath(path);
-		this.contacts = getContactsFromFile();
+		this.contactList = getContactsFromFile();
 	}
 	
 	public void dumpData() {
 		System.out.println("START OF CONTACTS DATA : ");
 		System.out.println();
-		for (int i = 0; i < contacts.length ; i++) {
+		for (int i = 0; i < contactList.length ; i++) {
 		
 		   System.out.println("=====================");
 		   System.out.println("Pointer :" + i );
-		   System.out.println("id : "+this.contacts[i].getId());
-		   System.out.println("name : "+this.contacts[i].getFirstName());
-		   System.out.println("last name : "+this.contacts[i].getLastName());
-		   System.out.println("dob : "+this.contacts[i].getBirthDate());
-		   System.out.println("email : "+this.contacts[i].getEmail());
-		   System.out.println("mob : "+this.contacts[i].getTelMobile());
-		   System.out.println("home : "+this.contacts[i].getTelHome());
+		   System.out.println("id : "+this.contactList[i].getId());
+		   System.out.println("name : "+this.contactList[i].getFirstName());
+		   System.out.println("last name : "+this.contactList[i].getLastName());
+		   System.out.println("dob : "+this.contactList[i].getBirthDate());
+		   System.out.println("email : "+this.contactList[i].getEmail());
+		   System.out.println("mob : "+this.contactList[i].getTelMobile());
+		   System.out.println("home : "+this.contactList[i].getTelHome());
 		   System.out.println("=====================");
 		}
 	}
@@ -84,7 +84,7 @@ public class Contacts extends Page{
 		            transformer.transform(source, result);
 		            
 		            //reloads the data after modifications
-			        contacts = getContactsFromFile();
+			        contactList = getContactsFromFile();
 			    } 
 		    }
 		} catch(Exception e) {
@@ -185,11 +185,11 @@ public class Contacts extends Page{
 		return contactsFF;
 	}
 
-	public Contact[] getContacts() {
-		return contacts;
+	public Contact[] getContactList() {
+		return contactList;
 	}
 	
 	public void setContacts(Contact[] contacts) {
-		this.contacts = contacts;
+		this.contactList = contacts;
 	}
 }
