@@ -35,6 +35,7 @@ public class Display extends JFrame implements ActionListener {
 	private JButton contactButton;
 	private JButton lockButton;
 	private JPanel blackPanel;
+	private JPanel contactDetails;
 	private JLabel hourLabel;
 	private String timeStamp;
 	private boolean isOff = true;
@@ -42,9 +43,10 @@ public class Display extends JFrame implements ActionListener {
 
 	private JPanel activePanel;
 	
+	Contacts contactsObj = new Contacts();	
+	Contact[] array = contactsObj.getContacts();
 	
-
-
+	
 	/**
 	 * Launch the application.
 	 */
@@ -310,10 +312,6 @@ public class Display extends JFrame implements ActionListener {
 		JPanel contactList = new JPanel();
 		contactList.setBounds(23, 88, 315, 553);
 		
-		Contacts contactsObj = new Contacts();	
-		
-		Contact[] array = contactsObj.getContacts();
-		
 		
 		
 	/*	for (int i = 0 ; i < 200 ; i++) {
@@ -337,20 +335,24 @@ public class Display extends JFrame implements ActionListener {
 			panTest.setBackground(Color.RED);
 			JLabel jlabel = new JLabel(Integer.toString(contact.getId()) + contact.getFirstName() + contact.getLastName() );
 			panTest.add(jlabel);
+			
+			panTest.addMouseListener(new java.awt.event.MouseAdapter() {
+				
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                	
+                    System.out.println("mouseClicked");
+                    System.out.println(contact.getId());
+                    
+                	frame.remove(activePanel);
+                    generateContactDetails(contact.getId());
+                	frame.validate();
+            		frame.repaint();
+            
+                    
+                }});
+			
 			contactList.add(panTest);
 			
-			contact.getId();
-
-	//		System.out.println(contact.getId());j
-			contact.getFirstName();
-
-	//		System.out.println(contact.getFirstName());
-			contact.getLastName();
-			contact.getBirthDate();
-			contact.getEmail();
-			contact.getTelMobile();
-			contact.getTelHome();
-			contact.getPic();
 			
 		}
 			
@@ -365,6 +367,42 @@ public class Display extends JFrame implements ActionListener {
 			
 		activePanel = contacts;
 
+	}
+	
+	private void generateContactDetails(int id) {
+		
+		contactDetails = new JPanel();
+		contactDetails.setBounds(23, 88, 315, 553);
+		contactDetails.setLayout(getLayout());
+		frame.getContentPane().add(contactDetails);
+		contactDetails.setBackground(Color.RED);
+		
+		for (Contact contact : array) {
+			
+			if (contact.getId() == id) {
+				
+				JLabel jlabel = new JLabel(Integer.toString(contact.getId()) + contact.getFirstName() + contact.getLastName() );
+				contactDetails.add(jlabel);
+				
+				contact.getId();
+				
+						contact.getFirstName();
+						contact.getLastName();
+						contact.getBirthDate();
+						contact.getEmail();
+						contact.getTelMobile();
+						contact.getTelHome();
+						contact.getPic();
+						System.out.println(contact.getPic());
+				
+			
+			}
+			
+		}
+		
+		activePanel = contactDetails;
+		
+		
 	}
 
 	private void generategallery() {
