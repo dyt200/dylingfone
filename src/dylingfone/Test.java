@@ -24,7 +24,7 @@ public class Test {
 			contacts.dumpData();
 			
 			
-			Contact[] array = contacts.getContacts();
+			Contact[] array = contacts.getContactList();
 			
 			
 			
