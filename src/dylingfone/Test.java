@@ -29,10 +29,7 @@ public class Test {
 			
 			
 			for (Contact contact : array) {
-<<<<<<< HEAD
 
-=======
->>>>>>> branch 'master' of https://github.com/dyt200/dylingfone
 				contact.getId();
 				System.out.println(contact.getId());
 
