@@ -44,7 +44,7 @@ public class Display extends JFrame implements ActionListener {
 	private JPanel activePanel;
 	
 	Contacts contactsObj = new Contacts();	
-	Contact[] array = contactsObj.getContacts();
+	Contact[] array = contactsObj.getContactList();
 	
 	
 	/**
