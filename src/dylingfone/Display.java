@@ -40,6 +40,7 @@ public class Display extends JFrame implements ActionListener {
 	private String timeStamp;
 	private boolean isOff = true;
 	private boolean isLocked = true;
+	private String detailHead ; 
 
 	private JPanel activePanel;
 	
@@ -281,25 +282,7 @@ public class Display extends JFrame implements ActionListener {
 
 	}
 
-	/*
-	 * private void generateBackPannel() {
-	 * 
-	 * Backpanel = new JPanel(); Backpanel.setBounds(23, 88, 320, 44);
-	 * frame.getContentPane().add(Backpanel); Backpanel.setBackground(Color.GRAY);
-	 * Backpanel.setLayout(null);
-	 * 
-	 * Backpanel.setVisible(false);
-	 * 
-	 * JButton btnBack = new JButton("<-"); btnBack.setBounds(12, 9, 50, 26);
-	 * Backpanel.add(btnBack); btnBack.addActionListener(this);
-	 * btnBack.setActionCommand("back");
-	 * 
-	 * JLabel label_1 = new JLabel(); label_1.setBounds(130, 14, 56, 16);
-	 * Backpanel.add(label_1);
-	 * 
-	 * 
-	 * }
-	 */
+	 
 
 	private void generatecontacts() {
 
@@ -371,6 +354,20 @@ public class Display extends JFrame implements ActionListener {
 	
 	private void generateContactDetails(int id) {
 		
+	
+		
+		for (Contact contact : array) {
+			
+			if (contact.getId() == id) {
+				
+				detailHead = contact.getFirstName();
+				
+			}
+			
+		}
+		
+		generateBackPannel(detailHead);
+		
 		contactDetails = new JPanel();
 		contactDetails.setBounds(23, 88, 315, 553);
 		contactDetails.setLayout(getLayout());
@@ -380,6 +377,8 @@ public class Display extends JFrame implements ActionListener {
 		for (Contact contact : array) {
 			
 			if (contact.getId() == id) {
+				
+				detailHead = contact.getFirstName();
 				
 				JLabel jlabel = new JLabel(Integer.toString(contact.getId()) + contact.getFirstName() + contact.getLastName() );
 				contactDetails.add(jlabel);
@@ -400,10 +399,30 @@ public class Display extends JFrame implements ActionListener {
 			
 		}
 		
+	
+		
 		activePanel = contactDetails;
 		
 		
 	}
+	
+	  private void generateBackPannel(String head) {
+		  
+		  Backpanel = new JPanel(); Backpanel.setBounds(23, 88, 320, 44);
+		  frame.getContentPane().add(Backpanel); Backpanel.setBackground(Color.GRAY);
+		  Backpanel.setLayout(null);;
+		  
+		  JButton btnBack = new JButton("←"); btnBack.setBounds(12, 9, 50, 26);
+		  Backpanel.add(btnBack); btnBack.addActionListener(this);
+		  btnBack.setActionCommand("back");
+		  
+		  JLabel label_1 = new JLabel(head);
+		  label_1.setBounds(130, 14, 56, 16);
+		  Backpanel.add(label_1);
+		  
+		 // activePanel = Backpanel;
+		  
+		  }
 
 	private void generategallery() {
 
@@ -502,7 +521,16 @@ public class Display extends JFrame implements ActionListener {
 			isOff = false;
 
 			break;
-
+			
+		case "back": 
+			
+			if (activePanel == contactDetails) {
+				
+				frame.remove(Backpanel);
+				generatecontacts();
+				
+			}
+		
 		default:
 
 			System.out.println("no action");
