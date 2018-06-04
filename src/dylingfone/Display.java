@@ -18,6 +18,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimerTask;
 import java.awt.event.*;
+import java.awt.image.ImageObserver;
+
+import javax.imageio.ImageIO;
 
 
 
@@ -46,6 +49,9 @@ public class Display extends JFrame implements ActionListener {
 	
 	Contacts contactsObj = new Contacts();	
 	Contact[] array = contactsObj.getContactList();
+	
+	
+	private ImageObserver observer;
 	
 	
 	/**
@@ -297,19 +303,6 @@ public class Display extends JFrame implements ActionListener {
 		
 		
 		
-	/*	for (int i = 0 ; i < 200 ; i++) {
-			
-			JPanel panTest = new JPanel();
-			panTest.setPreferredSize(new Dimension(280, 75));
-			panTest.setBackground(Color.RED);
-			JLabel jlabel = new JLabel(Integer.toString(i));
-			//jlabel.setFont(new Font("Verdana",1,20));
-			panTest.add(jlabel);
-			contactList.add(panTest);
-			
-			
-		} */
-		
 		for (Contact contact : array) {
 			
 			
@@ -372,7 +365,7 @@ public class Display extends JFrame implements ActionListener {
 		contactDetails.setBounds(23, 88, 315, 553);
 		contactDetails.setLayout(getLayout());
 		frame.getContentPane().add(contactDetails);
-		contactDetails.setBackground(Color.RED);
+		contactDetails.setBackground(new Color(250,250, 255));
 		
 		for (Contact contact : array) {
 			
@@ -380,20 +373,77 @@ public class Display extends JFrame implements ActionListener {
 				
 				detailHead = contact.getFirstName();
 				
-				JLabel jlabel = new JLabel(Integer.toString(contact.getId()) + contact.getFirstName() + contact.getLastName() );
-				contactDetails.add(jlabel);
 				
-				contact.getId();
+				GridBagLayout gbl_blackPanel = new GridBagLayout();
+				gbl_blackPanel.columnWidths = new int[]{35, 250, 35};
+				gbl_blackPanel.rowHeights = new int[]{261, 22, 22, 22, 22, 22, 22,22};
+				gbl_blackPanel.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+				gbl_blackPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+				contactDetails.setLayout(gbl_blackPanel);
 				
-						contact.getFirstName();
-						contact.getLastName();
-						contact.getBirthDate();
-						contact.getEmail();
-						contact.getTelMobile();
-						contact.getTelHome();
-						contact.getPic();
-						System.out.println(contact.getPic());
+				JLabel lblContactPic = new JLabel();
 				
+				Image contactImage = new ImageIcon(this.getClass().getResource("/cuchaulle.jpg")).getImage();
+				Image scaledContactImage = contactImage.getScaledInstance(250,200, java.awt.Image.SCALE_SMOOTH);
+			
+				lblContactPic.setIcon(new ImageIcon(scaledContactImage));
+				
+				lblContactPic.setOpaque(true);
+				GridBagConstraints gbc_lblContactPic = new GridBagConstraints();
+				gbc_lblContactPic.insets = new Insets(44, 0, 5, 0);
+				gbc_lblContactPic.gridx = 1;
+				gbc_lblContactPic.gridy = 0;
+				contactDetails.add(lblContactPic, gbc_lblContactPic);
+				
+				JLabel lblFirstName = new JLabel(contact.getFirstName());
+				GridBagConstraints gbc_lblFirstName = new GridBagConstraints();
+				gbc_lblFirstName.anchor = GridBagConstraints.NORTHWEST;
+				gbc_lblFirstName.insets = new Insets(22, 0, 5, 0);
+				gbc_lblFirstName.gridx = 1;
+				gbc_lblFirstName.gridy = 1;
+				contactDetails.add(lblFirstName, gbc_lblFirstName);
+				
+				JLabel lblLastName = new JLabel(contact.getLastName());
+				GridBagConstraints gbc_lblLastName = new GridBagConstraints();
+				gbc_lblLastName.anchor = GridBagConstraints.NORTHWEST;
+				gbc_lblLastName.insets = new Insets(22, 0, 5, 0);
+				gbc_lblLastName.gridx = 1;
+				gbc_lblLastName.gridy = 2;
+				contactDetails.add(lblLastName, gbc_lblLastName);
+				
+				JLabel lblMobileTel = new JLabel(contact.getTelMobile());
+				GridBagConstraints gbc_lblMobileTel = new GridBagConstraints();
+				gbc_lblMobileTel.anchor = GridBagConstraints.NORTHWEST;
+				gbc_lblMobileTel.insets = new Insets(22, 0, 5, 0);
+				gbc_lblMobileTel.gridx = 1;
+				gbc_lblMobileTel.gridy = 3;
+				contactDetails.add(lblMobileTel, gbc_lblMobileTel);
+				
+				JLabel lblHomeTel = new JLabel(contact.getTelHome());
+				GridBagConstraints gbc_lblHomeTel = new GridBagConstraints();
+				gbc_lblHomeTel.anchor = GridBagConstraints.NORTHWEST;
+				gbc_lblHomeTel.insets = new Insets(22, 0, 5, 0);
+				gbc_lblHomeTel.gridx = 1;
+				gbc_lblHomeTel.gridy = 4;
+				contactDetails.add(lblHomeTel, gbc_lblHomeTel);
+				
+				JLabel lblEmail = new JLabel(contact.getEmail());
+				GridBagConstraints gbc_lblEmail = new GridBagConstraints();
+				gbc_lblEmail.anchor = GridBagConstraints.NORTHWEST;
+				gbc_lblEmail.insets = new Insets(22, 0, 5, 0);
+				gbc_lblEmail.gridx = 1;
+				gbc_lblEmail.gridy = 5;
+				contactDetails.add(lblEmail, gbc_lblEmail);
+				
+				JLabel lblBirthdate = new JLabel("birthdate");
+				GridBagConstraints gbc_lblBirthdate = new GridBagConstraints();
+				gbc_lblBirthdate.anchor = GridBagConstraints.NORTHWEST;
+				gbc_lblBirthdate.insets = new Insets(22, 0, 5, 0);
+				gbc_lblBirthdate.gridx = 1;
+				gbc_lblBirthdate.gridy = 6;
+				contactDetails.add(lblBirthdate, gbc_lblBirthdate);
+				
+
 			
 			}
 			
