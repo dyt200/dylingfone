@@ -1,8 +1,49 @@
-<?xml version="1.0"?>
 <gallery>
 	<image id="1">
 		<file>./images/mario.jpg</file>
 		<title>My First Picture</title>
 		<description>This is my very first picture!</description>
 	</image>
+
+
+<image id="4">
+<title>added photo 1</title>
+<description>this was/is the very first photo added with Ben's sick function</description>
+<file>./images/test.jpg</file>
+</image>
+<image id="5">
+<title>added photo 1</title>
+<description>this was/is the very first photo added with Ben's sick function</description>
+<file>./images/test.jpg</file>
+</image>
+<image id="6">
+<title>added photo 1</title>
+<description>this was/is the very first photo added with Ben's sick function</description>
+<file>./images/test.jpg</file>
+</image>
+<image id="7">
+<title>added photo 1</title>
+<description>this was/is the very first photo added with Ben's sick function</description>
+<file>./images/test.jpg</file>
+</image>
+<image id="8">
+<title>added photo 1</title>
+<description>this was/is the very first photo added with Ben's sick function</description>
+<file>./images/test.jpg</file>
+</image>
+<image id="9">
+<title>added photo 1</title>
+<description>this was/is the very first photo added with Ben's sick function</description>
+<file>./images/test.jpg</file>
+</image>
+<image id="10">
+<title>added photo 1</title>
+<description>this was/is the very first photo added with Ben's sick function</description>
+<file>./images/test.jpg</file>
+</image>
+<image id="11">
+<title>added photo 1</title>
+<description>this was/is the very first photo added with Ben's sick function</description>
+<file>./images/test.jpg</file>
+</image>
 </gallery>

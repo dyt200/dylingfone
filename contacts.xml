@@ -1,6 +1,6 @@
-<contacts>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><contacts>
 	<contact id="1">
-        <firstName>one</firstName>
+        <firstName>tickleMyPickle</firstName>
         <lastName>pock</lastName>
         <birthDate>01.01.1901</birthDate>
         <email>a@a.com</email>
