@@ -795,6 +795,13 @@ public class Display extends JFrame implements ActionListener {
                     
                 	frame.remove(activePanel);
                 	// SAVE LOGIC HERE
+                	/**
+                	 * 
+                	 * 
+                	 * Ben,  you realy need to remove that fucking date type, let us simplify our lives
+                	 * See Ya :D
+                	 * 
+                	 */
                 	
                 	contactsObj.addContact(lblFirstName.getText(), lblLastName.getText(), lblBirthdate.getText(), lblEmail.getText(), lblMobileTel.getText(), lblHomeTel.getText());
            
