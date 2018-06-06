@@ -18,6 +18,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimerTask;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 
 
@@ -40,11 +46,15 @@ public class Display extends JFrame implements ActionListener {
 	private String timeStamp;
 	private boolean isOff = true;
 	private boolean isLocked = true;
+	private String detailHead ; 
 
 	private JPanel activePanel;
 	
 	Contacts contactsObj = new Contacts();	
 	Contact[] array = contactsObj.getContactList();
+	
+	
+	private ImageObserver observer;
 	
 	
 	/**
@@ -281,25 +291,7 @@ public class Display extends JFrame implements ActionListener {
 
 	}
 
-	/*
-	 * private void generateBackPannel() {
-	 * 
-	 * Backpanel = new JPanel(); Backpanel.setBounds(23, 88, 320, 44);
-	 * frame.getContentPane().add(Backpanel); Backpanel.setBackground(Color.GRAY);
-	 * Backpanel.setLayout(null);
-	 * 
-	 * Backpanel.setVisible(false);
-	 * 
-	 * JButton btnBack = new JButton("<-"); btnBack.setBounds(12, 9, 50, 26);
-	 * Backpanel.add(btnBack); btnBack.addActionListener(this);
-	 * btnBack.setActionCommand("back");
-	 * 
-	 * JLabel label_1 = new JLabel(); label_1.setBounds(130, 14, 56, 16);
-	 * Backpanel.add(label_1);
-	 * 
-	 * 
-	 * }
-	 */
+	 
 
 	private void generatecontacts() {
 
@@ -313,19 +305,6 @@ public class Display extends JFrame implements ActionListener {
 		contactList.setBounds(23, 88, 315, 553);
 		
 		
-		
-	/*	for (int i = 0 ; i < 200 ; i++) {
-			
-			JPanel panTest = new JPanel();
-			panTest.setPreferredSize(new Dimension(280, 75));
-			panTest.setBackground(Color.RED);
-			JLabel jlabel = new JLabel(Integer.toString(i));
-			//jlabel.setFont(new Font("Verdana",1,20));
-			panTest.add(jlabel);
-			contactList.add(panTest);
-			
-			
-		} */
 		
 		for (Contact contact : array) {
 			
@@ -371,42 +350,141 @@ public class Display extends JFrame implements ActionListener {
 	
 	private void generateContactDetails(int id) {
 		
-		contactDetails = new JPanel();
-		contactDetails.setBounds(23, 88, 315, 553);
-		contactDetails.setLayout(getLayout());
-		frame.getContentPane().add(contactDetails);
-		contactDetails.setBackground(Color.RED);
+	
 		
 		for (Contact contact : array) {
 			
 			if (contact.getId() == id) {
 				
-				JLabel jlabel = new JLabel(Integer.toString(contact.getId()) + contact.getFirstName() + contact.getLastName() );
-				contactDetails.add(jlabel);
+				detailHead = contact.getFirstName();
 				
-				contact.getId();
+			}
+			
+		}
+		
+		generateBackPannel(detailHead);
+		
+		contactDetails = new JPanel();
+		contactDetails.setBounds(23, 88, 315, 553);
+		contactDetails.setLayout(getLayout());
+		frame.getContentPane().add(contactDetails);
+		contactDetails.setBackground(new Color(250,250, 255));
+		
+		for (Contact contact : array) {
+			
+			if (contact.getId() == id) {
 				
-						contact.getFirstName();
-						contact.getLastName();
-						contact.getBirthDate();
-						contact.getEmail();
-						contact.getTelMobile();
-						contact.getTelHome();
-						contact.getPic();
-						System.out.println(contact.getPic());
+				detailHead = contact.getFirstName();
 				
+				
+				GridBagLayout gbl_blackPanel = new GridBagLayout();
+				gbl_blackPanel.columnWidths = new int[]{35, 250, 35};
+				gbl_blackPanel.rowHeights = new int[]{261, 22, 22, 22, 22, 22, 22,22};
+				gbl_blackPanel.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+				gbl_blackPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+				contactDetails.setLayout(gbl_blackPanel);
+				
+				JLabel lblContactPic = new JLabel();
+				
+				Image contactImage = new ImageIcon(this.getClass().getResource("/veillon.jpg")).getImage();
+				Image scaledContactImage = contactImage.getScaledInstance(250,aspectRatioCalculator(contactImage.getHeight(lblContactPic),contactImage.getWidth(lblContactPic),250), java.awt.Image.SCALE_SMOOTH);
+			
+				lblContactPic.setIcon(new ImageIcon(scaledContactImage));
+				
+			
+				
+				lblContactPic.setOpaque(true);
+				GridBagConstraints gbc_lblContactPic = new GridBagConstraints();
+				gbc_lblContactPic.insets = new Insets(44, 0, 5, 0);
+				gbc_lblContactPic.gridx = 1;
+				gbc_lblContactPic.gridy = 0;
+				contactDetails.add(lblContactPic, gbc_lblContactPic);
+				
+				JLabel lblFirstName = new JLabel(contact.getFirstName());
+				GridBagConstraints gbc_lblFirstName = new GridBagConstraints();
+				gbc_lblFirstName.anchor = GridBagConstraints.NORTHWEST;
+				gbc_lblFirstName.insets = new Insets(22, 0, 5, 0);
+				gbc_lblFirstName.gridx = 1;
+				gbc_lblFirstName.gridy = 1;
+				contactDetails.add(lblFirstName, gbc_lblFirstName);
+				
+				JLabel lblLastName = new JLabel(contact.getLastName());
+				GridBagConstraints gbc_lblLastName = new GridBagConstraints();
+				gbc_lblLastName.anchor = GridBagConstraints.NORTHWEST;
+				gbc_lblLastName.insets = new Insets(22, 0, 5, 0);
+				gbc_lblLastName.gridx = 1;
+				gbc_lblLastName.gridy = 2;
+				contactDetails.add(lblLastName, gbc_lblLastName);
+				
+				JLabel lblMobileTel = new JLabel(contact.getTelMobile());
+				GridBagConstraints gbc_lblMobileTel = new GridBagConstraints();
+				gbc_lblMobileTel.anchor = GridBagConstraints.NORTHWEST;
+				gbc_lblMobileTel.insets = new Insets(22, 0, 5, 0);
+				gbc_lblMobileTel.gridx = 1;
+				gbc_lblMobileTel.gridy = 3;
+				contactDetails.add(lblMobileTel, gbc_lblMobileTel);
+				
+				JLabel lblHomeTel = new JLabel(contact.getTelHome());
+				GridBagConstraints gbc_lblHomeTel = new GridBagConstraints();
+				gbc_lblHomeTel.anchor = GridBagConstraints.NORTHWEST;
+				gbc_lblHomeTel.insets = new Insets(22, 0, 5, 0);
+				gbc_lblHomeTel.gridx = 1;
+				gbc_lblHomeTel.gridy = 4;
+				contactDetails.add(lblHomeTel, gbc_lblHomeTel);
+				
+				JLabel lblEmail = new JLabel(contact.getEmail());
+				GridBagConstraints gbc_lblEmail = new GridBagConstraints();
+				gbc_lblEmail.anchor = GridBagConstraints.NORTHWEST;
+				gbc_lblEmail.insets = new Insets(22, 0, 5, 0);
+				gbc_lblEmail.gridx = 1;
+				gbc_lblEmail.gridy = 5;
+				contactDetails.add(lblEmail, gbc_lblEmail);
+				
+				JLabel lblBirthdate = new JLabel("birthdate");
+				GridBagConstraints gbc_lblBirthdate = new GridBagConstraints();
+				gbc_lblBirthdate.anchor = GridBagConstraints.NORTHWEST;
+				gbc_lblBirthdate.insets = new Insets(22, 0, 5, 0);
+				gbc_lblBirthdate.gridx = 1;
+				gbc_lblBirthdate.gridy = 6;
+				contactDetails.add(lblBirthdate, gbc_lblBirthdate);
+				
+
 			
 			}
 			
 		}
 		
+	
+		
 		activePanel = contactDetails;
 		
 		
 	}
+	
+	  private void generateBackPannel(String head) {
+		  
+		  Backpanel = new JPanel(); Backpanel.setBounds(23, 88, 320, 44);
+		  frame.getContentPane().add(Backpanel); Backpanel.setBackground(Color.GRAY);
+		  Backpanel.setLayout(null);;
+		  
+		  JButton btnBack = new JButton("â†�"); btnBack.setBounds(12, 9, 50, 26);
+		  Backpanel.add(btnBack); btnBack.addActionListener(this);
+		  btnBack.setActionCommand("back");
+		  
+		  JLabel label_1 = new JLabel(head);
+		  label_1.setBounds(130, 14, 56, 16);
+		  Backpanel.add(label_1);
+		  
+		 // activePanel = Backpanel;
+		  
+		  }
 
 	private void generategallery() {
-
+		
+		Gallery galleryObj = new Gallery();
+		Pictures[] pictures = galleryObj.getImages();
+		
+		
 		gallery = new JPanel();
 		gallery.setBounds(23, 88, 315, 553);
 		gallery.setLayout(getLayout());
@@ -417,13 +495,22 @@ public class Display extends JFrame implements ActionListener {
 		contactList.setBounds(23, 88, 315, 553);
 		
 		
-		for (int i = 0 ; i < 200 ; i++) {
-			
-			JPanel panTest = new JPanel();
-			panTest.setPreferredSize(new Dimension(65, 65));
-			panTest.setBackground(Color.BLUE);
-			contactList.add(panTest);
-			
+		for (int i = 0 ; i < pictures.length ; i++) {
+			try {
+				
+				BufferedImage currImage = ImageIO.read(new File(pictures[i].getPath()));
+				Image scaledImage = currImage.getScaledInstance(65,65,Image.SCALE_SMOOTH);
+				
+				JLabel picLabel = new JLabel(new ImageIcon(scaledImage), SwingConstants.LEFT);
+				picLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+				
+				contactList.add(picLabel);
+	
+				
+			} catch (IOException e) {
+				System.out.println("ERROR IN generateGallery() : "+e);
+			}
+			contactList.setBackground(Color.BLUE);
 			
 		}
 			
@@ -502,7 +589,16 @@ public class Display extends JFrame implements ActionListener {
 			isOff = false;
 
 			break;
-
+			
+		case "back": 
+			
+			if (activePanel == contactDetails) {
+				
+				frame.remove(Backpanel);
+				generatecontacts();
+				
+			}
+		
 		default:
 
 			System.out.println("no action");
@@ -521,6 +617,18 @@ public class Display extends JFrame implements ActionListener {
 		 * }
 		 */
 
+	}
+	
+	public int aspectRatioCalculator(double originHeight, double originWidth, double newWidth) {
+		
+		double res = (originHeight/originWidth) * newWidth;
+		
+		int resInt = (int) Math.round(res);
+
+		
+		return resInt;
+		
+		
 	}
 	
 	
