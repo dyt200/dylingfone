@@ -1,9 +1,12 @@
 <contacts>
 	<contact id="1">
 <<<<<<< HEAD
+<<<<<<< HEAD
         <firstName>tickleMyPickle</firstName>
         <lastName>pockli</lastName>
 =======
+=======
+>>>>>>> branch 'master' of https://github.com/dyt200/dylingfone
         <firstName>one</firstName>
         <lastName>pock</lastName>
 >>>>>>> branch 'master' of https://github.com/dyt200/dylingfone

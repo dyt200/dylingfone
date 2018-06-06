@@ -625,10 +625,12 @@ public class Display extends JFrame implements ActionListener {
 		  frame.getContentPane().add(Backpanel); Backpanel.setBackground(Color.GRAY);
 		  Backpanel.setLayout(null);
 		  
-
+		  
 		  JButton btnBack = new JButton("â†�"); btnBack.setBounds(12, 9, 50, 26);
 		  Backpanel.add(btnBack); 
 		  btnBack.addActionListener(this);
+
+
 		  btnBack.setActionCommand("back");
 		  
 		  JButton btnEditContact = new JButton("e"); 
@@ -662,50 +664,42 @@ public class Display extends JFrame implements ActionListener {
 		  
 		  }
 
-	  private void generategallery() {
-			
-			Gallery galleryObj = new Gallery();
-			Pictures[] pictures = galleryObj.getImages();
-			
-			
-			gallery = new JPanel();
-			gallery.setBounds(23, 88, 315, 553);
-			gallery.setLayout(getLayout());
-			frame.getContentPane().add(gallery);
-			gallery.setBackground(Color.CYAN);
-			
-			JPanel contactList = new JPanel();
-			contactList.setBounds(23, 88, 315, 553);
-			
-			
-			for (int i = 0 ; i < pictures.length ; i++) {
-				try {
-					
-					BufferedImage currImage = ImageIO.read(new File(pictures[i].getPath()));
-					Image scaledImage = currImage.getScaledInstance(65,65,Image.SCALE_SMOOTH);
-					
-					JLabel picLabel = new JLabel(new ImageIcon(scaledImage), SwingConstants.LEFT);
-					picLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-					
-					contactList.add(picLabel);
+
+	private void generategallery() {
 		
-					
-				} catch (IOException e) {
-					System.out.println("ERROR IN generateGallery() : "+e);
-				}
-				contactList.setBackground(Color.BLUE);
+		Gallery galleryObj = new Gallery();
+		Pictures[] pictures = galleryObj.getImages();
+		
+		
+		gallery = new JPanel();
+		gallery.setBounds(23, 88, 315, 553);
+		gallery.setLayout(getLayout());
+		frame.getContentPane().add(gallery);
+		gallery.setBackground(Color.CYAN);
+		
+		JPanel contactList = new JPanel();
+		contactList.setBounds(23, 88, 315, 553);
+		
+		
+		for (int i = 0 ; i < pictures.length ; i++) {
+			try {
 				
+				BufferedImage currImage = ImageIO.read(new File(pictures[i].getPath()));
+				Image scaledImage = currImage.getScaledInstance(65,65,Image.SCALE_SMOOTH);
+				
+				JLabel picLabel = new JLabel(new ImageIcon(scaledImage), SwingConstants.LEFT);
+				picLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+				
+				contactList.add(picLabel);
+	
+				
+			} catch (IOException e) {
+				System.out.println("ERROR IN generateGallery() : "+e);
 			}
-				
-				contactList.setPreferredSize(new Dimension(280, ((65*200) + (5*200))/4 + 5 ));
+			contactList.setBackground(Color.BLUE);
 			
-				JScrollPane scrollPane = new JScrollPane(contactList);
-				//scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-				
-				gallery.add(scrollPane);
+		}
 			
-		
-			activePanel = gallery;
 
 		}
 	public void actionPerformed(ActionEvent ae) {
