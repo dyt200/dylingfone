@@ -383,10 +383,12 @@ public class Display extends JFrame implements ActionListener {
 				
 				JLabel lblContactPic = new JLabel();
 				
-				Image contactImage = new ImageIcon(this.getClass().getResource("/cuchaulle.jpg")).getImage();
-				Image scaledContactImage = contactImage.getScaledInstance(250,200, java.awt.Image.SCALE_SMOOTH);
+				Image contactImage = new ImageIcon(this.getClass().getResource("/veillon.jpg")).getImage();
+				Image scaledContactImage = contactImage.getScaledInstance(250,aspectRatioCalculator(contactImage.getHeight(lblContactPic),contactImage.getWidth(lblContactPic),250), java.awt.Image.SCALE_SMOOTH);
 			
 				lblContactPic.setIcon(new ImageIcon(scaledContactImage));
+				
+			
 				
 				lblContactPic.setOpaque(true);
 				GridBagConstraints gbc_lblContactPic = new GridBagConstraints();
@@ -599,6 +601,19 @@ public class Display extends JFrame implements ActionListener {
 		 * }
 		 */
 
+	}
+	
+	public int aspectRatioCalculator(double originHeith, double originWidth,double newWidth) {
+		
+		double res;
+		res = (originHeith/originWidth) * newWidth;
+		
+		int resInt = (int) Math.round(res);
+
+		
+		return resInt;
+		
+		
 	}
 	
 	
