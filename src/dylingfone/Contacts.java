@@ -46,39 +46,6 @@ public class Contacts extends Page{
 		}
 	}
 	
-	public void editContact(int id, String element, String newValue) {
-		int tempId;
-		try {
-			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(super.xml);
-			
-			doc.getDocumentElement().normalize();
-		    NodeList list = doc.getElementsByTagName("contact");
-		    
-		    for (int i = 0; i < list.getLength(); i++) {
-		    	
-		    	Element contact = (Element)list.item(i);
-			    tempId = Integer.parseInt(contact.getAttribute("id"));
-			    
-			    if (id == tempId) {
-			    	Node toChange = contact.getElementsByTagName(element).item(0);
-			    	toChange.setTextContent(newValue);
-			    	
-			    	TransformerFactory transformerFactory = TransformerFactory.newInstance();
-			        Transformer transformer = transformerFactory.newTransformer();
-			        DOMSource source = new DOMSource(doc);
-			        StreamResult result = new StreamResult(getXml());
-			        transformer.transform(source, result);
-			        
-			        contactList = getContactsFromFile();
-			    }
-		    }
-		} catch(Exception e) {
-			System.out.println("ERROR IN EDITCONTACT() : "+e);
-		}
-	}
-	
 	public void deleteContact(int id) {
 		
 		int tempId;
@@ -92,6 +59,8 @@ public class Contacts extends Page{
 	        
 	        doc.getDocumentElement().normalize();
 		    NodeList list = doc.getElementsByTagName("contact");
+		    
+		    System.out.println("Number of elements in list : "+list.getLength());
 		    
 		    for (int i = 0; i < list.getLength(); i++) {
 		    	tempId = -1;
@@ -125,7 +94,7 @@ public class Contacts extends Page{
 		
 	}
 	
-	public void addContact(String firstName, String lastName, String birthDate, String email, String telMoblie, String telHome) {
+	public void addContact(int id, String firstName, String lastName, String birthDate, String email, String telMoblie, String telHome) {
 		try {
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -133,7 +102,7 @@ public class Contacts extends Page{
 	        Element root = doc.getDocumentElement();
 	        
 	        Element newContact = doc.createElement("contact");
-	        newContact.setAttribute("id",  Integer.toString(super.getNextId()));
+	        newContact.setAttribute("id",  Integer.toString(id));
 
             Element fname = doc.createElement("firstName");
             fname.appendChild(doc.createTextNode(firstName));
@@ -172,6 +141,7 @@ public class Contacts extends Page{
 		} catch (Exception e) {
 			System.out.println("ERROR IN ADD CONTACT : "+e);
 		}
+	
 	}
 	
 	public Contact[] getContactsFromFile() {

@@ -1,7 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><contacts>
+<contacts>
 	<contact id="1">
+<<<<<<< HEAD
         <firstName>tickleMyPickle</firstName>
         <lastName>pockli</lastName>
+=======
+        <firstName>one</firstName>
+        <lastName>pock</lastName>
+>>>>>>> branch 'master' of https://github.com/dyt200/dylingfone
         <birthDate>01.01.1901</birthDate>
         <email>a@a.com</email>
         <telMobile>075 522 35 38</telMobile>

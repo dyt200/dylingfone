@@ -1,7 +1,5 @@
 package dylingfone;
 
-import java.util.Date;
-
 public class Test {
 	
 	public static void main(String[] args) {
@@ -14,17 +12,18 @@ public class Test {
 		
 		try {
 			//creation of primary objects
-			Gallery gallery = new Gallery();
-			Contacts contacts = new Contacts();
+			//Gallery gallery = new Gallery();
+			//Contacts contacts = new Contacts();
 		
 			//for testing use dumpData() its like toString or w/e but better 
 			//gallery.dumpData();
 			
 			//if you want an array with all the data 
 			/*Contact[] array = contacts.getContactList();
-			
+			Contact[] array = contacts.getContactList();
+
 			simple loop to give an example how to get information - 
-			 
+
 			for (Contact contact : array) {
 
 				contact.getId();

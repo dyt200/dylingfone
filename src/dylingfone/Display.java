@@ -18,7 +18,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimerTask;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
+import java.io.File;
+import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
@@ -589,11 +592,11 @@ public class Display extends JFrame implements ActionListener {
 		                    
 		                	frame.remove(activePanel);
 		                	
-		                	contactsObj.editContact(id, "firstName", lblFirstName.getText() );
-		                	contactsObj.editContact(id, "lastName", lblLastName.getText() );
-		                	contactsObj.editContact(id, "telMobile", lblMobileTel.getText() );
-		                	contactsObj.editContact(id, "telHome", lblHomeTel.getText() );
-		                	contactsObj.editContact(id, "email", lblEmail.getText() );
+//		                	contactsObj.editContact(id, "firstName", lblFirstName.getText() );
+//		                	contactsObj.editContact(id, "lastName", lblLastName.getText() );
+//		                	contactsObj.editContact(id, "telMobile", lblMobileTel.getText() );
+//		                	contactsObj.editContact(id, "telHome", lblHomeTel.getText() );
+//		                	contactsObj.editContact(id, "email", lblEmail.getText() );
 		                	//contactsObj.editContact(id, "birthDate", lblBirthdate.getText() );
 		                	
 		                    generateContactDetails(id);
@@ -620,10 +623,10 @@ public class Display extends JFrame implements ActionListener {
 		  
 		  Backpanel = new JPanel(); Backpanel.setBounds(23, 88, 320, 44);
 		  frame.getContentPane().add(Backpanel); Backpanel.setBackground(Color.GRAY);
-		  Backpanel.setLayout(null);;
+		  Backpanel.setLayout(null);
 		  
-		  JButton btnBack = new JButton("←"); 
-		  btnBack.setBounds(12, 9, 50, 26);
+
+		  JButton btnBack = new JButton("â†�"); btnBack.setBounds(12, 9, 50, 26);
 		  Backpanel.add(btnBack); 
 		  btnBack.addActionListener(this);
 		  btnBack.setActionCommand("back");
@@ -659,40 +662,52 @@ public class Display extends JFrame implements ActionListener {
 		  
 		  }
 
-	private void generategallery() {
+	  private void generategallery() {
+			
+			Gallery galleryObj = new Gallery();
+			Pictures[] pictures = galleryObj.getImages();
+			
+			
+			gallery = new JPanel();
+			gallery.setBounds(23, 88, 315, 553);
+			gallery.setLayout(getLayout());
+			frame.getContentPane().add(gallery);
+			gallery.setBackground(Color.CYAN);
+			
+			JPanel contactList = new JPanel();
+			contactList.setBounds(23, 88, 315, 553);
+			
+			
+			for (int i = 0 ; i < pictures.length ; i++) {
+				try {
+					
+					BufferedImage currImage = ImageIO.read(new File(pictures[i].getPath()));
+					Image scaledImage = currImage.getScaledInstance(65,65,Image.SCALE_SMOOTH);
+					
+					JLabel picLabel = new JLabel(new ImageIcon(scaledImage), SwingConstants.LEFT);
+					picLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+					
+					contactList.add(picLabel);
+		
+					
+				} catch (IOException e) {
+					System.out.println("ERROR IN generateGallery() : "+e);
+				}
+				contactList.setBackground(Color.BLUE);
+				
+			}
+				
+				contactList.setPreferredSize(new Dimension(280, ((65*200) + (5*200))/4 + 5 ));
+			
+				JScrollPane scrollPane = new JScrollPane(contactList);
+				//scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+				
+				gallery.add(scrollPane);
+			
+		
+			activePanel = gallery;
 
-		gallery = new JPanel();
-		gallery.setBounds(23, 88, 315, 553);
-		gallery.setLayout(getLayout());
-		frame.getContentPane().add(gallery);
-		gallery.setBackground(Color.CYAN);
-		
-		JPanel contactList = new JPanel();
-		contactList.setBounds(23, 88, 315, 553);
-		
-		
-		for (int i = 0 ; i < 200 ; i++) {
-			
-			JPanel panTest = new JPanel();
-			panTest.setPreferredSize(new Dimension(65, 65));
-			panTest.setBackground(Color.BLUE);
-			contactList.add(panTest);
-			
-			
 		}
-			
-			contactList.setPreferredSize(new Dimension(280, ((65*200) + (5*200))/4 + 5 ));
-		
-			JScrollPane scrollPane = new JScrollPane(contactList);
-			//scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-			
-			gallery.add(scrollPane);
-		
-	
-		activePanel = gallery;
-
-	}
-
 	public void actionPerformed(ActionEvent ae) {
 
 		String action = ae.getActionCommand();
@@ -791,10 +806,9 @@ public class Display extends JFrame implements ActionListener {
 
 	}
 	
-	public int aspectRatioCalculator(double originHeith, double originWidth,double newWidth) {
+	public int aspectRatioCalculator(double originHeight, double originWidth, double newWidth) {
 		
-		double res;
-		res = (originHeith/originWidth) * newWidth;
+		double res = (originHeight/originWidth) * newWidth;
 		
 		int resInt = (int) Math.round(res);
 

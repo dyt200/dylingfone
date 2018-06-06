@@ -8,7 +8,6 @@ public class Pictures {
 	private String path;
 	
 	public Pictures (int id, String title, String description, String path) {
-		this.id = id;
 		this.title = title;
 		this.description = description;
 		this.path = path;
