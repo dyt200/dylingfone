@@ -41,17 +41,18 @@ public class Display extends JFrame implements ActionListener {
 	private JButton contactButton;
 	private JButton lockButton;
 	private JPanel blackPanel;
+	private JPanel EditContact;
 	private JPanel contactDetails;
 	private JLabel hourLabel;
 	private String timeStamp;
 	private boolean isOff = true;
 	private boolean isLocked = true;
 	private String detailHead ; 
+	private int contactId;
 
 	private JPanel activePanel;
 	
-	Contacts contactsObj = new Contacts();	
-	Contact[] array = contactsObj.getContactList();
+
 	
 	
 	private ImageObserver observer;
@@ -294,6 +295,9 @@ public class Display extends JFrame implements ActionListener {
 	 
 
 	private void generatecontacts() {
+		
+		Contacts contactsObj = new Contacts();	
+		Contact[] array = contactsObj.getContactList();
 
 		contacts = new JPanel();
 		contacts.setBounds(23, 88, 315, 553);
@@ -350,6 +354,9 @@ public class Display extends JFrame implements ActionListener {
 	
 	private void generateContactDetails(int id) {
 		
+		Contacts contactsObj = new Contacts();	
+		Contact[] array = contactsObj.getContactList();
+		
 	
 		
 		for (Contact contact : array) {
@@ -357,12 +364,13 @@ public class Display extends JFrame implements ActionListener {
 			if (contact.getId() == id) {
 				
 				detailHead = contact.getFirstName();
+				contactId = contact.getId();
 				
 			}
 			
 		}
 		
-		generateBackPannel(detailHead);
+		generateBackPannel(detailHead, id);
 		
 		contactDetails = new JPanel();
 		contactDetails.setBounds(23, 88, 315, 553);
@@ -375,6 +383,7 @@ public class Display extends JFrame implements ActionListener {
 			if (contact.getId() == id) {
 				
 				detailHead = contact.getFirstName();
+				
 				
 				
 				GridBagLayout gbl_blackPanel = new GridBagLayout();
@@ -461,15 +470,200 @@ public class Display extends JFrame implements ActionListener {
 		
 	}
 	
-	  private void generateBackPannel(String head) {
+	private void generateEditContact(int id) {
+		
+		Contacts contactsObj = new Contacts();	
+		Contact[] array = contactsObj.getContactList();
+		
+
+		
+		for (Contact contact : array) {
+			
+			if (contact.getId() == id) {
+				
+				detailHead = contact.getFirstName();
+				contactId = contact.getId();
+				
+			}
+			
+		}
+		
+		frame.remove(Backpanel);
+		
+		EditContact = new JPanel();
+		EditContact.setBounds(23, 88, 315, 553);
+		EditContact.setLayout(getLayout());
+		frame.getContentPane().add(EditContact);
+		EditContact.setBackground(new Color(250,250, 255));
+		
+		for (Contact contact : array) {
+			
+			if (contact.getId() == id) {
+				
+				detailHead = contact.getFirstName();
+				
+				
+				GridBagLayout gbl_blackPanel = new GridBagLayout();
+				gbl_blackPanel.columnWidths = new int[]{35, 250, 35};
+				gbl_blackPanel.rowHeights = new int[]{261, 22, 22, 22, 22, 22, 22,22};
+				gbl_blackPanel.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+				gbl_blackPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+				EditContact.setLayout(gbl_blackPanel);
+				
+				JLabel lblContactPic = new JLabel();
+				
+				Image contactImage = new ImageIcon(this.getClass().getResource("/veillon.jpg")).getImage();
+				Image scaledContactImage = contactImage.getScaledInstance(250,aspectRatioCalculator(contactImage.getHeight(lblContactPic),contactImage.getWidth(lblContactPic),250), java.awt.Image.SCALE_SMOOTH);
+			
+				lblContactPic.setIcon(new ImageIcon(scaledContactImage));
+				
+			
+				
+				lblContactPic.setOpaque(true);
+				GridBagConstraints gbc_lblContactPic = new GridBagConstraints();
+				gbc_lblContactPic.insets = new Insets(44, 0, 5, 0);
+				gbc_lblContactPic.gridx = 1;
+				gbc_lblContactPic.gridy = 0;
+				EditContact.add(lblContactPic, gbc_lblContactPic);
+				
+				JTextField lblFirstName = new JTextField(contact.getFirstName());
+				lblFirstName.setSize(new Dimension(250, 10));
+				GridBagConstraints gbc_lblFirstName = new GridBagConstraints();
+				gbc_lblFirstName.anchor = GridBagConstraints.NORTHWEST;
+				gbc_lblFirstName.fill=GridBagConstraints.HORIZONTAL;
+				gbc_lblFirstName.insets = new Insets(22, 0, 5, 0);
+				gbc_lblFirstName.gridx = 1;
+				gbc_lblFirstName.gridy = 1;
+				EditContact.add(lblFirstName, gbc_lblFirstName);
+				
+				JTextField lblLastName = new JTextField(contact.getLastName());
+				GridBagConstraints gbc_lblLastName = new GridBagConstraints();
+				gbc_lblLastName.anchor = GridBagConstraints.NORTHWEST;
+				gbc_lblLastName.fill = GridBagConstraints.HORIZONTAL;
+				gbc_lblLastName.insets = new Insets(22, 0, 5, 0);
+				gbc_lblLastName.gridx = 1;
+				gbc_lblLastName.gridy = 2;
+				EditContact.add(lblLastName, gbc_lblLastName);
+				
+				JTextField lblMobileTel = new JTextField(contact.getTelMobile());
+				GridBagConstraints gbc_lblMobileTel = new GridBagConstraints();
+				gbc_lblMobileTel.anchor = GridBagConstraints.NORTHWEST;
+				gbc_lblMobileTel.fill = GridBagConstraints.HORIZONTAL;
+				gbc_lblMobileTel.insets = new Insets(22, 0, 5, 0);
+				gbc_lblMobileTel.gridx = 1;
+				gbc_lblMobileTel.gridy = 3;
+				EditContact.add(lblMobileTel, gbc_lblMobileTel);
+				
+				JTextField lblHomeTel = new JTextField(contact.getTelHome());
+				GridBagConstraints gbc_lblHomeTel = new GridBagConstraints();
+				gbc_lblHomeTel.anchor = GridBagConstraints.NORTHWEST;
+				gbc_lblHomeTel.fill = GridBagConstraints.HORIZONTAL;
+				gbc_lblHomeTel.insets = new Insets(22, 0, 5, 0);
+				gbc_lblHomeTel.gridx = 1;
+				gbc_lblHomeTel.gridy = 4;
+				EditContact.add(lblHomeTel, gbc_lblHomeTel);
+				
+				JTextField lblEmail = new JTextField(contact.getEmail());
+				GridBagConstraints gbc_lblEmail = new GridBagConstraints();
+				gbc_lblEmail.anchor = GridBagConstraints.NORTHWEST;
+				gbc_lblEmail.fill = GridBagConstraints.HORIZONTAL;
+				gbc_lblEmail.insets = new Insets(22, 0, 5, 0);
+				gbc_lblEmail.gridx = 1;
+				gbc_lblEmail.gridy = 5;
+				EditContact.add(lblEmail, gbc_lblEmail);
+				
+				JTextField lblBirthdate = new JTextField("birthdate");
+				GridBagConstraints gbc_lblBirthdate = new GridBagConstraints();
+				gbc_lblBirthdate.anchor = GridBagConstraints.NORTHWEST;
+				gbc_lblBirthdate.fill = GridBagConstraints.HORIZONTAL;
+				gbc_lblBirthdate.insets = new Insets(22, 0, 5, 0);
+				gbc_lblBirthdate.gridx = 1;
+				gbc_lblBirthdate.gridy = 6;
+				EditContact.add(lblBirthdate, gbc_lblBirthdate);
+				
+				
+				JButton btnSave = new JButton("save"); 
+				GridBagConstraints gbc_btnSave = new GridBagConstraints();
+				gbc_btnSave.anchor = GridBagConstraints.NORTHWEST;
+				gbc_btnSave.fill = GridBagConstraints.HORIZONTAL;
+				gbc_btnSave.insets = new Insets(10, 0, 5, 0);
+				gbc_btnSave.gridx = 1;
+				gbc_btnSave.gridy = 0;
+				EditContact.add(btnSave, gbc_btnSave);
+				
+				  
+				  btnSave.addMouseListener(new java.awt.event.MouseAdapter() {
+						
+		                public void mouseClicked(java.awt.event.MouseEvent evt) {
+		                	
+		                    System.out.println("mouseClicked edit");
+		                    System.out.println(id);
+		                    
+		                	frame.remove(activePanel);
+		                	
+		                	contactsObj.editContact(id, "firstName", lblFirstName.getText() );
+		                	contactsObj.editContact(id, "lastName", lblLastName.getText() );
+		                	contactsObj.editContact(id, "telMobile", lblMobileTel.getText() );
+		                	contactsObj.editContact(id, "telHome", lblHomeTel.getText() );
+		                	contactsObj.editContact(id, "email", lblEmail.getText() );
+		                	//contactsObj.editContact(id, "birthDate", lblBirthdate.getText() );
+		                	
+		                    generateContactDetails(id);
+		                	frame.validate();
+		            		frame.repaint();
+		            
+		                    
+		                }});
+				
+
+			
+			}
+			
+		}
+		
+	
+		
+		activePanel = EditContact;
+		
+		
+	}
+	
+	  private void generateBackPannel(String head,int id) {
 		  
 		  Backpanel = new JPanel(); Backpanel.setBounds(23, 88, 320, 44);
 		  frame.getContentPane().add(Backpanel); Backpanel.setBackground(Color.GRAY);
-		  Backpanel.setLayout(null);;
+		  Backpanel.setLayout(null);
 		  
-		  JButton btnBack = new JButton("â†�"); btnBack.setBounds(12, 9, 50, 26);
-		  Backpanel.add(btnBack); btnBack.addActionListener(this);
+		  
+		  JButton btnBack = new JButton("b"); btnBack.setBounds(12, 9, 50, 26);
+		  Backpanel.add(btnBack); 
+		  btnBack.addActionListener(this);
+
+
 		  btnBack.setActionCommand("back");
+		  
+		  JButton btnEditContact = new JButton("e"); 
+		  btnEditContact.setBounds(260, 9, 50, 26);
+		  Backpanel.add(btnEditContact); 
+		  
+		  btnEditContact.addMouseListener(new java.awt.event.MouseAdapter() {
+				
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                	
+                    System.out.println("mouseClicked edit");
+                    System.out.println(id);
+                    
+                	frame.remove(activePanel);
+                    generateEditContact(id);
+                	frame.validate();
+            		frame.repaint();
+            
+                    
+                }});
+//		  btnEditContact.addActionListener(this);
+//		  btnEditContact.setActionCommand("EditContact");
+		
+		  
 		  
 		  JLabel label_1 = new JLabel(head);
 		  label_1.setBounds(130, 14, 56, 16);
