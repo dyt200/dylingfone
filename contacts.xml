@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><contacts>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<contacts>
 	<contact id="1">
-        <firstName>tickleMyPickless</firstName>
+        <firstName>tickleMyPicklesss</firstName>
         <lastName>pock</lastName>
         <birthDate>01.01.1901</birthDate>
         <email>a@a.com</email>
@@ -8,20 +9,21 @@
         <telHome>010101</telHome>
     </contact>
 	<contact id="2">
-        <firstName>two</firstName>
+        <firstName>Juan</firstName>
         <lastName>pock</lastName>
         <birthDate>01.01.1901</birthDate>
         <email>a@a.com</email>
         <telMobile>0795240907</telMobile>
         <telHome>010101</telHome>
     </contact>
-	<contact id="3">
-        <firstName>three</firstName>
-        <lastName>pock</lastName>
-        <birthDate>01.01.1901</birthDate>
-        <email>a@a.com</email>
-        <telMobile>0101010</telMobile>
-        <telHome>010101</telHome>
-    </contact>
 	
+	
+<contact id="3">
+<firstName>This</firstName>
+<lastName>isukg</lastName>
+<birthDate>01.01.1901</birthDate>
+<email>3546384351</email>
+<telMobile>3546384351</telMobile>
+<telHome>saved</telHome>
+</contact>
 </contacts>
