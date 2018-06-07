@@ -378,6 +378,7 @@ public class Display extends JFrame implements ActionListener {
 
 	}
 	
+	
 	private void generateContactDetails(int id) {
 		
 		Contacts contactsObj = new Contacts();	
@@ -683,7 +684,7 @@ public class Display extends JFrame implements ActionListener {
 		
 		JLabel lblContactPic = new JLabel();
 		
-		Image contactImage = new ImageIcon(this.getClass().getResource("/veillon.jpg")).getImage();
+		Image contactImage = new ImageIcon(this.getClass().getResource("/placeholder.jpg")).getImage();
 		Image scaledContactImage = contactImage.getScaledInstance(250,aspectRatioCalculator(contactImage.getHeight(lblContactPic),contactImage.getWidth(lblContactPic),250), java.awt.Image.SCALE_SMOOTH);
 	
 		lblContactPic.setIcon(new ImageIcon(scaledContactImage));
