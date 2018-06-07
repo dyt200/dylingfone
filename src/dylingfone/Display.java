@@ -373,11 +373,8 @@ public class Display extends JFrame implements ActionListener {
 			scrollPane.setBounds(23, 150, 315, 553);
 			
 			contacts.add(scrollPane);
-	
-
 			
-			
-		activePanel = contacts;
+			activePanel = contacts;
 
 	}
 	
@@ -385,35 +382,28 @@ public class Display extends JFrame implements ActionListener {
 		
 		Contacts contactsObj = new Contacts();	
 		Contact[] array = contactsObj.getContactList();
-		
+		Gallery galleryLol = new Gallery();
+
+		String imagePath = "";
 	
-		
 		for (Contact contact : array) {
 			
 			if (contact.getId() == id) {
 				
 				detailHead = contact.getFirstName();
 				contactId = contact.getId();
+				imagePath = galleryLol.getPathFromId(contact.getPic());
+				System.out.println("path = "+imagePath);
 				
-			}
-			
-		}
-		
-		generateBackPannel(detailHead, id);
-		
-		contactDetails = new JPanel();
-		contactDetails.setBounds(23, 88, 315, 553);
-		contactDetails.setLayout(getLayout());
-		frame.getContentPane().add(contactDetails);
-		contactDetails.setBackground(new Color(250,250, 255));
-		
-		for (Contact contact : array) {
-			
-			if (contact.getId() == id) {
+				generateBackPannel(detailHead, id);
+				
+				contactDetails = new JPanel();
+				contactDetails.setBounds(23, 88, 315, 553);
+				contactDetails.setLayout(getLayout());
+				frame.getContentPane().add(contactDetails);
+				contactDetails.setBackground(new Color(250,250, 255));
 				
 				detailHead = contact.getFirstName();
-				
-				
 				
 				GridBagLayout gbl_blackPanel = new GridBagLayout();
 				gbl_blackPanel.columnWidths = new int[]{35, 250, 35};
@@ -424,12 +414,10 @@ public class Display extends JFrame implements ActionListener {
 				
 				JLabel lblContactPic = new JLabel();
 				
-				Image contactImage = new ImageIcon(this.getClass().getResource("/veillon.jpg")).getImage();
+				Image contactImage = new ImageIcon(this.getClass().getResource(imagePath)).getImage();
 				Image scaledContactImage = contactImage.getScaledInstance(250,aspectRatioCalculator(contactImage.getHeight(lblContactPic),contactImage.getWidth(lblContactPic),250), java.awt.Image.SCALE_SMOOTH);
 			
 				lblContactPic.setIcon(new ImageIcon(scaledContactImage));
-				
-			
 				
 				lblContactPic.setOpaque(true);
 				GridBagConstraints gbc_lblContactPic = new GridBagConstraints();
@@ -486,17 +474,10 @@ public class Display extends JFrame implements ActionListener {
 				gbc_lblBirthdate.gridy = 6;
 				contactDetails.add(lblBirthdate, gbc_lblBirthdate);
 				
-
-			
+				activePanel = contactDetails;
+				
 			}
-			
-		}
-		
-	
-		
-		activePanel = contactDetails;
-		
-		
+		}		
 	}
 	
 	private void generateEditContact(int id) {
@@ -504,17 +485,20 @@ public class Display extends JFrame implements ActionListener {
 		Contacts contactsObj = new Contacts();	
 		Contact[] array = contactsObj.getContactList();
 		
-
+		Gallery galleryLol = new Gallery();
+		Pictures[] pictures = galleryLol.getImages();
+		String imagePath = "";
+		int imageId;
 		
 		for (Contact contact : array) {
 			
 			if (contact.getId() == id) {
-				
 				detailHead = contact.getFirstName();
 				contactId = contact.getId();
 				
+				imagePath = galleryLol.getPathFromId(contact.getPic());
+				System.out.println("IMAGE PATH = "+imagePath);
 			}
-			
 		}
 		
 		frame.remove(Backpanel);
@@ -531,7 +515,6 @@ public class Display extends JFrame implements ActionListener {
 				
 				detailHead = contact.getFirstName();
 				
-				
 				GridBagLayout gbl_blackPanel = new GridBagLayout();
 				gbl_blackPanel.columnWidths = new int[]{35, 250, 35};
 				gbl_blackPanel.rowHeights = new int[]{261, 22, 22, 22, 22, 22, 22,22};
@@ -540,15 +523,11 @@ public class Display extends JFrame implements ActionListener {
 				EditContact.setLayout(gbl_blackPanel);
 				
 				JLabel lblContactPic = new JLabel();
-				
-				Image contactImage = new ImageIcon(this.getClass().getResource("/veillon.jpg")).getImage();
+				Image contactImage = new ImageIcon(this.getClass().getResource(imagePath)).getImage();
 				Image scaledContactImage = contactImage.getScaledInstance(250,aspectRatioCalculator(contactImage.getHeight(lblContactPic),contactImage.getWidth(lblContactPic),250), java.awt.Image.SCALE_SMOOTH);
-			
 				lblContactPic.setIcon(new ImageIcon(scaledContactImage));
-				
-			
-				
 				lblContactPic.setOpaque(true);
+				
 				GridBagConstraints gbc_lblContactPic = new GridBagConstraints();
 				gbc_lblContactPic.insets = new Insets(44, 0, 5, 0);
 				gbc_lblContactPic.gridx = 1;
@@ -656,24 +635,22 @@ public class Display extends JFrame implements ActionListener {
 					  
 					btnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
 							
-			                public void mouseClicked(java.awt.event.MouseEvent evt) {
-			                	
-			                    System.out.println("mouseClicked edit");
-			                    System.out.println(id);
-			                    
-			                	frame.remove(activePanel);
-			                	
-			                	contactsObj.deleteContact(id);
-			                	System.out.println("Delete contact sucess");
-			                
-			                    generatecontacts();
-			                	frame.validate();
-			            		frame.repaint();
-			            
-			                    
-			                }});
-				
-
+	                public void mouseClicked(java.awt.event.MouseEvent evt) {
+	                	
+	                    System.out.println("mouseClicked edit");
+	                    System.out.println(id);
+	                    
+	                	frame.remove(activePanel);
+	                	
+	                	contactsObj.deleteContact(id);
+	                	System.out.println("Delete contact sucess");
+	                
+	                    generatecontacts();
+	                	frame.validate();
+	            		frame.repaint();
+	            
+	                    
+	                }});
 			
 			}
 			
@@ -710,10 +687,8 @@ public class Display extends JFrame implements ActionListener {
 		Image scaledContactImage = contactImage.getScaledInstance(250,aspectRatioCalculator(contactImage.getHeight(lblContactPic),contactImage.getWidth(lblContactPic),250), java.awt.Image.SCALE_SMOOTH);
 	
 		lblContactPic.setIcon(new ImageIcon(scaledContactImage));
-		
-	
-		
 		lblContactPic.setOpaque(true);
+		
 		GridBagConstraints gbc_lblContactPic = new GridBagConstraints();
 		gbc_lblContactPic.insets = new Insets(44, 0, 5, 0);
 		gbc_lblContactPic.gridx = 1;

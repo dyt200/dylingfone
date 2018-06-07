@@ -43,7 +43,7 @@ public class Test {
 			//How to EDIT a contact, with test dumps
 			//works really well so far, needs full testing
 			/*contacts.dumpData();
-			contacts.editContact(1, "firstName", "tickleMyPickle");
+			contacts.editContact(1, "birthDate", "01.01.2011");
 			contacts.dumpData();*/
 			
 			//How to EDIT an image, with dumps
@@ -72,7 +72,7 @@ public class Test {
 			//HOW TO ADD TO CONTACTS/GALLERY (add strings this is just an example)
 			//normally these two functions handle IDs automatically;
 			//
-			//contacts.addContact(firstName, lastName, birthDate, email, telMoblie, telHome);
+			//contacts.addContact("johnasdsad", "snow", "13.01.1988", "a@a.a", "123012301","asdjaskdj1");
 			//gallery.addPicture(title, desc, path);
 			
 			//How to add stuff to either contacts or gallery 

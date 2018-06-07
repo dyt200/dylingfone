@@ -3,7 +3,7 @@
 	<contact id="1">
         <firstName>tickleMyPicklesss</firstName>
         <lastName>pock</lastName>
-        <birthDate>01.01.1901</birthDate>
+        <birthDate>01.01.2011</birthDate>
         <email>a@a.com</email>
         <telMobile>0101010</telMobile>
         <telHome>010101</telHome>
@@ -16,8 +16,6 @@
         <telMobile>0795240907</telMobile>
         <telHome>010101</telHome>
     </contact>
-	
-	
 <contact id="3">
 <firstName>This</firstName>
 <lastName>isukg</lastName>
@@ -25,5 +23,21 @@
 <email>3546384351</email>
 <telMobile>3546384351</telMobile>
 <telHome>saved</telHome>
+</contact>
+<contact id="4">
+<firstName>john</firstName>
+<lastName>snow</lastName>
+<birthDate>11.12.1988</birthDate>
+<email>a@a.a</email>
+<telMobile>a@a.a</telMobile>
+<telHome>asdjaskdj1</telHome>
+</contact>
+<contact id="5">
+<firstName>johnasdsad</firstName>
+<lastName>snow</lastName>
+<birthDate>01.01.1908</birthDate>
+<email>a@a.a</email>
+<telMobile>123012301</telMobile>
+<telHome>asdjaskdj1</telHome>
 </contact>
 </contacts>

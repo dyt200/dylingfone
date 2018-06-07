@@ -133,9 +133,7 @@ public class Gallery extends Page {
 		    	
 		    	tempId = -1;
 			    Element image = (Element)list.item(i);
-			   
-			   
-			
+			  
 			    tempId = Integer.parseInt(image.getAttribute("id"));
 			    System.out.println("id = "+id+" AND tempId = "+tempId);
 			    if (id == tempId) {
@@ -200,6 +198,16 @@ public class Gallery extends Page {
 			System.out.println("IN GALLERY ERROR : "+e);
 		}
 		return imagesFF;
+	}
+	
+	public String getPathFromId(int id) {
+		int tempId;
+		for(int i = 0; i < images.length; i++) {
+			tempId = i;
+			if(tempId == id) 
+				return images[i].getPath();
+		}
+		return "/placeholder.jpg";
 	}
 	
 	public Pictures[] getImages() {

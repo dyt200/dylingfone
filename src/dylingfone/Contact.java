@@ -11,7 +11,7 @@ public class Contact {
 	private String email;
 	private String telMobile;
 	private String telHome;
-	private String pic;
+	private int pic;
 	
 	public Contact(int id, String firstName, String lastName, Date birthDate, String email, String telMobile, String telHome) {
 		this.setId(id);
@@ -21,6 +21,7 @@ public class Contact {
 		this.email = email;
 		this.telMobile = telMobile;
 		this.telHome = telHome;
+		this.pic = -1;
 	}
 	
 	public String getFirstName() {
@@ -41,10 +42,10 @@ public class Contact {
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
-	public String getPic() {
+	public int getPic() {
 		return pic;
 	}
-	public void setPic(String pic) {
+	public void setPic(int pic) {
 		this.pic = pic;
 	}
 	public String getEmail() {

@@ -1,4 +1,9 @@
 <gallery>
+	<image id="-1">
+		<file>./images/placeholder.jpg</file>
+		<title>My First Picture</title>
+		<description>This is my very first picture!</description>
+	</image>
 	<image id="1">
 		<file>./images/mario.jpg</file>
 		<title>My First Picture</title>

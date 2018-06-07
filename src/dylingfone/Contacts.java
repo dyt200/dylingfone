@@ -125,7 +125,7 @@ public class Contacts extends Page{
 		
 	}
 	
-	public void addContact(String firstName, String lastName, String birthDate, String email, String telMoblie, String telHome) {
+	public void addContact(String firstName, String lastName, String birthDate, String email, String telMobile, String telHome) {
 		try {
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -152,7 +152,7 @@ public class Contacts extends Page{
             newContact.appendChild(mail);
             
             Element tMobile = doc.createElement("telMobile");
-            tMobile.appendChild(doc.createTextNode(email));
+            tMobile.appendChild(doc.createTextNode(telMobile));
             newContact.appendChild(tMobile);
             
             Element tHome = doc.createElement("telHome");
@@ -168,6 +168,8 @@ public class Contacts extends Page{
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             StreamResult result = new StreamResult(getXml());
             transformer.transform(source, result);
+            
+            contactList = getContactsFromFile();
             
 		} catch (Exception e) {
 			System.out.println("ERROR IN ADD CONTACT : "+e);
