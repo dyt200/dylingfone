@@ -102,7 +102,7 @@ public class Display extends JFrame implements ActionListener {
 		frame.setUndecorated(true);
 		frame.setBackground(new Color(0, 0,0,0)); // Uncomment to set the background
 
-		// transpatrent
+		// transpatrentx
 		 frame.getContentPane().setLayout(null);
 
 		/**
