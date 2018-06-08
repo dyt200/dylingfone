@@ -34,7 +34,7 @@ public class Contacts extends Page{
 		for (int i = 0; i < contactList.length ; i++) {
 		
 		   System.out.println("=====================");
-		   System.out.println("Pointer :" + i );
+		   System.out.println("index :" + i );
 		   System.out.println("id : "+this.contactList[i].getId());
 		   System.out.println("name : "+this.contactList[i].getFirstName());
 		   System.out.println("last name : "+this.contactList[i].getLastName());
@@ -219,6 +219,40 @@ public class Contacts extends Page{
 
 	public Contact[] getContactList() {
 		return contactList;
+	}
+	
+	public void getContactListAlpha() {
+		Contact[] tempC = contactList;
+		int compare;
+		Contact save;
+		
+		for(int i = 0; i < tempC.length; i++) {
+			
+			for(int j = i+1; j < tempC.length; j++) {
+				
+				compare = tempC[j].getLastName().compareTo(tempC[i].getLastName());
+				
+				if (compare == 0) {
+					compare = tempC[j].getFirstName().compareTo(tempC[i].getFirstName());
+				}
+				
+				if (compare == 0) {
+					if(tempC[i].getId() > tempC[j].getId())
+						compare = -1;
+					else if (tempC[i].getId() < tempC[j].getId())
+						compare = 1;
+				}
+				
+				if(compare < 0) {
+					save = tempC[i];
+					tempC[i] = tempC[j];
+					tempC[j] = save;
+				}
+				
+			}
+		}
+		//return tempC;
+		contactList = tempC;
 	}
 	
 	public void setContacts(Contact[] contacts) {

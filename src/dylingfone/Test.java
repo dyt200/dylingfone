@@ -12,8 +12,11 @@ public class Test {
 		
 		try {
 			//creation of primary objects
-			//Gallery gallery = new Gallery();
-			//Contacts contacts = new Contacts();
+			Gallery gallery = new Gallery();
+			Contacts contacts = new Contacts();
+			
+			//How to get contacts in alphabetical order
+			//contacts.getContactListAlpha();
 		
 			//for testing use dumpData() its like toString or w/e but better 
 			//gallery.dumpData();
