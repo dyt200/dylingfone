@@ -417,15 +417,14 @@ public class Display extends JFrame implements ActionListener {
 				imagePath = galleryLol.getPathFromId(contact.getPic());
 				System.out.println("path = "+imagePath);
 				
-				generateBackPannel(detailHead, id);
+				generateBackPannel(detailHead, id, 1);
 				
 				contactDetails = new JPanel();
 				contactDetails.setBounds(23, 88, 315, 553);
 				contactDetails.setLayout(getLayout());
-				frame.getContentPane().add(contactDetails);
 				contactDetails.setBackground(new Color(250,250, 255));
 				
-				detailHead = contact.getFirstName();
+				frame.getContentPane().add(contactDetails);
 				
 				GridBagLayout gbl_blackPanel = new GridBagLayout();
 				gbl_blackPanel.columnWidths = new int[]{35, 250, 35};
@@ -911,7 +910,11 @@ public class Display extends JFrame implements ActionListener {
 		activePanel = AddContact;
 	};
 	
-	  private void generateBackPannel(String head,int id) {
+	  private void generateBackPannel(String head,int id, int type) {
+		  
+		  /*	TYPE 1 = contacts
+		   * 	TYPE 2 = images
+		   */
 		  
 		  Backpanel = new JPanel(); Backpanel.setBounds(23, 88, 320, 44);
 		  frame.getContentPane().add(Backpanel); Backpanel.setBackground(Color.GRAY);
@@ -924,7 +927,7 @@ public class Display extends JFrame implements ActionListener {
 		  btnBack.addActionListener(this);
 
 
-		  btnBack.setActionCommand("back");
+		  btnBack.setActionCommand("back"+type);
 		  
 		  JButton btnEditContact = new JButton("e"); 
 		  btnEditContact.setBounds(260, 9, 50, 26);
@@ -938,7 +941,12 @@ public class Display extends JFrame implements ActionListener {
                     System.out.println(id);
                     
                 	frame.remove(activePanel);
-                    generateEditContact(id);
+                	
+                	if(type == 1) {
+                		generateEditContact(id);
+                	} else {
+                		generateEditImage(id);
+                	}
                 	frame.validate();
             		frame.repaint();
             
@@ -962,18 +970,17 @@ public class Display extends JFrame implements ActionListener {
 		Gallery galleryObj = new Gallery();
 		Pictures[] pictures = galleryObj.getImages();
 		
-		
 		gallery = new JPanel();
 		gallery.setBounds(23, 88, 315, 553);
 		gallery.setLayout(getLayout());
 		frame.getContentPane().add(gallery);
-		gallery.setBackground(Color.CYAN);
 		
 		JPanel contactList = new JPanel();
 		contactList.setBounds(23, 88, 315, 553);
 		
 		
 		for (int i = 0 ; i < pictures.length ; i++) {
+			final int id = i;
 			try {
 				
 				BufferedImage currImage = ImageIO.read(new File(pictures[i].getPath()));
@@ -982,26 +989,75 @@ public class Display extends JFrame implements ActionListener {
 				JLabel picLabel = new JLabel(new ImageIcon(scaledImage), SwingConstants.LEFT);
 				picLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 				
+				// mouse listener for clicking on an image to go into imageDetails.
+				// 1988 THIS SEEMS TO WORK WELL, go to generateImageDetails (below)
+				picLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+		            public void mouseClicked(java.awt.event.MouseEvent evt) {
+		            	frame.remove(activePanel);
+		                generateImageDetails(id);
+		            	frame.validate();
+		        		frame.repaint();
+		            }
+	            });
+				
 				contactList.add(picLabel);
-	
 				
 			} catch (IOException e) {
 				System.out.println("ERROR IN generateGallery() : "+e);
 			}
-			contactList.setBackground(Color.BLUE);
+			
 			
 		}
-			
-			contactList.setPreferredSize(new Dimension(280, ((65*200) + (5*200))/4 + 5 ));
 		
-			JScrollPane scrollPane = new JScrollPane(contactList);
-			//scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-			
-			gallery.add(scrollPane);
+		contactList.setBackground(Color.BLUE);
+		contactList.setPreferredSize(new Dimension(280, ((65*200) + (5*200))/4 + 5 ));
+	
+		JScrollPane scrollPane = new JScrollPane(contactList);
+		//scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		
+		gallery.add(scrollPane);
 		
 	
 		activePanel = gallery;
 
+	}
+	
+	public void generateImageDetails(int id) {
+		Gallery gallery = new Gallery();
+		Pictures[] imageList = gallery.getImages();
+		
+		String title = imageList[id].getTitle();
+		String imagePath = gallery.getPathFromId(id);
+		
+		generateBackPannel(title, id, 2);
+		
+		JPanel imageDetails = new JPanel();
+		imageDetails.setBounds(23, 88, 315, 553);
+		imageDetails.setLayout(getLayout());
+		imageDetails.setBackground(Color.GRAY);
+		
+		//1988 THIS IS WHERE IM STUCK
+		//I can type the path of the image a la main in place of imagePath and it doesnt find it, ive tried every possible way
+		JLabel lblContactPic = new JLabel();
+		System.out.println("path = "+imagePath);
+		Image contactImage = new ImageIcon(this.getClass().getResource(imagePath)).getImage();
+		Image scaledContactImage = contactImage.getScaledInstance(225,aspectRatioCalculator(contactImage.getHeight(lblContactPic),contactImage.getWidth(lblContactPic),225), java.awt.Image.SCALE_SMOOTH);
+	
+		lblContactPic.setIcon(new ImageIcon(scaledContactImage));
+		lblContactPic.setOpaque(true);
+		
+		GridBagConstraints gbc_lblContactPic = new GridBagConstraints();
+		gbc_lblContactPic.insets = new Insets(44, 0, 5, 0);
+		gbc_lblContactPic.gridx = 1;
+		gbc_lblContactPic.gridy = 0;
+		imageDetails.add(lblContactPic, gbc_lblContactPic);
+		
+		activePanel = imageDetails;
+		
+	}
+	
+	public void generateEditImage(int id) {
+		System.out.println("IMAGINE THAT YOU ARE NOW EDITING AN IMAGE... WOW IT WORKS SO WELL!");
 	}
 
 	public void actionPerformed(ActionEvent ae) {
@@ -1068,7 +1124,8 @@ public class Display extends JFrame implements ActionListener {
 
 			break;
 			
-		case "back": 
+		//back for contacts
+		case "back1": 
 			
 			if (activePanel == contactDetails) {
 				
@@ -1077,6 +1134,13 @@ public class Display extends JFrame implements ActionListener {
 				
 			}
 			break;
+			
+		//back for images
+		case "back2":
+			frame.remove(Backpanel);
+			generategallery();
+			break;
+			
 		case "AddContact":
 			
 			generateAddContact();
