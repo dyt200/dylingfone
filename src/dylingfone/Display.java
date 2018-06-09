@@ -44,6 +44,7 @@ public class Display extends JFrame implements ActionListener {
 	private JPanel EditContact;
 	private JPanel contactDetails;
 	private JPanel AddContact;
+	private JPanel imageDetails;
 	private JLabel hourLabel;
 	private String timeStamp;
 	private boolean isOff = true;
@@ -877,9 +878,6 @@ public class Display extends JFrame implements ActionListener {
               }});
 		
 		
-
-		
-		  
 		  btnSave.addMouseListener(new java.awt.event.MouseAdapter() {
 				
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -888,14 +886,6 @@ public class Display extends JFrame implements ActionListener {
                     System.out.println();
                     
                 	frame.remove(activePanel);
-                	// SAVE LOGIC HERE
-                	/**
-                	 * 
-                	 * 
-                	 * Ben,  you realy need to remove that fucking date type, let us simplify our lives
-                	 * See Ya :D
-                	 * 
-                	 */
                 	
                 	contactsObj.addContact(lblFirstName.getText(), lblLastName.getText(), lblBirthdate.getText(), lblEmail.getText(), lblMobileTel.getText(), lblHomeTel.getText());
            
@@ -916,8 +906,10 @@ public class Display extends JFrame implements ActionListener {
 		   * 	TYPE 2 = images
 		   */
 		  
-		  Backpanel = new JPanel(); Backpanel.setBounds(23, 88, 320, 44);
-		  frame.getContentPane().add(Backpanel); Backpanel.setBackground(Color.GRAY);
+		  Backpanel = new JPanel();
+		  Backpanel.setBounds(23, 88, 320, 44);
+		  frame.getContentPane().add(Backpanel);
+		  Backpanel.setBackground(Color.GRAY);
 		  Backpanel.setLayout(null);
 		  
 		  
@@ -981,32 +973,40 @@ public class Display extends JFrame implements ActionListener {
 		
 		for (int i = 0 ; i < pictures.length ; i++) {
 			final int id = i;
-			try {
+		
 				
-				BufferedImage currImage = ImageIO.read(new File(pictures[i].getPath()));
-				Image scaledImage = currImage.getScaledInstance(65,65,Image.SCALE_SMOOTH);
+				BufferedImage img = null;
+				try {
+				    img = ImageIO.read(new File(pictures[i].getPath()));
+				} catch (IOException e) {
+					
+				}
+				;
 				
-				JLabel picLabel = new JLabel(new ImageIcon(scaledImage), SwingConstants.LEFT);
-				picLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+				// BufferedImage currImage = ImageIO.read(new File(pictures[i].getPath()));
+				
+				Image scaledImage = img.getScaledInstance(65,65,Image.SCALE_SMOOTH);
+				
+				JLabel picLabel = new JLabel(new ImageIcon(scaledImage));
+				//picLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 				
 				// mouse listener for clicking on an image to go into imageDetails.
 				// 1988 THIS SEEMS TO WORK WELL, go to generateImageDetails (below)
 				picLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+					
 		            public void mouseClicked(java.awt.event.MouseEvent evt) {
+		            	
 		            	frame.remove(activePanel);
 		                generateImageDetails(id);
 		            	frame.validate();
 		        		frame.repaint();
+		        		
+		        		
 		            }
 	            });
 				
 				contactList.add(picLabel);
 				
-			} catch (IOException e) {
-				System.out.println("ERROR IN generateGallery() : "+e);
-			}
-			
-			
 		}
 		
 		contactList.setBackground(Color.BLUE);
@@ -1023,6 +1023,7 @@ public class Display extends JFrame implements ActionListener {
 	}
 	
 	public void generateImageDetails(int id) {
+		
 		Gallery gallery = new Gallery();
 		Pictures[] imageList = gallery.getImages();
 		
@@ -1031,26 +1032,33 @@ public class Display extends JFrame implements ActionListener {
 		
 		generateBackPannel(title, id, 2);
 		
-		JPanel imageDetails = new JPanel();
+		imageDetails = new JPanel();
 		imageDetails.setBounds(23, 88, 315, 553);
-		imageDetails.setLayout(getLayout());
-		imageDetails.setBackground(Color.GRAY);
+		imageDetails.setLayout(null);
+		frame.getContentPane().add(imageDetails);
+		imageDetails.setBackground(Color.BLACK);
+		
 		
 		//1988 THIS IS WHERE IM STUCK
 		//I can type the path of the image a la main in place of imagePath and it doesnt find it, ive tried every possible way
 		JLabel lblContactPic = new JLabel();
+		
 		System.out.println("path = "+imagePath);
-		Image contactImage = new ImageIcon(this.getClass().getResource(imagePath)).getImage();
-		Image scaledContactImage = contactImage.getScaledInstance(225,aspectRatioCalculator(contactImage.getHeight(lblContactPic),contactImage.getWidth(lblContactPic),225), java.awt.Image.SCALE_SMOOTH);
-	
+		
+		BufferedImage img = null;
+		try {
+		    img = ImageIO.read(new File(imagePath));
+		} catch (IOException e) {
+		}
+		;
+		
+	//	Image contactImage = new ImageIcon(this.getClass().getResource("/10.jpg")).getImage();
+		Image scaledContactImage = img.getScaledInstance(321,aspectRatioCalculator(img.getHeight(),img.getWidth(),321), java.awt.Image.SCALE_SMOOTH);
+		lblContactPic.setBounds(0, 150, 321, aspectRatioCalculator(img.getHeight(),img.getWidth(),321) );
 		lblContactPic.setIcon(new ImageIcon(scaledContactImage));
 		lblContactPic.setOpaque(true);
-		
-		GridBagConstraints gbc_lblContactPic = new GridBagConstraints();
-		gbc_lblContactPic.insets = new Insets(44, 0, 5, 0);
-		gbc_lblContactPic.gridx = 1;
-		gbc_lblContactPic.gridy = 0;
-		imageDetails.add(lblContactPic, gbc_lblContactPic);
+	
+		imageDetails.add(lblContactPic);
 		
 		activePanel = imageDetails;
 		
@@ -1133,20 +1141,26 @@ public class Display extends JFrame implements ActionListener {
 				generatecontacts();
 				
 			}
+			
 			break;
 			
 		//back for images
 		case "back2":
+			
 			frame.remove(Backpanel);
 			generategallery();
+			
 			break;
 			
 		case "AddContact":
 			
 			generateAddContact();
+			break;
 			
 		case "openChoiceGallery":
 			
+			
+			break;
 		
 		default:
 
@@ -1154,6 +1168,7 @@ public class Display extends JFrame implements ActionListener {
 			break;
 
 		}
+		
 		frame.validate();
 		frame.repaint();
 
@@ -1172,8 +1187,10 @@ public class Display extends JFrame implements ActionListener {
 		
 		double res = (originHeight/originWidth) * newWidth;
 		
+		
 		int resInt = (int) Math.round(res);
-
+		
+		System.out.println(resInt);
 		
 		return resInt;
 		

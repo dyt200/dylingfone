@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<contacts>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><contacts>
 	<contact id="1">
 		<firstName>Ben</firstName>
 		<lastName>Pocklington</lastName>
@@ -7,7 +6,7 @@
 		<email>benpocklington@aol.com</email>
 		<telMobile>0798687594</telMobile>
 		<telHome>01775725994</telHome>
-		<pic></pic>
+		<pic/>
 	</contact>
 	<contact id="2">
 		<firstName>Dylan</firstName>
@@ -16,7 +15,7 @@
 		<email>dylan1234@gmail.com</email>
 		<telMobile>0798687594</telMobile>
 		<telHome>0778697594</telHome>
-		<pic></pic>
+		<pic/>
 	</contact>
 	<contact id="3">
 		<firstName>Fred</firstName>
@@ -25,7 +24,7 @@
 		<email>fkruger@gainz.ch</email>
 		<telMobile>0798687591</telMobile>
 		<telHome>0798345594</telHome>
-		<pic></pic>
+		<pic/>
 	</contact>
 	<contact id="4">
 		<firstName>James</firstName>
@@ -34,7 +33,7 @@
 		<email>jjones.as@hotmail.com</email>
 		<telMobile>0798687594</telMobile>
 		<telHome>0798117594</telHome>
-		<pic></pic>
+		<pic/>
 	</contact>
 	<contact id="5">
 		<firstName>Nick</firstName>
@@ -43,7 +42,7 @@
 		<email>nick123@gmail.com</email>
 		<telMobile>0793457594</telMobile>
 		<telHome>0798687894</telHome>
-		<pic></pic>
+		<pic/>
 	</contact>
 	<contact id="6">
 		<firstName>Sonic</firstName>
@@ -52,7 +51,7 @@
 		<email>superfast@aol.com</email>
 		<telMobile>0798829574</telMobile>
 		<telHome>0798764594</telHome>
-		<pic></pic>
+		<pic/>
 	</contact>
 	<contact id="7">
 		<firstName>Sam</firstName>
@@ -61,7 +60,7 @@
 		<email>yalesson@yahoo.com</email>
 		<telMobile>0798612344</telMobile>
 		<telHome>0798666594</telHome>
-		<pic></pic>
+		<pic/>
 	</contact>
 	<contact id="8">
 		<firstName>Gary</firstName>
@@ -70,7 +69,7 @@
 		<email>gcole@hotmail.com</email>
 		<telMobile>0798111594</telMobile>
 		<telHome>0792227594</telHome>
-		<pic></pic>
+		<pic/>
 	</contact>
 	<contact id="9">
 		<firstName>George</firstName>
@@ -79,7 +78,7 @@
 		<email>theSmokingMirror@avast.com</email>
 		<telMobile>0798683334</telMobile>
 		<telHome>079898994</telHome>
-		<pic></pic>
+		<pic/>
 	</contact>
 	<contact id="10">
 		<firstName>Jim</firstName>
@@ -88,7 +87,7 @@
 		<email>jimjm@gmail.com</email>
 		<telMobile>0798287594</telMobile>
 		<telHome>0798687584</telHome>
-		<pic></pic>
+		<pic/>
 	</contact>
 	<contact id="11">
 		<firstName>Alistar</firstName>
@@ -97,7 +96,7 @@
 		<email>ali123@hotmail.com</email>
 		<telMobile>0798090994</telMobile>
 		<telHome>0798565594</telHome>
-		<pic></pic>
+		<pic/>
 	</contact>
 	<contact id="12">
 		<firstName>Scott</firstName>
@@ -106,7 +105,7 @@
 		<email>snorman@hotmail.com</email>
 		<telMobile>0796667594</telMobile>
 		<telHome>0798689089</telHome>
-		<pic></pic>
+		<pic/>
 	</contact>
 	<contact id="13">
 		<firstName>Graham</firstName>
@@ -115,7 +114,7 @@
 		<email>gjones@gmail.com</email>
 		<telMobile>0798667832</telMobile>
 		<telHome>0798611194</telHome>
-		<pic></pic>
+		<pic/>
 	</contact>
 	<contact id="14">
 		<firstName>David</firstName>
@@ -124,7 +123,7 @@
 		<email>daveyJonesLocker@gmail.com</email>
 		<telMobile>0798687224</telMobile>
 		<telHome>0798337594</telHome>
-		<pic></pic>
+		<pic/>
 	</contact>
 	<contact id="15">
 		<firstName>Jules</firstName>
@@ -133,7 +132,7 @@
 		<email>jsaid@aol.com</email>
 		<telMobile>0798687444</telMobile>
 		<telHome>0798687594</telHome>
-		<pic></pic>
+		<pic/>
 	</contact>
 	<contact id="16">
 		<firstName>Kahn</firstName>
@@ -142,7 +141,7 @@
 		<email>kaniboi@gmail.com</email>
 		<telMobile>0798655594</telMobile>
 		<telHome>0798687594</telHome>
-		<pic></pic>
+		<pic/>
 	</contact>
 	<contact id="17">
 		<firstName>Sam</firstName>
@@ -151,7 +150,7 @@
 		<email>sloosey@gmail.com</email>
 		<telMobile>0766687594</telMobile>
 		<telHome>0798687774</telHome>
-		<pic></pic>
+		<pic/>
 	</contact>
 	<contact id="18">
 		<firstName>Kazim</firstName>
@@ -160,7 +159,7 @@
 		<email>kaz12039102@gmail.com</email>
 		<telMobile>0798687599</telMobile>
 		<telHome>0798687884</telHome>
-		<pic></pic>
+		<pic/>
 	</contact>
 	<contact id="19">
 		<firstName>James</firstName>
@@ -169,7 +168,7 @@
 		<email>jimmyjam@gmail.com</email>
 		<telMobile>0798127594</telMobile>
 		<telHome>074545594</telHome>
-		<pic></pic>
+		<pic/>
 	</contact>
 	<contact id="20">
 		<firstName>Charles</firstName>
@@ -178,7 +177,7 @@
 		<email>chealers6969@aol.com</email>
 		<telMobile>077878594</telMobile>
 		<telHome>0798909084</telHome>
-		<pic></pic>
+		<pic/>
 	</contact>
 	<contact id="21">
 		<firstName>Philippe</firstName>
@@ -187,7 +186,7 @@
 		<email>phillipedouggieG@gmail.com</email>
 		<telMobile>0798454594</telMobile>
 		<telHome>0798689894</telHome>
-		<pic></pic>
+		<pic/>
 	</contact>
 	<contact id="22">
 		<firstName>Frederic</firstName>
@@ -196,7 +195,7 @@
 		<email>frevaz@aol.com</email>
 		<telMobile>0798132494</telMobile>
 		<telHome>079887654</telHome>
-		<pic></pic>
+		<pic/>
 	</contact>
 	<contact id="23">
 		<firstName>Coline</firstName>
@@ -205,7 +204,7 @@
 		<email>cvd@hotmail.com</email>
 		<telMobile>079809094</telMobile>
 		<telHome>079786594</telHome>
-		<pic></pic>
+		<pic/>
 	</contact>
 	<contact id="24">
 		<firstName>Matthew</firstName>
@@ -214,7 +213,7 @@
 		<email>segi101@hotmail.com</email>
 		<telMobile>0733387594</telMobile>
 		<telHome>0794447594</telHome>
-		<pic></pic>
+		<pic/>
 	</contact>
 	<contact id="25">
 		<firstName>Deckard</firstName>
@@ -223,7 +222,6 @@
 		<email>whyblizzardwhy@battlenet.com</email>
 		<telMobile>0792666239</telMobile>
 		<telHome>086761239</telHome>
-		<pic></pic>
+		<pic/>
 	</contact>
 </contacts>
-
