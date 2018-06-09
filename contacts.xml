@@ -1,43 +1,229 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <contacts>
 	<contact id="1">
-        <firstName>tickleMyPicklesss</firstName>
-        <lastName>pock</lastName>
-        <birthDate>01.01.2011</birthDate>
-        <email>a@a.com</email>
-        <telMobile>0101010</telMobile>
-        <telHome>010101</telHome>
-    </contact>
+		<firstName>Ben</firstName>
+		<lastName>Pocklington</lastName>
+		<birthDate>17.03.1988</birthDate>
+		<email>benpocklington@aol.com</email>
+		<telMobile>0798687594</telMobile>
+		<telHome>01775725994</telHome>
+		<pic></pic>
+	</contact>
 	<contact id="2">
-        <firstName>Juan</firstName>
-        <lastName>pock</lastName>
-        <birthDate>01.01.1901</birthDate>
-        <email>a@a.com</email>
-        <telMobile>0795240907</telMobile>
-        <telHome>010101</telHome>
-    </contact>
-<contact id="3">
-<firstName>This</firstName>
-<lastName>iaukg</lastName>
-<birthDate>01.01.1901</birthDate>
-<email>3546384351</email>
-<telMobile>3546384351</telMobile>
-<telHome>saved</telHome>
-</contact>
-<contact id="4">
-<firstName>john</firstName>
-<lastName>slow</lastName>
-<birthDate>11.12.1988</birthDate>
-<email>a@a.a</email>
-<telMobile>a@a.a</telMobile>
-<telHome>asdjaskdj1</telHome>
-</contact>
-<contact id="5">
-<firstName>johnasdsad</firstName>
-<lastName>snow</lastName>
-<birthDate>01.01.1908</birthDate>
-<email>a@a.a</email>
-<telMobile>123012301</telMobile>
-<telHome>asdjaskdj1</telHome>
-</contact>
+		<firstName>Dylan</firstName>
+		<lastName>Thompson</lastName>
+		<birthDate>01.01.2008</birthDate>
+		<email>dylan1234@gmail.com</email>
+		<telMobile>0798687594</telMobile>
+		<telHome>0778697594</telHome>
+		<pic></pic>
+	</contact>
+	<contact id="3">
+		<firstName>Fred</firstName>
+		<lastName>Kruger</lastName>
+		<birthDate>06.07.1956</birthDate>
+		<email>fkruger@gainz.ch</email>
+		<telMobile>0798687591</telMobile>
+		<telHome>0798345594</telHome>
+		<pic></pic>
+	</contact>
+	<contact id="4">
+		<firstName>James</firstName>
+		<lastName>Johnson</lastName>
+		<birthDate>01.01.1999</birthDate>
+		<email>jjones.as@hotmail.com</email>
+		<telMobile>0798687594</telMobile>
+		<telHome>0798117594</telHome>
+		<pic></pic>
+	</contact>
+	<contact id="5">
+		<firstName>Nick</firstName>
+		<lastName>Fury</lastName>
+		<birthDate>21.12.1980</birthDate>
+		<email>nick123@gmail.com</email>
+		<telMobile>0793457594</telMobile>
+		<telHome>0798687894</telHome>
+		<pic></pic>
+	</contact>
+	<contact id="6">
+		<firstName>Sonic</firstName>
+		<lastName>Hedgehog</lastName>
+		<birthDate>17.08.2001</birthDate>
+		<email>superfast@aol.com</email>
+		<telMobile>0798829574</telMobile>
+		<telHome>0798764594</telHome>
+		<pic></pic>
+	</contact>
+	<contact id="7">
+		<firstName>Sam</firstName>
+		<lastName>Yale</lastName>
+		<birthDate>06.06.2011</birthDate>
+		<email>yalesson@yahoo.com</email>
+		<telMobile>0798612344</telMobile>
+		<telHome>0798666594</telHome>
+		<pic></pic>
+	</contact>
+	<contact id="8">
+		<firstName>Gary</firstName>
+		<lastName>Coleman</lastName>
+		<birthDate>08.04.1991</birthDate>
+		<email>gcole@hotmail.com</email>
+		<telMobile>0798111594</telMobile>
+		<telHome>0792227594</telHome>
+		<pic></pic>
+	</contact>
+	<contact id="9">
+		<firstName>George</firstName>
+		<lastName>Stobbart</lastName>
+		<birthDate>12.12.1984</birthDate>
+		<email>theSmokingMirror@avast.com</email>
+		<telMobile>0798683334</telMobile>
+		<telHome>079898994</telHome>
+		<pic></pic>
+	</contact>
+	<contact id="10">
+		<firstName>Jim</firstName>
+		<lastName>Smith</lastName>
+		<birthDate>01.01.1967</birthDate>
+		<email>jimjm@gmail.com</email>
+		<telMobile>0798287594</telMobile>
+		<telHome>0798687584</telHome>
+		<pic></pic>
+	</contact>
+	<contact id="11">
+		<firstName>Alistar</firstName>
+		<lastName>Naiken</lastName>
+		<birthDate>03.01.1976</birthDate>
+		<email>ali123@hotmail.com</email>
+		<telMobile>0798090994</telMobile>
+		<telHome>0798565594</telHome>
+		<pic></pic>
+	</contact>
+	<contact id="12">
+		<firstName>Scott</firstName>
+		<lastName>Norman</lastName>
+		<birthDate>01.12.2002</birthDate>
+		<email>snorman@hotmail.com</email>
+		<telMobile>0796667594</telMobile>
+		<telHome>0798689089</telHome>
+		<pic></pic>
+	</contact>
+	<contact id="13">
+		<firstName>Graham</firstName>
+		<lastName>Jones</lastName>
+		<birthDate>05.05.2001</birthDate>
+		<email>gjones@gmail.com</email>
+		<telMobile>0798667832</telMobile>
+		<telHome>0798611194</telHome>
+		<pic></pic>
+	</contact>
+	<contact id="14">
+		<firstName>David</firstName>
+		<lastName>Jones</lastName>
+		<birthDate>04.10.1966</birthDate>
+		<email>daveyJonesLocker@gmail.com</email>
+		<telMobile>0798687224</telMobile>
+		<telHome>0798337594</telHome>
+		<pic></pic>
+	</contact>
+	<contact id="15">
+		<firstName>Jules</firstName>
+		<lastName>Sadin</lastName>
+		<birthDate>05.01.1991</birthDate>
+		<email>jsaid@aol.com</email>
+		<telMobile>0798687444</telMobile>
+		<telHome>0798687594</telHome>
+		<pic></pic>
+	</contact>
+	<contact id="16">
+		<firstName>Kahn</firstName>
+		<lastName>Schneider</lastName>
+		<birthDate>01.05.1999</birthDate>
+		<email>kaniboi@gmail.com</email>
+		<telMobile>0798655594</telMobile>
+		<telHome>0798687594</telHome>
+		<pic></pic>
+	</contact>
+	<contact id="17">
+		<firstName>Sam</firstName>
+		<lastName>Loose</lastName>
+		<birthDate>03.03.1978</birthDate>
+		<email>sloosey@gmail.com</email>
+		<telMobile>0766687594</telMobile>
+		<telHome>0798687774</telHome>
+		<pic></pic>
+	</contact>
+	<contact id="18">
+		<firstName>Kazim</firstName>
+		<lastName>Anifajit</lastName>
+		<birthDate>03.04.1994</birthDate>
+		<email>kaz12039102@gmail.com</email>
+		<telMobile>0798687599</telMobile>
+		<telHome>0798687884</telHome>
+		<pic></pic>
+	</contact>
+	<contact id="19">
+		<firstName>James</firstName>
+		<lastName>Lakiin</lastName>
+		<birthDate>05.11.1956</birthDate>
+		<email>jimmyjam@gmail.com</email>
+		<telMobile>0798127594</telMobile>
+		<telHome>074545594</telHome>
+		<pic></pic>
+	</contact>
+	<contact id="20">
+		<firstName>Charles</firstName>
+		<lastName>Trale</lastName>
+		<birthDate>01.01.2005</birthDate>
+		<email>chealers6969@aol.com</email>
+		<telMobile>077878594</telMobile>
+		<telHome>0798909084</telHome>
+		<pic></pic>
+	</contact>
+	<contact id="21">
+		<firstName>Philippe</firstName>
+		<lastName>Dougoud</lastName>
+		<birthDate>03.01.1967</birthDate>
+		<email>phillipedouggieG@gmail.com</email>
+		<telMobile>0798454594</telMobile>
+		<telHome>0798689894</telHome>
+		<pic></pic>
+	</contact>
+	<contact id="22">
+		<firstName>Frederic</firstName>
+		<lastName>Revaz</lastName>
+		<birthDate>13.01.1989</birthDate>
+		<email>frevaz@aol.com</email>
+		<telMobile>0798132494</telMobile>
+		<telHome>079887654</telHome>
+		<pic></pic>
+	</contact>
+	<contact id="23">
+		<firstName>Coline</firstName>
+		<lastName>Van Dorpe</lastName>
+		<birthDate>30.12.1986</birthDate>
+		<email>cvd@hotmail.com</email>
+		<telMobile>079809094</telMobile>
+		<telHome>079786594</telHome>
+		<pic></pic>
+	</contact>
+	<contact id="24">
+		<firstName>Matthew</firstName>
+		<lastName>Sagar</lastName>
+		<birthDate>15.12.1989</birthDate>
+		<email>segi101@hotmail.com</email>
+		<telMobile>0733387594</telMobile>
+		<telHome>0794447594</telHome>
+		<pic></pic>
+	</contact>
+	<contact id="25">
+		<firstName>Deckard</firstName>
+		<lastName>Cain</lastName>
+		<birthDate>15.12.1912</birthDate>
+		<email>whyblizzardwhy@battlenet.com</email>
+		<telMobile>0792666239</telMobile>
+		<telHome>086761239</telHome>
+		<pic></pic>
+	</contact>
 </contacts>
+

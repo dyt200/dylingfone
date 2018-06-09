@@ -298,7 +298,10 @@ public class Display extends JFrame implements ActionListener {
 	private void generatecontacts() {
 		
 		Contacts contactsObj = new Contacts();	
-		Contact[] array = contactsObj.getContactList();
+		Contact[] array = contactsObj.getContactListAlpha();
+		String lastLetter = "0";
+		String currentLetter;
+		int countLetters = 0;
 
 		contacts = new JPanel();
 		contacts.setBounds(23, 88, 315, 553);
@@ -339,11 +342,29 @@ public class Display extends JFrame implements ActionListener {
 		
 		for (Contact contact : array) {
 			
+			currentLetter = String.valueOf(contact.getLastName().charAt(0));
 			
+			//if first letter of lastName != last letter then adds letter header
+			if(currentLetter.equals(lastLetter) == false) {
+				lastLetter = currentLetter;
+				countLetters++;
+				
+				JPanel letterHead = new JPanel();
+				letterHead.setPreferredSize(new Dimension(280, 20));
+				letterHead.setLayout(new FlowLayout(FlowLayout.LEFT));
+				
+				JLabel jlabel = new JLabel(currentLetter);
+				letterHead.add(jlabel);
+				contactList.add(letterHead);
+			}
+			
+			//creation of each contact panel + label
 			JPanel panTest = new JPanel();
-			panTest.setPreferredSize(new Dimension(280, 75));
+			panTest.setPreferredSize(new Dimension(280, 30));
 			panTest.setBackground(Color.LIGHT_GRAY);
-			JLabel jlabel = new JLabel(Integer.toString(contact.getId()) + contact.getFirstName() + contact.getLastName() );
+			panTest.setLayout(new FlowLayout(FlowLayout.LEFT));
+			
+			JLabel jlabel = new JLabel(contact.getLastName()+", "+contact.getFirstName());
 			panTest.add(jlabel);
 			
 			panTest.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -366,7 +387,7 @@ public class Display extends JFrame implements ActionListener {
 			
 		}
 			
-			contactList.setPreferredSize(new Dimension(280, (75*array.length)+ (array.length*5) + 5));
+			contactList.setPreferredSize(new Dimension(280, (20*countLetters) + (countLetters*6) + (30*array.length)+ (array.length*5) + 5));
 		
 			JScrollPane scrollPane = new JScrollPane(contactList);
 			//scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);

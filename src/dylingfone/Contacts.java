@@ -221,7 +221,7 @@ public class Contacts extends Page{
 		return contactList;
 	}
 	
-	public void getContactListAlpha() {
+	public Contact[] getContactListAlpha() {
 		Contact[] tempC = contactList;
 		int compare;
 		Contact save;
@@ -251,8 +251,8 @@ public class Contacts extends Page{
 				
 			}
 		}
-		//return tempC;
-		contactList = tempC;
+		
+		return tempC;
 	}
 	
 	public void setContacts(Contact[] contacts) {
