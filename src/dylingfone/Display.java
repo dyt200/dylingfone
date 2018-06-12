@@ -13,6 +13,7 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.awt.*;
 import java.text.DateFormat;
+import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -101,9 +102,9 @@ public class Display extends JFrame implements ActionListener {
 		frame.setBounds(100, 100, 368, 754);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setUndecorated(true);
-		frame.setBackground(new Color(0, 0,0,0)); // Uncomment to set the background
+		frame.setBackground(new Color(0, 0,0,0)); // Comment to set the background non transparent
 
-		// transpatrentx
+
 		 frame.getContentPane().setLayout(null);
 
 		/**
@@ -161,7 +162,7 @@ public class Display extends JFrame implements ActionListener {
 
 	private void generatelockScreen() {
 		
-	
+		
 		lockScreen = new JPanel();
 		lockScreen.setBounds(23, 88, 320, 553);
 		lockScreen.setBackground(Color.DARK_GRAY);
@@ -170,41 +171,62 @@ public class Display extends JFrame implements ActionListener {
 		
 		generateClock();
 		
-		JSlider slider = new JSlider(JSlider.HORIZONTAL, 0,100,0);
-		slider.setBounds(56, 485, 190, 29);
-		slider.setBackground(new Color(0, 0, 0,0));
-		//slider.
-		lockScreen.add(slider);
+		JButton btnUnlcok = new JButton();
 		
+		Image backBtnIcon = new ImageIcon(this.getClass().getResource("/padlock.png")).getImage();
+		Image scaledBackBtnIcon = backBtnIcon.getScaledInstance(53, 53, java.awt.Image.SCALE_SMOOTH);
+		btnUnlcok.setIcon(new ImageIcon(scaledBackBtnIcon));
+		btnUnlcok.setBorderPainted(false);
+		btnUnlcok.setFocusPainted(false);
+		btnUnlcok.setContentAreaFilled(false);
+		btnUnlcok.setRolloverEnabled(false);
+		
+		btnUnlcok.setBounds(120, 450, 64, 64);
 
-		slider.addChangeListener(new javax.swing.event.ChangeListener() {
+		lockScreen.add(btnUnlcok);
+		
+		activePanel = lockScreen;
+		
+		btnUnlcok.addMouseListener(new java.awt.event.MouseAdapter() {
 			
-			int unlockValue = 100;
-			
-			@Override
-			public void stateChanged(ChangeEvent e) {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+            	
+            	
+        		Image backBtnIcon = new ImageIcon(this.getClass().getResource("/unlocked.png")).getImage();
+        		Image scaledBackBtnIcon = backBtnIcon.getScaledInstance(64, 64, java.awt.Image.SCALE_SMOOTH);
+        		btnUnlcok.setBounds(130, 450, 64, 64);
+        		btnUnlcok.setIcon(new ImageIcon(scaledBackBtnIcon)); 
+        		
+            	frame.validate();
+				frame.repaint();
 				
-				 JSlider source = (JSlider)e.getSource();
-				 
-				 
-				 if (unlockValue == source.getValue()) {
-					 
-					 frame.remove(activePanel);
-					 
-						generateHomeScreen();
+				int delay = 180;
+				
+				Timer timer = new Timer( delay, new ActionListener(){
+				  @Override
+				  public void actionPerformed( ActionEvent e ){
+					  
+						frame.remove(activePanel);
+		            	
+		            	generateHomeScreen();
 						isLocked = false;
 
 						frame.validate();
 						frame.repaint();
-
-					 
-				 }
+				    
+				  }
+				} );
+				timer.setRepeats( false );
+				timer.start();
 				
-			}
-		});
-	
+			
+            	
+                
+            }});
 		
-		activePanel = lockScreen;
+					 
+		
+
 		
 
 	}
@@ -217,8 +239,9 @@ public class Display extends JFrame implements ActionListener {
 		hourLabel.setForeground(Color.WHITE);
 		hourLabel.setBackground(Color.WHITE);
 		hourLabel.setFont(new Font("Apple SD Gothic Neo", Font.PLAIN, 78));
-		hourLabel.setBounds(84, 58, 200, 69);
+		hourLabel.setBounds(50, 55, 220, 69);
 		lockScreen.add(hourLabel);
+		
 
 	}
 	public void setdate() {
@@ -227,13 +250,21 @@ public class Display extends JFrame implements ActionListener {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				java.util.Date myDate = new Date();
-				hourLabel.setText(myDate.getHours() + ":" + myDate.getMinutes());
+				
+				  SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm");
+			      String time = localDateFormat.format(new Date());
+			      hourLabel.setText(time);
+			    
+				
+				
+			/*	java.util.Date myDate = new Date();
+				SimpleDateFormat 
+				hourLabel.setText(myDate. + ":" + myDate.getMinutes()); */
 				
 			}
 		};
 		
-		new javax.swing.Timer(10, actionDate).start();
+		new javax.swing.Timer(100, actionDate).start();
 		
 	}
 	
@@ -245,35 +276,34 @@ public class Display extends JFrame implements ActionListener {
 		homeScreen.setBounds(23, 88, 320, 553);
 		frame.getContentPane().add(homeScreen);
 		GridBagLayout gbl_homeScreen = new GridBagLayout();
-		gbl_homeScreen.columnWidths = new int[] { 32, 64, 64, 64, 64, 32 };
-		gbl_homeScreen.rowHeights = new int[] { 20, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		gbl_homeScreen.columnWidths = new int[] {20,60, 60, 60,60,20};
+		gbl_homeScreen.rowHeights = new int[] { 20,64,64,64,64,64,64,64,64 };
 		gbl_homeScreen.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
-		gbl_homeScreen.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-				0.0, Double.MIN_VALUE };
+		gbl_homeScreen.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,0.0,0.0, Double.MIN_VALUE};
 		homeScreen.setLayout(gbl_homeScreen);
 
 		Image contactIcon = new ImageIcon(this.getClass().getResource("/contactIcon.png")).getImage();
-		Image scaledContactIcon = contactIcon.getScaledInstance(64, 64, java.awt.Image.SCALE_SMOOTH);
+		Image scaledContactIcon = contactIcon.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
 
 		contactButton = new JButton();
-		contactButton.setBackground(Color.BLACK);
 		contactButton.setIcon(new ImageIcon(scaledContactIcon));
 
 		contactButton.setBorderPainted(false);
+		contactButton.setFocusPainted(false);
 		contactButton.setContentAreaFilled(false);
-		contactButton.addActionListener(this);
 		contactButton.setRolloverEnabled(false);
+		contactButton.addActionListener(this);		
 		contactButton.setActionCommand("openContacts");
 
 		GridBagConstraints gbc_contactButton = new GridBagConstraints();
-		gbc_contactButton.insets = new Insets(0, 0, 0, 0);
+		gbc_contactButton.insets = new Insets(0, -15, 0, -5);
 		gbc_contactButton.gridx = 1;
 		gbc_contactButton.gridy = 1;
 		homeScreen.add(contactButton, gbc_contactButton);
 
 		galleryButton = new JButton();
 		Image galleryIcon = new ImageIcon(this.getClass().getResource("/galleryIcon.png")).getImage();
-		Image scaledGalleryIcon = galleryIcon.getScaledInstance(64, 64, java.awt.Image.SCALE_SMOOTH);
+		Image scaledGalleryIcon = galleryIcon.getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
 
 		galleryButton.setIcon(new ImageIcon(scaledGalleryIcon));
 		GridBagConstraints gbc_galleryButton = new GridBagConstraints();
@@ -285,7 +315,7 @@ public class Display extends JFrame implements ActionListener {
 		galleryButton.addActionListener(this);
 		galleryButton.setActionCommand("openGallery");
 
-		gbc_galleryButton.insets = new Insets(0, 0, 0, 0);
+		gbc_galleryButton.insets = new Insets(0, -5, 0, -5);
 		gbc_galleryButton.gridx = 2;
 		gbc_galleryButton.gridy = 1;
 		homeScreen.add(galleryButton, gbc_galleryButton);
@@ -443,58 +473,131 @@ public class Display extends JFrame implements ActionListener {
 				
 				lblContactPic.setOpaque(true);
 				GridBagConstraints gbc_lblContactPic = new GridBagConstraints();
-				gbc_lblContactPic.insets = new Insets(44, 0, 5, 0);
+				gbc_lblContactPic.insets = new Insets(68, 0, 5, 0);
 				gbc_lblContactPic.gridx = 1;
 				gbc_lblContactPic.gridy = 0;
 				contactDetails.add(lblContactPic, gbc_lblContactPic);
 				
+				JLabel FirstName = new JLabel("First name :");
+				FirstName.setForeground(Color.GRAY);
+				GridBagConstraints gbc_FirstName = new GridBagConstraints();
+				//gbc_lblFirstName.anchor = GridBagConstraints.NORTHWEST;
+				gbc_FirstName.fill=GridBagConstraints.HORIZONTAL;
+				gbc_FirstName.insets = new Insets(22, 0, 5, 0);
+				gbc_FirstName.gridx = 1;
+				gbc_FirstName.gridy = 1;
+				contactDetails.add(FirstName, gbc_FirstName);
+				
+				
 				JLabel lblFirstName = new JLabel(contact.getFirstName());
 				GridBagConstraints gbc_lblFirstName = new GridBagConstraints();
-				gbc_lblFirstName.anchor = GridBagConstraints.NORTHWEST;
-				gbc_lblFirstName.insets = new Insets(22, 0, 5, 0);
+				//gbc_lblFirstName.anchor = GridBagConstraints.NORTHWEST;
+				gbc_lblFirstName.fill=GridBagConstraints.HORIZONTAL;
+				gbc_lblFirstName.insets = new Insets(22, 94, 5, 0);
 				gbc_lblFirstName.gridx = 1;
 				gbc_lblFirstName.gridy = 1;
 				contactDetails.add(lblFirstName, gbc_lblFirstName);
 				
+
+				JLabel LastName = new JLabel("Last name :");
+				LastName.setForeground(Color.GRAY);
+				GridBagConstraints gbc_LastName = new GridBagConstraints();
+				gbc_LastName.anchor = GridBagConstraints.NORTHWEST;
+				gbc_LastName.fill = GridBagConstraints.HORIZONTAL;
+				gbc_LastName.insets = new Insets(11, 0, 5, 0);
+				gbc_LastName.gridx = 1;
+				gbc_LastName.gridy = 2;
+				contactDetails.add(LastName, gbc_LastName);
+				
+				
 				JLabel lblLastName = new JLabel(contact.getLastName());
 				GridBagConstraints gbc_lblLastName = new GridBagConstraints();
 				gbc_lblLastName.anchor = GridBagConstraints.NORTHWEST;
-				gbc_lblLastName.insets = new Insets(22, 0, 5, 0);
+				gbc_lblLastName.fill = GridBagConstraints.HORIZONTAL;
+				gbc_lblLastName.insets = new Insets(11, 94, 5, 0);
 				gbc_lblLastName.gridx = 1;
 				gbc_lblLastName.gridy = 2;
 				contactDetails.add(lblLastName, gbc_lblLastName);
 				
+				JLabel MobileTel = new JLabel("Mobile : ");
+				MobileTel.setForeground(Color.GRAY);
+				GridBagConstraints gbc_MobileTel = new GridBagConstraints();
+				gbc_MobileTel.anchor = GridBagConstraints.NORTHWEST;
+				gbc_MobileTel.fill = GridBagConstraints.HORIZONTAL;
+				gbc_MobileTel.insets = new Insets(11, 0, 5, 0);
+				gbc_MobileTel.gridx = 1;
+				gbc_MobileTel.gridy = 3;
+				contactDetails.add(MobileTel, gbc_MobileTel);
+				
 				JLabel lblMobileTel = new JLabel(contact.getTelMobile());
 				GridBagConstraints gbc_lblMobileTel = new GridBagConstraints();
 				gbc_lblMobileTel.anchor = GridBagConstraints.NORTHWEST;
-				gbc_lblMobileTel.insets = new Insets(22, 0, 5, 0);
+				gbc_lblMobileTel.fill = GridBagConstraints.HORIZONTAL;
+				gbc_lblMobileTel.insets = new Insets(11, 94, 5, 0);
 				gbc_lblMobileTel.gridx = 1;
 				gbc_lblMobileTel.gridy = 3;
 				contactDetails.add(lblMobileTel, gbc_lblMobileTel);
 				
+				JLabel HomeTel = new JLabel("Home :");
+				HomeTel.setForeground(Color.GRAY);
+				GridBagConstraints gbc_HomeTel = new GridBagConstraints();
+				gbc_HomeTel.anchor = GridBagConstraints.NORTHWEST;
+				gbc_HomeTel.fill = GridBagConstraints.HORIZONTAL;
+				gbc_HomeTel.insets = new Insets(11, 0, 5, 0);
+				gbc_HomeTel.gridx = 1;
+				gbc_HomeTel.gridy = 4;
+				contactDetails.add(HomeTel, gbc_HomeTel);
+				
 				JLabel lblHomeTel = new JLabel(contact.getTelHome());
 				GridBagConstraints gbc_lblHomeTel = new GridBagConstraints();
 				gbc_lblHomeTel.anchor = GridBagConstraints.NORTHWEST;
-				gbc_lblHomeTel.insets = new Insets(22, 0, 5, 0);
+				gbc_lblHomeTel.fill = GridBagConstraints.HORIZONTAL;
+				gbc_lblHomeTel.insets = new Insets(11, 94, 5, 0);
 				gbc_lblHomeTel.gridx = 1;
 				gbc_lblHomeTel.gridy = 4;
 				contactDetails.add(lblHomeTel, gbc_lblHomeTel);
 				
+				JLabel Email = new JLabel("E-Mail :");
+				Email.setForeground(Color.GRAY);
+				GridBagConstraints gbc_Email = new GridBagConstraints();
+				gbc_Email.anchor = GridBagConstraints.NORTHWEST;
+				gbc_Email.fill = GridBagConstraints.HORIZONTAL;
+				gbc_Email.insets = new Insets(11, 0, 5, 0);
+				gbc_Email.gridx = 1;
+				gbc_Email.gridy = 5;
+				contactDetails.add(Email, gbc_Email);
+				
 				JLabel lblEmail = new JLabel(contact.getEmail());
 				GridBagConstraints gbc_lblEmail = new GridBagConstraints();
 				gbc_lblEmail.anchor = GridBagConstraints.NORTHWEST;
-				gbc_lblEmail.insets = new Insets(22, 0, 5, 0);
+				gbc_lblEmail.fill = GridBagConstraints.HORIZONTAL;
+				gbc_lblEmail.insets = new Insets(11,94 , 5, 0);
 				gbc_lblEmail.gridx = 1;
 				gbc_lblEmail.gridy = 5;
 				contactDetails.add(lblEmail, gbc_lblEmail);
 				
-				JLabel lblBirthdate = new JLabel("birthdate");
+				JLabel Birthdate = new JLabel("Birthdate :");
+				Birthdate.setForeground(Color.GRAY);
+				GridBagConstraints gbc_Birthdate = new GridBagConstraints();
+				gbc_Birthdate.anchor = GridBagConstraints.NORTHWEST;
+				gbc_Birthdate.fill = GridBagConstraints.HORIZONTAL;
+				gbc_Birthdate.insets = new Insets(11, 0, 5, 0);
+				gbc_Birthdate.gridx = 1;
+				gbc_Birthdate.gridy = 6;
+				contactDetails.add(Birthdate, gbc_Birthdate);
+				
+				DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
+				String dob =  dateFormat.format(contact.getBirthDate());
+				
+				JLabel lblBirthdate = new JLabel(dob);
 				GridBagConstraints gbc_lblBirthdate = new GridBagConstraints();
 				gbc_lblBirthdate.anchor = GridBagConstraints.NORTHWEST;
-				gbc_lblBirthdate.insets = new Insets(22, 0, 5, 0);
+				gbc_lblBirthdate.fill = GridBagConstraints.HORIZONTAL;
+				gbc_lblBirthdate.insets = new Insets(11, 94, 5, 0);
 				gbc_lblBirthdate.gridx = 1;
 				gbc_lblBirthdate.gridy = 6;
 				contactDetails.add(lblBirthdate, gbc_lblBirthdate);
+				
 				
 				activePanel = contactDetails;
 				
@@ -551,68 +654,137 @@ public class Display extends JFrame implements ActionListener {
 				lblContactPic.setOpaque(true);
 				
 				GridBagConstraints gbc_lblContactPic = new GridBagConstraints();
-				gbc_lblContactPic.insets = new Insets(44, 0, 5, 0);
+				gbc_lblContactPic.insets = new Insets(54, 0, 5, 0);
 				gbc_lblContactPic.gridx = 1;
 				gbc_lblContactPic.gridy = 0;
 				EditContact.add(lblContactPic, gbc_lblContactPic);
 				
+				JLabel FirstName = new JLabel("First name :");
+				GridBagConstraints gbc_FirstName = new GridBagConstraints();
+				//gbc_lblFirstName.anchor = GridBagConstraints.NORTHWEST;
+				gbc_FirstName.fill=GridBagConstraints.HORIZONTAL;
+				gbc_FirstName.insets = new Insets(22, 0, 5, 0);
+				gbc_FirstName.gridx = 1;
+				gbc_FirstName.gridy = 1;
+				EditContact.add(FirstName, gbc_FirstName);
+				
+				
 				JTextField lblFirstName = new JTextField(contact.getFirstName());
-				lblFirstName.setSize(new Dimension(250, 10));
 				GridBagConstraints gbc_lblFirstName = new GridBagConstraints();
-				gbc_lblFirstName.anchor = GridBagConstraints.NORTHWEST;
+				//gbc_lblFirstName.anchor = GridBagConstraints.NORTHWEST;
 				gbc_lblFirstName.fill=GridBagConstraints.HORIZONTAL;
-				gbc_lblFirstName.insets = new Insets(22, 0, 5, 0);
+				gbc_lblFirstName.insets = new Insets(22, 94, 5, 0);
 				gbc_lblFirstName.gridx = 1;
 				gbc_lblFirstName.gridy = 1;
 				EditContact.add(lblFirstName, gbc_lblFirstName);
+				
+
+				JLabel LastName = new JLabel("Last name :");
+				GridBagConstraints gbc_LastName = new GridBagConstraints();
+				gbc_LastName.anchor = GridBagConstraints.NORTHWEST;
+				gbc_LastName.fill = GridBagConstraints.HORIZONTAL;
+				gbc_LastName.insets = new Insets(11, 0, 5, 0);
+				gbc_LastName.gridx = 1;
+				gbc_LastName.gridy = 2;
+				EditContact.add(LastName, gbc_LastName);
+				
 				
 				JTextField lblLastName = new JTextField(contact.getLastName());
 				GridBagConstraints gbc_lblLastName = new GridBagConstraints();
 				gbc_lblLastName.anchor = GridBagConstraints.NORTHWEST;
 				gbc_lblLastName.fill = GridBagConstraints.HORIZONTAL;
-				gbc_lblLastName.insets = new Insets(22, 0, 5, 0);
+				gbc_lblLastName.insets = new Insets(11, 94, 5, 0);
 				gbc_lblLastName.gridx = 1;
 				gbc_lblLastName.gridy = 2;
 				EditContact.add(lblLastName, gbc_lblLastName);
+				
+				JLabel MobileTel = new JLabel("Mobile : ");
+				GridBagConstraints gbc_MobileTel = new GridBagConstraints();
+				gbc_MobileTel.anchor = GridBagConstraints.NORTHWEST;
+				gbc_MobileTel.fill = GridBagConstraints.HORIZONTAL;
+				gbc_MobileTel.insets = new Insets(11, 0, 5, 0);
+				gbc_MobileTel.gridx = 1;
+				gbc_MobileTel.gridy = 3;
+				EditContact.add(MobileTel, gbc_MobileTel);
 				
 				JTextField lblMobileTel = new JTextField(contact.getTelMobile());
 				GridBagConstraints gbc_lblMobileTel = new GridBagConstraints();
 				gbc_lblMobileTel.anchor = GridBagConstraints.NORTHWEST;
 				gbc_lblMobileTel.fill = GridBagConstraints.HORIZONTAL;
-				gbc_lblMobileTel.insets = new Insets(22, 0, 5, 0);
+				gbc_lblMobileTel.insets = new Insets(11, 94, 5, 0);
 				gbc_lblMobileTel.gridx = 1;
 				gbc_lblMobileTel.gridy = 3;
 				EditContact.add(lblMobileTel, gbc_lblMobileTel);
+				
+				JLabel HomeTel = new JLabel("Home :");
+				GridBagConstraints gbc_HomeTel = new GridBagConstraints();
+				gbc_HomeTel.anchor = GridBagConstraints.NORTHWEST;
+				gbc_HomeTel.fill = GridBagConstraints.HORIZONTAL;
+				gbc_HomeTel.insets = new Insets(11, 0, 5, 0);
+				gbc_HomeTel.gridx = 1;
+				gbc_HomeTel.gridy = 4;
+				EditContact.add(HomeTel, gbc_HomeTel);
 				
 				JTextField lblHomeTel = new JTextField(contact.getTelHome());
 				GridBagConstraints gbc_lblHomeTel = new GridBagConstraints();
 				gbc_lblHomeTel.anchor = GridBagConstraints.NORTHWEST;
 				gbc_lblHomeTel.fill = GridBagConstraints.HORIZONTAL;
-				gbc_lblHomeTel.insets = new Insets(22, 0, 5, 0);
+				gbc_lblHomeTel.insets = new Insets(11, 94, 5, 0);
 				gbc_lblHomeTel.gridx = 1;
 				gbc_lblHomeTel.gridy = 4;
 				EditContact.add(lblHomeTel, gbc_lblHomeTel);
+				
+				JLabel Email = new JLabel("E-Mail :");
+				GridBagConstraints gbc_Email = new GridBagConstraints();
+				gbc_Email.anchor = GridBagConstraints.NORTHWEST;
+				gbc_Email.fill = GridBagConstraints.HORIZONTAL;
+				gbc_Email.insets = new Insets(11, 0, 5, 0);
+				gbc_Email.gridx = 1;
+				gbc_Email.gridy = 5;
+				EditContact.add(Email, gbc_Email);
 				
 				JTextField lblEmail = new JTextField(contact.getEmail());
 				GridBagConstraints gbc_lblEmail = new GridBagConstraints();
 				gbc_lblEmail.anchor = GridBagConstraints.NORTHWEST;
 				gbc_lblEmail.fill = GridBagConstraints.HORIZONTAL;
-				gbc_lblEmail.insets = new Insets(22, 0, 5, 0);
+				gbc_lblEmail.insets = new Insets(11,94 , 5, 0);
 				gbc_lblEmail.gridx = 1;
 				gbc_lblEmail.gridy = 5;
 				EditContact.add(lblEmail, gbc_lblEmail);
 				
-				JTextField lblBirthdate = new JTextField("birthdate");
+				JLabel Birthdate = new JLabel("Birthdate :");
+				GridBagConstraints gbc_Birthdate = new GridBagConstraints();
+				gbc_Birthdate.anchor = GridBagConstraints.NORTHWEST;
+				gbc_Birthdate.fill = GridBagConstraints.HORIZONTAL;
+				gbc_Birthdate.insets = new Insets(11, 0, 5, 0);
+				gbc_Birthdate.gridx = 1;
+				gbc_Birthdate.gridy = 6;
+				EditContact.add(Birthdate, gbc_Birthdate);
+				
+				DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
+				String dob =  dateFormat.format(contact.getBirthDate());
+				
+				JTextField lblBirthdate = new JTextField(dob);
 				GridBagConstraints gbc_lblBirthdate = new GridBagConstraints();
 				gbc_lblBirthdate.anchor = GridBagConstraints.NORTHWEST;
 				gbc_lblBirthdate.fill = GridBagConstraints.HORIZONTAL;
-				gbc_lblBirthdate.insets = new Insets(22, 0, 5, 0);
+				gbc_lblBirthdate.insets = new Insets(11, 94, 5, 0);
 				gbc_lblBirthdate.gridx = 1;
 				gbc_lblBirthdate.gridy = 6;
 				EditContact.add(lblBirthdate, gbc_lblBirthdate);
 				
 				
-				JButton btnSave = new JButton("save"); 
+				JButton btnSave = new JButton(); 
+				
+				Image btnSaveBtnIcon = new ImageIcon(this.getClass().getResource("/diskette.png")).getImage();
+				Image scaledebtnSaveBtnIcon = btnSaveBtnIcon.getScaledInstance(25, 25, java.awt.Image.SCALE_SMOOTH);
+				btnSave.setIcon(new ImageIcon(scaledebtnSaveBtnIcon));
+		  
+				btnSave.setBorderPainted(false);
+				btnSave.setFocusPainted(false);
+				btnSave.setContentAreaFilled(false);
+				btnSave.setRolloverEnabled(false);
+				
 				GridBagConstraints gbc_btnSave = new GridBagConstraints();
 				gbc_btnSave.anchor = GridBagConstraints.NORTHWEST;
 			//	gbc_btnSave.fill = GridBagConstraints.HORIZONTAL;
@@ -645,7 +817,17 @@ public class Display extends JFrame implements ActionListener {
 		                    
 		                }});
 				  
-					JButton btnDelete = new JButton("delete"); 
+					JButton btnDelete = new JButton();
+					
+					Image btnDeleteIcon = new ImageIcon(this.getClass().getResource("/rubbish-bin.png")).getImage();
+					Image scaledbtnDeleteIcon = btnDeleteIcon.getScaledInstance(25, 25, java.awt.Image.SCALE_SMOOTH);
+					btnDelete.setIcon(new ImageIcon(scaledbtnDeleteIcon));
+			  
+					btnDelete.setBorderPainted(false);
+					btnDelete.setFocusPainted(false);
+					btnDelete.setContentAreaFilled(false);
+					btnDelete.setRolloverEnabled(false);
+					
 					GridBagConstraints gbc_btnDelete = new GridBagConstraints();
 					gbc_btnDelete.anchor = GridBagConstraints.NORTHEAST;
 					//gbc_btnDelete.fill = GridBagConstraints.HORIZONTAL;
@@ -685,7 +867,7 @@ public class Display extends JFrame implements ActionListener {
 		
 	}
 	
-	public void generateAddContact() {
+	public void generateAddContact(String caughtContactImage) {
 		
 		Contacts contactsObj = new Contacts();	
 		Contact[] array = contactsObj.getContactList();
@@ -705,7 +887,15 @@ public class Display extends JFrame implements ActionListener {
 		
 		JLabel lblContactPic = new JLabel();
 		
-		Image contactImage = new ImageIcon(this.getClass().getResource("/placeholder.jpg")).getImage();
+		// 777
+		
+		BufferedImage contactImage = null;
+		try {
+			contactImage = ImageIO.read(new File(caughtContactImage));
+		} catch (IOException e) {
+			
+		};
+		
 		Image scaledContactImage = contactImage.getScaledInstance(225,aspectRatioCalculator(contactImage.getHeight(lblContactPic),contactImage.getWidth(lblContactPic),225), java.awt.Image.SCALE_SMOOTH);
 	
 		lblContactPic.setIcon(new ImageIcon(scaledContactImage));
@@ -851,7 +1041,17 @@ public class Display extends JFrame implements ActionListener {
 		AddContact.add(lblBirthdate, gbc_lblBirthdate);
 		
 		
-		JButton btnSave = new JButton("save"); 
+		JButton btnSave = new JButton(); 
+		
+		Image btnSaveBtnIcon = new ImageIcon(this.getClass().getResource("/diskette.png")).getImage();
+		Image scaledebtnSaveBtnIcon = btnSaveBtnIcon.getScaledInstance(25, 25, java.awt.Image.SCALE_SMOOTH);
+		btnSave.setIcon(new ImageIcon(scaledebtnSaveBtnIcon));
+  
+		btnSave.setBorderPainted(false);
+		btnSave.setFocusPainted(false);
+		btnSave.setContentAreaFilled(false);
+		btnSave.setRolloverEnabled(false);
+		
 		GridBagConstraints gbc_btnSave = new GridBagConstraints();
 		gbc_btnSave.anchor = GridBagConstraints.CENTER;
 	//	gbc_btnSave.fill = GridBagConstraints.HORIZONTAL;
@@ -869,7 +1069,7 @@ public class Display extends JFrame implements ActionListener {
                   
               	frame.remove(activePanel);
            
-                generategallery();
+                generategallery(true);
                 
               	frame.validate();
           		frame.repaint();
@@ -887,7 +1087,23 @@ public class Display extends JFrame implements ActionListener {
                     
                 	frame.remove(activePanel);
                 	
-                	contactsObj.addContact(lblFirstName.getText(), lblLastName.getText(), lblBirthdate.getText(), lblEmail.getText(), lblMobileTel.getText(), lblHomeTel.getText());
+                
+  
+                	if ( lblFirstName.getText().equals("") ||  lblLastName.getText().equals("") ||  lblBirthdate.getText().equals("") || lblEmail.getText().equals("") || lblMobileTel.getText().equals("") || lblHomeTel.getText().equals("")  ) {
+                		
+                		System.out.println("YOU MUST FILL ALL THE FORM ! The contact was not registered");
+                		
+                	}
+                	else {
+                		
+                		// 666
+                		// Since i added a system to get the pic from the gallery, we now need to be able to save
+                		// that picture path in the XML. So i trust you can find a way to add that in your addContact method :D
+                		
+                	 	contactsObj.addContact(lblFirstName.getText(), lblLastName.getText(), lblBirthdate.getText(), lblEmail.getText(), lblMobileTel.getText(), lblHomeTel.getText());
+                	
+                	}
+               
            
                     generatecontacts();
                 	frame.validate();
@@ -912,17 +1128,37 @@ public class Display extends JFrame implements ActionListener {
 		  Backpanel.setBackground(Color.GRAY);
 		  Backpanel.setLayout(null);
 		  
+		  JButton btnBack = new JButton(); 
 		  
-		  JButton btnBack = new JButton("b"); 
-		  btnBack.setBounds(12, 9, 50, 26);
+				Image backBtnIcon = new ImageIcon(this.getClass().getResource("/left-arrow.png")).getImage();
+				Image scaledBackBtnIcon = backBtnIcon.getScaledInstance(45, 45, java.awt.Image.SCALE_SMOOTH);
+				btnBack.setIcon(new ImageIcon(scaledBackBtnIcon));
+		  
+				btnBack.setBorderPainted(false);
+				btnBack.setFocusPainted(false);
+				btnBack.setContentAreaFilled(false);
+				btnBack.setRolloverEnabled(false);
+				
+				
+		  btnBack.setBounds(6, 9, 50, 26);
 		  Backpanel.add(btnBack); 
 		  btnBack.addActionListener(this);
 
 
 		  btnBack.setActionCommand("back"+type);
 		  
-		  JButton btnEditContact = new JButton("e"); 
-		  btnEditContact.setBounds(260, 9, 50, 26);
+		  JButton btnEditContact = new JButton(); 
+		  
+			Image eBtnIcon = new ImageIcon(this.getClass().getResource("/cogwheel.png")).getImage();
+			Image scaledeBtnIcon = eBtnIcon.getScaledInstance(25, 25, java.awt.Image.SCALE_SMOOTH);
+			btnEditContact.setIcon(new ImageIcon(scaledeBtnIcon));
+	  
+			btnEditContact.setBorderPainted(false);
+			btnEditContact.setFocusPainted(false);
+			btnEditContact.setContentAreaFilled(false);
+			btnEditContact.setRolloverEnabled(false);
+			
+		  btnEditContact.setBounds(265, 2, 50, 40);
 		  Backpanel.add(btnEditContact); 
 		  
 		  btnEditContact.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -957,7 +1193,7 @@ public class Display extends JFrame implements ActionListener {
 		  
 		  }
 
-	private void generategallery() {
+	private void generategallery(boolean isEditProfilePic) {
 		
 		Gallery galleryObj = new Gallery();
 		Pictures[] pictures = galleryObj.getImages();
@@ -980,8 +1216,9 @@ public class Display extends JFrame implements ActionListener {
 				    img = ImageIO.read(new File(pictures[i].getPath()));
 				} catch (IOException e) {
 					
-				}
-				;
+				};
+				
+				String imgPath = pictures[i].getPath();
 				
 				// BufferedImage currImage = ImageIO.read(new File(pictures[i].getPath()));
 				
@@ -996,8 +1233,20 @@ public class Display extends JFrame implements ActionListener {
 					
 		            public void mouseClicked(java.awt.event.MouseEvent evt) {
 		            	
-		            	frame.remove(activePanel);
-		                generateImageDetails(id);
+		               	frame.remove(activePanel);
+		            	
+		            	if (isEditProfilePic == true) {
+		            		
+			                generateAddContact(imgPath);
+		            		
+		            	}
+		            	else {
+		            		
+		            	    generateImageDetails(id);
+		            		
+		            	}
+		            	
+	
 		            	frame.validate();
 		        		frame.repaint();
 		        		
@@ -1009,8 +1258,8 @@ public class Display extends JFrame implements ActionListener {
 				
 		}
 		
-		contactList.setBackground(Color.BLUE);
-		contactList.setPreferredSize(new Dimension(280, ((65*200) + (5*200))/4 + 5 ));
+		contactList.setBackground(Color.DARK_GRAY);
+		contactList.setPreferredSize(new Dimension(280, ((65*50) + (5*50))/4 + 5 ));
 	
 		JScrollPane scrollPane = new JScrollPane(contactList);
 		//scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -1054,7 +1303,7 @@ public class Display extends JFrame implements ActionListener {
 		
 	//	Image contactImage = new ImageIcon(this.getClass().getResource("/10.jpg")).getImage();
 		Image scaledContactImage = img.getScaledInstance(321,aspectRatioCalculator(img.getHeight(),img.getWidth(),321), java.awt.Image.SCALE_SMOOTH);
-		lblContactPic.setBounds(0, 150, 321, aspectRatioCalculator(img.getHeight(),img.getWidth(),321) );
+		lblContactPic.setBounds(0, 88, 321, aspectRatioCalculator(img.getHeight(),img.getWidth(),321) );
 		lblContactPic.setIcon(new ImageIcon(scaledContactImage));
 		lblContactPic.setOpaque(true);
 	
@@ -1089,7 +1338,8 @@ public class Display extends JFrame implements ActionListener {
 				isOff = false;
 
 			} else if (isOff == false) {
-
+				
+				frame.remove(Backpanel);
 				generateBlackPannel();
 				isOff = true;
 				isLocked = true;
@@ -1108,18 +1358,18 @@ public class Display extends JFrame implements ActionListener {
 
 		case "openGallery":
 
-			generategallery();
+			generategallery(false);
 
 			break;
 
 		case "goToHome":
 
 			if (isLocked == true && isOff == true) {
-
+				
 				generatelockScreen();
 
 			} else if (isLocked == true) {
-
+				
 				generatelockScreen();
 
 			} else if (isOff == false) {
@@ -1148,13 +1398,13 @@ public class Display extends JFrame implements ActionListener {
 		case "back2":
 			
 			frame.remove(Backpanel);
-			generategallery();
+			generategallery(false);
 			
 			break;
 			
 		case "AddContact":
 			
-			generateAddContact();
+			generateAddContact("./images/placeholder.jpg");
 			break;
 			
 		case "openChoiceGallery":
