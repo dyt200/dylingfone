@@ -177,9 +177,9 @@ public class Gallery extends Page {
 			
 			doc.getDocumentElement().normalize();
 		    NodeList nList = doc.getElementsByTagName("image");
-		    imagesFF = new Pictures[nList.getLength()];
+		    imagesFF = new Pictures[nList.getLength()-1];
 		    
-		    for (int temp = 0; temp < nList.getLength(); temp++) {
+		    for (int temp = 1; temp < nList.getLength(); temp++) {
 		        Node nNode = nList.item(temp);
 		        if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 		        	
@@ -190,7 +190,7 @@ public class Gallery extends Page {
 		            						el.getElementsByTagName("description").item(0).getTextContent(),
 		            						el.getElementsByTagName("file").item(0).getTextContent()
 		            						);
-		            imagesFF[temp] = tempImg;
+		            imagesFF[temp-1] = tempImg;
 		        }
 		    }
 	    

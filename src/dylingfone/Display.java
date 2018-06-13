@@ -586,7 +586,7 @@ public class Display extends JFrame implements ActionListener {
 				gbc_Birthdate.gridy = 6;
 				contactDetails.add(Birthdate, gbc_Birthdate);
 				
-				DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
+				DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 				String dob =  dateFormat.format(contact.getBirthDate());
 				
 				JLabel lblBirthdate = new JLabel(dob);
@@ -869,8 +869,7 @@ public class Display extends JFrame implements ActionListener {
 	
 	public void generateAddContact(String caughtContactImage) {
 		
-		Contacts contactsObj = new Contacts();	
-		Contact[] array = contactsObj.getContactList();
+		Contacts contactsObj = new Contacts();
 		
 		AddContact = new JPanel();
 		AddContact.setBounds(23, 88, 315, 553);
@@ -1040,7 +1039,6 @@ public class Display extends JFrame implements ActionListener {
 		gbc_lblBirthdate.gridy = 6;
 		AddContact.add(lblBirthdate, gbc_lblBirthdate);
 		
-		
 		JButton btnSave = new JButton(); 
 		
 		Image btnSaveBtnIcon = new ImageIcon(this.getClass().getResource("/diskette.png")).getImage();
@@ -1077,7 +1075,6 @@ public class Display extends JFrame implements ActionListener {
                   
               }});
 		
-		
 		  btnSave.addMouseListener(new java.awt.event.MouseAdapter() {
 				
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1087,32 +1084,18 @@ public class Display extends JFrame implements ActionListener {
                     
                 	frame.remove(activePanel);
                 	
-                
-  
                 	if ( lblFirstName.getText().equals("") ||  lblLastName.getText().equals("") ||  lblBirthdate.getText().equals("") || lblEmail.getText().equals("") || lblMobileTel.getText().equals("") || lblHomeTel.getText().equals("")  ) {
-                		
                 		System.out.println("YOU MUST FILL ALL THE FORM ! The contact was not registered");
-                		
-                	}
-                	else {
-                		
-                		// 666
-                		// Since i added a system to get the pic from the gallery, we now need to be able to save
-                		// that picture path in the XML. So i trust you can find a way to add that in your addContact method :D
-                		
-                	 	contactsObj.addContact(lblFirstName.getText(), lblLastName.getText(), lblBirthdate.getText(), lblEmail.getText(), lblMobileTel.getText(), lblHomeTel.getText());
-                	
+                	} else {
+                	 	contactsObj.addContact(lblFirstName.getText(), lblLastName.getText(), lblBirthdate.getText(), lblEmail.getText(), lblMobileTel.getText(), lblHomeTel.getText(), caughtContactImage);
                 	}
                
-           
                     generatecontacts();
                 	frame.validate();
             		frame.repaint();
             
-                    
                 }});
 		  
-		
 		activePanel = AddContact;
 	};
 	
@@ -1130,15 +1113,14 @@ public class Display extends JFrame implements ActionListener {
 		  
 		  JButton btnBack = new JButton(); 
 		  
-				Image backBtnIcon = new ImageIcon(this.getClass().getResource("/left-arrow.png")).getImage();
-				Image scaledBackBtnIcon = backBtnIcon.getScaledInstance(45, 45, java.awt.Image.SCALE_SMOOTH);
-				btnBack.setIcon(new ImageIcon(scaledBackBtnIcon));
-		  
-				btnBack.setBorderPainted(false);
-				btnBack.setFocusPainted(false);
-				btnBack.setContentAreaFilled(false);
-				btnBack.setRolloverEnabled(false);
-				
+		  Image backBtnIcon = new ImageIcon(this.getClass().getResource("/left-arrow.png")).getImage();
+		  Image scaledBackBtnIcon = backBtnIcon.getScaledInstance(45, 45, java.awt.Image.SCALE_SMOOTH);
+		  btnBack.setIcon(new ImageIcon(scaledBackBtnIcon));
+	  
+		  btnBack.setBorderPainted(false);
+		  btnBack.setFocusPainted(false);
+		  btnBack.setContentAreaFilled(false);
+		  btnBack.setRolloverEnabled(false);
 				
 		  btnBack.setBounds(6, 9, 50, 26);
 		  Backpanel.add(btnBack); 
@@ -1149,37 +1131,37 @@ public class Display extends JFrame implements ActionListener {
 		  
 		  JButton btnEditContact = new JButton(); 
 		  
-			Image eBtnIcon = new ImageIcon(this.getClass().getResource("/cogwheel.png")).getImage();
-			Image scaledeBtnIcon = eBtnIcon.getScaledInstance(25, 25, java.awt.Image.SCALE_SMOOTH);
-			btnEditContact.setIcon(new ImageIcon(scaledeBtnIcon));
+		  Image eBtnIcon = new ImageIcon(this.getClass().getResource("/cogwheel.png")).getImage();
+		  Image scaledeBtnIcon = eBtnIcon.getScaledInstance(25, 25, java.awt.Image.SCALE_SMOOTH);
+		  btnEditContact.setIcon(new ImageIcon(scaledeBtnIcon));
 	  
-			btnEditContact.setBorderPainted(false);
-			btnEditContact.setFocusPainted(false);
-			btnEditContact.setContentAreaFilled(false);
-			btnEditContact.setRolloverEnabled(false);
+		  btnEditContact.setBorderPainted(false);
+		  btnEditContact.setFocusPainted(false);
+		  btnEditContact.setContentAreaFilled(false);
+		  btnEditContact.setRolloverEnabled(false);
 			
 		  btnEditContact.setBounds(265, 2, 50, 40);
 		  Backpanel.add(btnEditContact); 
 		  
 		  btnEditContact.addMouseListener(new java.awt.event.MouseAdapter() {
 				
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-                	
-                    System.out.println("mouseClicked edit");
-                    System.out.println(id);
-                    
-                	frame.remove(activePanel);
-                	
-                	if(type == 1) {
-                		generateEditContact(id);
-                	} else {
-                		generateEditImage(id);
-                	}
-                	frame.validate();
-            		frame.repaint();
-            
-                    
-                }});
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
+				
+			    System.out.println("mouseClicked edit");
+			    System.out.println(id);
+			    
+				frame.remove(activePanel);
+				
+				if(type == 1) {
+					generateEditContact(id);
+				} else {
+					generateEditImage(id);
+				}
+				frame.validate();
+				frame.repaint();
+			
+			    
+			}});
 //		  btnEditContact.addActionListener(this);
 //		  btnEditContact.setActionCommand("EditContact");
 		

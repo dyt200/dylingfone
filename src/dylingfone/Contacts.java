@@ -125,7 +125,7 @@ public class Contacts extends Page{
 		
 	}
 	
-	public void addContact(String firstName, String lastName, String birthDate, String email, String telMobile, String telHome) {
+	public void addContact(String firstName, String lastName, String birthDate, String email, String telMobile, String telHome, String pic) {
 		try {
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -158,6 +158,10 @@ public class Contacts extends Page{
             Element tHome = doc.createElement("telHome");
             tHome.appendChild(doc.createTextNode(telHome));
             newContact.appendChild(tHome);
+            
+            Element picture = doc.createElement("pic");
+            picture.appendChild(doc.createTextNode(pic));
+            newContact.appendChild(picture);
 
             root.appendChild(newContact);
             
