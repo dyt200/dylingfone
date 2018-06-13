@@ -169,6 +169,8 @@ public class Display extends JFrame implements ActionListener {
 		frame.getContentPane().add(lockScreen);
 		lockScreen.setLayout(null);
 		
+
+		
 		generateClock();
 		
 		JButton btnUnlcok = new JButton();
@@ -795,7 +797,7 @@ public class Display extends JFrame implements ActionListener {
 				gbc_Birthdate.gridy = 6;
 				EditContact.add(Birthdate, gbc_Birthdate);
 				
-				DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
+				DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 				String dob =  dateFormat.format(contact.getBirthDate());
 				
 				JTextField lblBirthdate = new JTextField(dob);
@@ -995,6 +997,7 @@ public class Display extends JFrame implements ActionListener {
 		AddContact.add(FirstName, gbc_FirstName);
 		
 		
+		
 		JTextField lblFirstName = new JTextField();
 		GridBagConstraints gbc_lblFirstName = new GridBagConstraints();
 		//gbc_lblFirstName.anchor = GridBagConstraints.NORTHWEST;
@@ -1132,26 +1135,46 @@ public class Display extends JFrame implements ActionListener {
                   
               }});
 		
-		  btnSave.addMouseListener(new java.awt.event.MouseAdapter() {
-				
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-                	
-                    System.out.println("mouseClicked edit");
-                    System.out.println();
-                    
-                	frame.remove(activePanel);
-                	
-                	if ( lblFirstName.getText().equals("") ||  lblLastName.getText().equals("") ||  lblBirthdate.getText().equals("") || lblEmail.getText().equals("") || lblMobileTel.getText().equals("") || lblHomeTel.getText().equals("")  ) {
-                		System.out.println("YOU MUST FILL ALL THE FORM ! The contact was not registered");
-                	} else {
-                	 	contactsObj.addContact(lblFirstName.getText(), lblLastName.getText(), lblBirthdate.getText(), lblEmail.getText(), lblMobileTel.getText(), lblHomeTel.getText(), caughtContactImageID);
-                	}
-               
-                    generatecontacts();
-                	frame.validate();
-            		frame.repaint();
-            
-                }});
+			  btnSave.addMouseListener(new java.awt.event.MouseAdapter() {
+					
+	                public void mouseClicked(java.awt.event.MouseEvent evt) {
+	                	
+	                    System.out.println("mouseClicked edit");
+	                    System.out.println();
+	                    
+	                    boolean error = false;
+	                    
+	                	if(lblFirstName.getText().equals("")) {
+	                		FirstName.setForeground(Color.red);
+	                		AddContact.add(FirstName, gbc_FirstName);
+	                		error = true;
+	                	}
+	                	if(lblLastName.getText().equals("")) {
+	                		LastName.setForeground(Color.red);
+	                		AddContact.add(LastName, LastName);
+	                		error = true;
+			  			}
+	                	if(!StringFunc.isValidDate(lblBirthdate.getText())) {
+	                		Birthdate.setForeground(Color.red);
+	                		AddContact.add(Birthdate, gbc_Birthdate);
+	                		error = true;
+	                	}
+	                	if(!StringFunc.isValidEmail(lblEmail.getText())) {
+	                		Email.setForeground(Color.red);
+	                		AddContact.add(Email, gbc_Email);
+	                		error = true;
+	                	}
+	                	if(!error){
+	                		frame.remove(activePanel);
+	                		contactsObj.addContact(lblFirstName.getText(), lblLastName.getText(), lblBirthdate.getText(), lblEmail.getText(), lblMobileTel.getText(), lblHomeTel.getText(), caughtContactImageID);
+	                		generatecontacts();
+	                    	
+	                	}
+	                	
+	                	frame.validate();
+	            		frame.repaint();
+	            
+	                }});
 		  
 		activePanel = AddContact;
 	};
