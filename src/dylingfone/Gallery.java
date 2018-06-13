@@ -207,7 +207,7 @@ public class Gallery extends Page {
 			if(tempId == id) 
 				return images[i].getPath();
 		}
-		return "/placeholder.jpg";
+		return "./images/placeholder.jpg";
 	}
 	
 	public Pictures[] getImages() {

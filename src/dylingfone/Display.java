@@ -436,8 +436,10 @@ public class Display extends JFrame implements ActionListener {
 		Contacts contactsObj = new Contacts();	
 		Contact[] array = contactsObj.getContactList();
 		Gallery galleryLol = new Gallery();
+		
+		//String imagePath = "";
 
-		String imagePath = "";
+		
 	
 		for (Contact contact : array) {
 			
@@ -445,8 +447,16 @@ public class Display extends JFrame implements ActionListener {
 				
 				detailHead = contact.getFirstName();
 				contactId = contact.getId();
-				imagePath = galleryLol.getPathFromId(contact.getPic());
-				System.out.println("path = "+imagePath);
+				System.out.println("pic id contact" + contact.getPic());
+				String imagePath = galleryLol.getPathFromId(contact.getPic());
+				System.out.println(imagePath);
+				
+				BufferedImage img = null;
+				try {
+				    img = ImageIO.read(new File(imagePath));
+				} catch (IOException e) {
+					
+				};
 				
 				generateBackPannel(detailHead, id, 1);
 				
@@ -466,8 +476,7 @@ public class Display extends JFrame implements ActionListener {
 				
 				JLabel lblContactPic = new JLabel();
 				
-				Image contactImage = new ImageIcon(this.getClass().getResource(imagePath)).getImage();
-				Image scaledContactImage = contactImage.getScaledInstance(225,aspectRatioCalculator(contactImage.getHeight(lblContactPic),contactImage.getWidth(lblContactPic),225), java.awt.Image.SCALE_SMOOTH);
+				Image scaledContactImage = img.getScaledInstance(225,aspectRatioCalculator(img.getHeight(),img.getWidth(),225), java.awt.Image.SCALE_SMOOTH);
 			
 				lblContactPic.setIcon(new ImageIcon(scaledContactImage));
 				
@@ -612,8 +621,9 @@ public class Display extends JFrame implements ActionListener {
 		
 		Gallery galleryLol = new Gallery();
 		Pictures[] pictures = galleryLol.getImages();
+		
 		String imagePath = "";
-		int imageId;
+		BufferedImage img = null;
 		
 		for (Contact contact : array) {
 			
@@ -621,7 +631,13 @@ public class Display extends JFrame implements ActionListener {
 				detailHead = contact.getFirstName();
 				contactId = contact.getId();
 				
-				imagePath = galleryLol.getPathFromId(contact.getPic());
+			
+				try {
+				    img = ImageIO.read(new File(galleryLol.getPathFromId(contact.getPic())));
+				} catch (IOException e) {
+					
+				};
+				
 				System.out.println("IMAGE PATH = "+imagePath);
 			}
 		}
@@ -647,9 +663,25 @@ public class Display extends JFrame implements ActionListener {
 				gbl_blackPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 				EditContact.setLayout(gbl_blackPanel);
 				
+				Image ChosePicIcon = new ImageIcon(this.getClass().getResource("/pencilIcon.png")).getImage();
+				Image scaledChosePicIcon = ChosePicIcon.getScaledInstance(32,32, java.awt.Image.SCALE_SMOOTH);
+				
+				JButton btnChosePic = new JButton(); 
+				btnChosePic.setIcon(new ImageIcon(scaledChosePicIcon));
+				btnChosePic.setBorderPainted(false);
+				btnChosePic.setContentAreaFilled(false);
+				btnChosePic.setRolloverEnabled(false);
+				GridBagConstraints gbc_btnChosePic = new GridBagConstraints();
+				gbc_btnChosePic.anchor = GridBagConstraints.SOUTHEAST;
+			//	gbc_btnSave.fill = GridBagConstraints.HORIZONTAL;
+				gbc_btnChosePic.insets = new Insets(0, 0, 5, 0);
+				gbc_btnChosePic.gridx = 1;
+				gbc_btnChosePic.gridy = 0;
+				
+				EditContact.add(btnChosePic, gbc_btnChosePic);
+				
 				JLabel lblContactPic = new JLabel();
-				Image contactImage = new ImageIcon(this.getClass().getResource(imagePath)).getImage();
-				Image scaledContactImage = contactImage.getScaledInstance(225,aspectRatioCalculator(contactImage.getHeight(lblContactPic),contactImage.getWidth(lblContactPic),225), java.awt.Image.SCALE_SMOOTH);
+				Image scaledContactImage = img.getScaledInstance(225,aspectRatioCalculator(img.getHeight(),img.getWidth(),225), java.awt.Image.SCALE_SMOOTH);
 				lblContactPic.setIcon(new ImageIcon(scaledContactImage));
 				lblContactPic.setOpaque(true);
 				
@@ -658,6 +690,8 @@ public class Display extends JFrame implements ActionListener {
 				gbc_lblContactPic.gridx = 1;
 				gbc_lblContactPic.gridy = 0;
 				EditContact.add(lblContactPic, gbc_lblContactPic);
+				
+				
 				
 				JLabel FirstName = new JLabel("First name :");
 				GridBagConstraints gbc_FirstName = new GridBagConstraints();
@@ -793,6 +827,24 @@ public class Display extends JFrame implements ActionListener {
 				gbc_btnSave.gridy = 0;
 				EditContact.add(btnSave, gbc_btnSave);
 				
+				   btnChosePic.addMouseListener(new java.awt.event.MouseAdapter() {
+						
+			              public void mouseClicked(java.awt.event.MouseEvent evt) {
+			              	
+			                  System.out.println("mouseClicked edit");
+			                  System.out.println();
+			                  
+			              	frame.remove(activePanel);
+			           
+			                generategallery(contact.getId(), true);
+			                
+			              	frame.validate();
+			          		frame.repaint();
+			          
+			                  
+			              }});
+					
+				
 				  
 				  btnSave.addMouseListener(new java.awt.event.MouseAdapter() {
 						
@@ -867,9 +919,12 @@ public class Display extends JFrame implements ActionListener {
 		
 	}
 	
-	public void generateAddContact(String caughtContactImage) {
+	public void generateAddContact(String caughtContactImageID) {
 		
 		Contacts contactsObj = new Contacts();
+		Gallery galleryLol = new Gallery();
+		
+		String imagePath = galleryLol.getPathFromId(Integer.parseInt(caughtContactImageID));
 		
 		AddContact = new JPanel();
 		AddContact.setBounds(23, 88, 315, 553);
@@ -886,11 +941,13 @@ public class Display extends JFrame implements ActionListener {
 		
 		JLabel lblContactPic = new JLabel();
 		
+		
+		
 		// 777
 		
 		BufferedImage contactImage = null;
 		try {
-			contactImage = ImageIO.read(new File(caughtContactImage));
+			contactImage = ImageIO.read(new File(imagePath));
 		} catch (IOException e) {
 			
 		};
@@ -910,9 +967,9 @@ public class Display extends JFrame implements ActionListener {
 		btnChosePic.setContentAreaFilled(false);
 		btnChosePic.setRolloverEnabled(false);
 		GridBagConstraints gbc_btnChosePic = new GridBagConstraints();
-		gbc_btnChosePic.anchor = GridBagConstraints.NORTHEAST;
-	//	gbc_btnSave.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnChosePic.insets = new Insets(40, 0, 5, 0);
+		gbc_btnChosePic.anchor = GridBagConstraints.SOUTHEAST;
+		//	gbc_btnSave.fill = GridBagConstraints.HORIZONTAL;
+			gbc_btnChosePic.insets = new Insets(0, 0, 5, 0);
 		gbc_btnChosePic.gridx = 1;
 		gbc_btnChosePic.gridy = 0;
 		
@@ -1067,7 +1124,7 @@ public class Display extends JFrame implements ActionListener {
                   
               	frame.remove(activePanel);
            
-                generategallery(true);
+                generategallery(-2 ,true);
                 
               	frame.validate();
           		frame.repaint();
@@ -1087,7 +1144,7 @@ public class Display extends JFrame implements ActionListener {
                 	if ( lblFirstName.getText().equals("") ||  lblLastName.getText().equals("") ||  lblBirthdate.getText().equals("") || lblEmail.getText().equals("") || lblMobileTel.getText().equals("") || lblHomeTel.getText().equals("")  ) {
                 		System.out.println("YOU MUST FILL ALL THE FORM ! The contact was not registered");
                 	} else {
-                	 	contactsObj.addContact(lblFirstName.getText(), lblLastName.getText(), lblBirthdate.getText(), lblEmail.getText(), lblMobileTel.getText(), lblHomeTel.getText(), caughtContactImage);
+                	 	contactsObj.addContact(lblFirstName.getText(), lblLastName.getText(), lblBirthdate.getText(), lblEmail.getText(), lblMobileTel.getText(), lblHomeTel.getText(), caughtContactImageID);
                 	}
                
                     generatecontacts();
@@ -1175,10 +1232,12 @@ public class Display extends JFrame implements ActionListener {
 		  
 		  }
 
-	private void generategallery(boolean isEditProfilePic) {
+	private void generategallery(int contactID, boolean isEditProfilePic) {
 		
 		Gallery galleryObj = new Gallery();
 		Pictures[] pictures = galleryObj.getImages();
+		
+		Contacts contactsObj = new Contacts();	
 		
 		gallery = new JPanel();
 		gallery.setBounds(23, 88, 315, 553);
@@ -1193,20 +1252,22 @@ public class Display extends JFrame implements ActionListener {
 			final int id = i;
 		
 				
-				BufferedImage img = null;
+				/*BufferedImage img = null;
 				try {
 				    img = ImageIO.read(new File(pictures[i].getPath()));
 				} catch (IOException e) {
 					
-				};
+				};*/
 				
 				String imgPath = pictures[i].getPath();
+				String imgID = String.valueOf(pictures[i].getId()) ;
 				
 				// BufferedImage currImage = ImageIO.read(new File(pictures[i].getPath()));
 				
-				Image scaledImage = img.getScaledInstance(65,65,Image.SCALE_SMOOTH);
+				//Image scaledImage = img.getScaledInstance(65,65,Image.SCALE_SMOOTH);
+				ImageIcon imageIcon = new ImageIcon(new ImageIcon(pictures[i].getPath()).getImage().getScaledInstance(65, 65, Image.SCALE_DEFAULT));
 				
-				JLabel picLabel = new JLabel(new ImageIcon(scaledImage));
+				JLabel picLabel = new JLabel(imageIcon);
 				//picLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 				
 				// mouse listener for clicking on an image to go into imageDetails.
@@ -1218,9 +1279,19 @@ public class Display extends JFrame implements ActionListener {
 		               	frame.remove(activePanel);
 		            	
 		            	if (isEditProfilePic == true) {
-		            		
-			                generateAddContact(imgPath);
-		            		
+		            
+			                if (contactID > 0) {
+			                	
+			                	contactsObj.editContact(contactID, "pic", imgID);
+			            		generateEditContact(contactID);
+			            		
+			                	
+			                }
+			                else {
+			                	
+			                	generateAddContact(imgID);
+			                	
+			                }
 		            	}
 		            	else {
 		            		
@@ -1241,7 +1312,7 @@ public class Display extends JFrame implements ActionListener {
 		}
 		
 		contactList.setBackground(Color.DARK_GRAY);
-		contactList.setPreferredSize(new Dimension(280, ((65*50) + (5*50))/4 + 5 ));
+		contactList.setPreferredSize(new Dimension(280, ((65*pictures.length) + (5*pictures.length))/4 + 5 ));
 	
 		JScrollPane scrollPane = new JScrollPane(contactList);
 		//scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -1340,7 +1411,7 @@ public class Display extends JFrame implements ActionListener {
 
 		case "openGallery":
 
-			generategallery(false);
+			generategallery(-2 ,false);
 
 			break;
 
@@ -1380,7 +1451,7 @@ public class Display extends JFrame implements ActionListener {
 		case "back2":
 			
 			frame.remove(Backpanel);
-			generategallery(false);
+			generategallery(-2, false);
 			
 			break;
 			
