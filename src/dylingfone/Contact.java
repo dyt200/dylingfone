@@ -24,6 +24,17 @@ public class Contact {
 		this.pic = -1;
 	}
 	
+	public Contact(int id, String firstName, String lastName, Date birthDate, String email, String telMobile, String telHome, int pic) {
+		this.setId(id);
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.birthDate = birthDate;
+		this.email = email;
+		this.telMobile = telMobile;
+		this.telHome = telHome;
+		this.pic = pic;
+	}
+	
 	public String getFirstName() {
 		return firstName;
 	}

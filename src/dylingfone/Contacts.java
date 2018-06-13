@@ -182,6 +182,9 @@ public class Contacts extends Page{
 	
 	public Contact[] getContactsFromFile() {
 		Contact[] contactsFF = null;
+		int pic;
+		Contact tempCon;
+		
 		try {
 			
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -200,17 +203,35 @@ public class Contacts extends Page{
 		        if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 		        	
 		            Element el = (Element) nNode;
+		            
 		            String dateTemp = el.getElementsByTagName("birthDate").item(0).getTextContent();
 		            Date birthDate=new SimpleDateFormat("dd.MM.yyyy").parse(dateTemp);
-		            Contact tempCon = new Contact(
-		            						Integer.parseInt(el.getAttribute("id")), 
-		            						el.getElementsByTagName("firstName").item(0).getTextContent(),
-		            						el.getElementsByTagName("lastName").item(0).getTextContent(),
-		            						birthDate,
-		            						el.getElementsByTagName("email").item(0).getTextContent(),
-		            						el.getElementsByTagName("telMobile").item(0).getTextContent(),
-		            						el.getElementsByTagName("telHome").item(0).getTextContent()
-		            						);
+		            
+		            if(el.getElementsByTagName("pic").item(0).getTextContent() == "") {
+		            	 tempCon = new Contact(
+         						Integer.parseInt(el.getAttribute("id")), 
+         						el.getElementsByTagName("firstName").item(0).getTextContent(),
+         						el.getElementsByTagName("lastName").item(0).getTextContent(),
+         						birthDate,
+         						el.getElementsByTagName("email").item(0).getTextContent(),
+         						el.getElementsByTagName("telMobile").item(0).getTextContent(),
+         						el.getElementsByTagName("telHome").item(0).getTextContent()
+         						);
+		            } else {
+		            	 tempCon = new Contact(
+	         						Integer.parseInt(el.getAttribute("id")), 
+	         						el.getElementsByTagName("firstName").item(0).getTextContent(),
+	         						el.getElementsByTagName("lastName").item(0).getTextContent(),
+	         						birthDate,
+	         						el.getElementsByTagName("email").item(0).getTextContent(),
+	         						el.getElementsByTagName("telMobile").item(0).getTextContent(),
+	         						el.getElementsByTagName("telHome").item(0).getTextContent(),
+	         						Integer.parseInt(el.getElementsByTagName("pic").item(0).getTextContent())
+	         						);
+		            }
+		            
+		           
+		           
 		            
 		            contactsFF[temp] = tempCon;
 		        }
