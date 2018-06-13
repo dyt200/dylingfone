@@ -1457,7 +1457,7 @@ public class Display extends JFrame implements ActionListener {
 			
 		case "AddContact":
 			
-			generateAddContact("./images/placeholder.jpg");
+			generateAddContact(Integer.toString(-1));
 			break;
 			
 		case "openChoiceGallery":
