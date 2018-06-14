@@ -2,24 +2,10 @@ package dylingfone;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-
-import javafx.*;
-import javax.swing.event.ChangeEvent;
-
-import javafx.scene.control.ScrollPane;
-
 import java.text.SimpleDateFormat;
-import java.time.Clock;
-import java.time.Instant;
-import java.time.LocalTime;
-import java.time.ZoneId;
 import java.awt.*;
 import java.text.DateFormat;
 import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.TimerTask;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
@@ -55,7 +41,6 @@ public class Display extends JFrame implements ActionListener {
 	private JPanel AddContact;
 	private JPanel imageDetails;
 	private JLabel hourLabel;
-	private String timeStamp;
 	private boolean isOff = true;
 	private boolean isLocked = true;
 	private String detailHead ; 
@@ -64,9 +49,7 @@ public class Display extends JFrame implements ActionListener {
 	private JPanel activePanel;
 	
 	Image backgoundImg = new ImageIcon(this.getClass().getResource("/background-6.jpg")).getImage();
-	
-	
-	private ImageObserver observer;
+
 	
 	
 	/**
