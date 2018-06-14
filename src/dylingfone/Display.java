@@ -131,6 +131,10 @@ public class Display extends JFrame implements ActionListener {
 
 		lockButton = new JButton();
 		lockButton.setBackground(Color.BLACK);
+		lockButton.setBorderPainted(false);
+		lockButton.setFocusPainted(false);
+		lockButton.setContentAreaFilled(true);
+		lockButton.setRolloverEnabled(false);
 		lockButton.setBounds(254, 3, 47, 8);
 		frame.getContentPane().add(lockButton);
 
@@ -165,7 +169,6 @@ public class Display extends JFrame implements ActionListener {
 
 		
 		lockScreen = new JPanel()	{
-			
 			
 			protected void paintComponent(Graphics g)
 			{
@@ -235,14 +238,8 @@ public class Display extends JFrame implements ActionListener {
 				timer.setRepeats( false );
 				timer.start();
 				
-			
-            	
                 
             }});
-		
-					 
-		
-
 		
 
 	}
@@ -400,7 +397,7 @@ public class Display extends JFrame implements ActionListener {
 		
 		for (Contact contact : array) {
 			
-			currentLetter = String.valueOf(contact.getLastName().charAt(0)).toUpperCase();
+			currentLetter = String.valueOf(contact.getLastName().charAt(0));
 			
 			//if first letter of lastName != last letter then adds letter header
 			if(currentLetter.equals(lastLetter) == false) {
