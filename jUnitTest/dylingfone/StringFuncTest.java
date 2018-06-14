@@ -10,7 +10,7 @@ class StringFuncTest {
 	void setUp() {
 		classBeingTested = new StringFunc();
 	}
-	
+	 
 	@Test
 	void testIsValidDate() {
 		String testValue = "01.01.1970";

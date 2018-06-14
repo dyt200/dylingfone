@@ -13,7 +13,7 @@ class DisplayTest {
 		double x = 474.0;
 		double y = 474.0;
 		double z = 321.0;
-		
+		 
 		assertTrue(expected == classBeingTested.aspectRatioCalculator(x, y, z));
 	}
 
