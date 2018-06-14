@@ -1438,7 +1438,7 @@ public class Display extends JFrame implements ActionListener {
 		}
 		;
 		
-	//	Image contactImage = new ImageIcon(this.getClass().getResource("/10.jpg")).getImage();
+	//	Image contactImage = new ImageIcon(this.getClass().getResource("/10.jpg")).gettImage();
 		Image scaledContactImage = img.getScaledInstance(321,aspectRatioCalculator(img.getHeight(),img.getWidth(),321), java.awt.Image.SCALE_SMOOTH);
 		lblContactPic.setBounds(0, 125, 321, aspectRatioCalculator(img.getHeight(),img.getWidth(),321) );
 		lblContactPic.setIcon(new ImageIcon(scaledContactImage));
