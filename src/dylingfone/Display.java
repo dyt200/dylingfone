@@ -55,7 +55,7 @@ public class Display extends JFrame implements ActionListener {
 
 	private JPanel activePanel;
 	
-
+	Image backgoundImg = new ImageIcon(this.getClass().getResource("/background-5.jpeg")).getImage();
 	
 	
 	private ImageObserver observer;
@@ -162,10 +162,24 @@ public class Display extends JFrame implements ActionListener {
 
 	private void generatelockScreen() {
 		
+
 		
-		lockScreen = new JPanel();
+		lockScreen = new JPanel()	{
+			
+			
+			protected void paintComponent(Graphics g)
+			{
+				g.drawImage(backgoundImg, 0,0, null);
+				super.paintComponent(g);
+			}
+		};
+		
+		lockScreen.setOpaque(false);
+				
 		lockScreen.setBounds(23, 88, 320, 553);
 		lockScreen.setBackground(Color.DARK_GRAY);
+		
+		
 		frame.getContentPane().add(lockScreen);
 		lockScreen.setLayout(null);
 		
@@ -273,7 +287,18 @@ public class Display extends JFrame implements ActionListener {
 
 	private void generateHomeScreen() {
 
-		homeScreen = new JPanel();
+		homeScreen = new JPanel(){
+			
+			
+			protected void paintComponent(Graphics g)
+			{
+				g.drawImage(backgoundImg, 0,0, null);
+				super.paintComponent(g);
+			}
+		};
+		
+		homeScreen.setOpaque(false);
+				
 		homeScreen.setBackground(Color.DARK_GRAY);
 		homeScreen.setBounds(23, 88, 320, 553);
 		frame.getContentPane().add(homeScreen);
