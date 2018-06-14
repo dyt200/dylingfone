@@ -1507,6 +1507,12 @@ public class Display extends JFrame implements ActionListener {
 			break;
 
 		case "goToHome":
+			
+			 if (Backpanel != null) {
+					
+					frame.remove(Backpanel);
+					
+					}
 
 			if (isLocked == true && isOff == true) {
 				
