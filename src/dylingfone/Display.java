@@ -8,7 +8,6 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
 
@@ -1357,10 +1356,22 @@ public class Display extends JFrame implements ActionListener {
 //		  btnEditContact.setActionCommand("EditContact");
 		
 		  
-		  
-		  JLabel label_1 = new JLabel(head);
-		  label_1.setBounds(130, 14, 56, 16);
-		  Backpanel.add(label_1);
+		  if (type != 2) {
+			  
+			  JLabel label_1 = new JLabel(head);
+			  label_1.setBounds(130, 14, 56, 16);
+			  Backpanel.add(label_1);
+			  
+		  }
+		  else {
+			  
+			  JLabel label_1 = new JLabel();
+			  label_1.setBounds(130, 14, 56, 16);
+			  Backpanel.add(label_1);
+			  
+		  }
+		 
+		
 		  
 		 // activePanel = Backpanel;
 		  
@@ -1670,10 +1681,14 @@ public class Display extends JFrame implements ActionListener {
 	
 	public int aspectRatioCalculator(double originHeight, double originWidth, double newWidth) {
 		
+		
+		
 		double res = (originHeight/originWidth) * newWidth;
 		
 		
 		int resInt = (int) Math.round(res);
+		
+		System.out.println(originHeight + " " + originWidth + " " + newWidth + " " + resInt );
 		
 		System.out.println(resInt);
 		
