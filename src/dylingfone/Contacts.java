@@ -255,10 +255,10 @@ public class Contacts extends Page{
 			
 			for(int j = i+1; j < tempC.length; j++) {
 				
-				compare = tempC[j].getLastName().compareTo(tempC[i].getLastName());
+				compare = tempC[j].getLastName().toUpperCase().compareTo(tempC[i].getLastName().toUpperCase());
 				
 				if (compare == 0) {
-					compare = tempC[j].getFirstName().compareTo(tempC[i].getFirstName());
+					compare = tempC[j].getFirstName().toUpperCase().compareTo(tempC[i].getFirstName().toUpperCase());
 				}
 				
 				if (compare == 0) {

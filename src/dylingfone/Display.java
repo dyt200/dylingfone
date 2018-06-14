@@ -400,7 +400,7 @@ public class Display extends JFrame implements ActionListener {
 		
 		for (Contact contact : array) {
 			
-			currentLetter = String.valueOf(contact.getLastName().charAt(0));
+			currentLetter = String.valueOf(contact.getLastName().charAt(0)).toUpperCase();
 			
 			//if first letter of lastName != last letter then adds letter header
 			if(currentLetter.equals(lastLetter) == false) {
