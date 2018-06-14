@@ -34,7 +34,7 @@ public class Display extends JFrame implements ActionListener {
 	private JFrame frame;
 	private JPanel lockScreen;
 	private JPanel homeScreen;
-	private JPanel Backpanel;
+	private JPanel Backpanel ;
 	private JPanel contacts;
 	private JPanel gallery;
 	public String precNavState;
@@ -55,7 +55,7 @@ public class Display extends JFrame implements ActionListener {
 
 	private JPanel activePanel;
 	
-	Image backgoundImg = new ImageIcon(this.getClass().getResource("/background-5.jpeg")).getImage();
+	Image backgoundImg = new ImageIcon(this.getClass().getResource("/background-6.jpg")).getImage();
 	
 	
 	private ImageObserver observer;
@@ -1470,7 +1470,14 @@ public class Display extends JFrame implements ActionListener {
 
 			} else if (isOff == false) {
 				
+		
+				
+			 if (Backpanel != null) {
+				
 				frame.remove(Backpanel);
+				
+				}
+				
 				generateBlackPannel();
 				isOff = true;
 				isLocked = true;
@@ -1517,6 +1524,8 @@ public class Display extends JFrame implements ActionListener {
 		case "back1": 
 			
 			if (activePanel == contactDetails) {
+				
+				
 				
 				frame.remove(Backpanel);
 				generatecontacts();
