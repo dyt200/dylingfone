@@ -1,6 +1,8 @@
 package dylingfone;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
 import javafx.*;
 import javax.swing.event.ChangeEvent;
 
@@ -408,21 +410,24 @@ public class Display extends JFrame implements ActionListener {
 				countLetters++;
 				
 				JPanel letterHead = new JPanel();
-				letterHead.setPreferredSize(new Dimension(280, 20));
+				letterHead.setPreferredSize(new Dimension(280, 30));
 				letterHead.setLayout(new FlowLayout(FlowLayout.LEFT));
 				
 				JLabel jlabel = new JLabel(currentLetter);
+				jlabel.setFont(new Font("", Font.BOLD, 15));
+				jlabel.setBorder(new EmptyBorder(0,10,0,0));
 				letterHead.add(jlabel);
 				contactList.add(letterHead);
 			}
 			
 			//creation of each contact panel + label
-			JPanel panTest = new JPanel();
+			JPanel panTest = new RoundJPanel();
+			//panTest.setBackground(Color.LIGHT_GRAY);
 			panTest.setPreferredSize(new Dimension(280, 30));
-			panTest.setBackground(Color.LIGHT_GRAY);
 			panTest.setLayout(new FlowLayout(FlowLayout.LEFT));
 			
 			JLabel jlabel = new JLabel(contact.getLastName()+", "+contact.getFirstName());
+			jlabel.setBorder(new EmptyBorder(0,10,0,0));
 			panTest.add(jlabel);
 			
 			panTest.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -445,7 +450,7 @@ public class Display extends JFrame implements ActionListener {
 			
 		}
 			
-			contactList.setPreferredSize(new Dimension(280, (20*countLetters) + (countLetters*6) + (30*array.length)+ (array.length*5) + 5));
+			contactList.setPreferredSize(new Dimension(280, (30*countLetters) + (countLetters*6) + (30*array.length)+ (array.length*5) + 5));
 		
 			JScrollPane scrollPane = new JScrollPane(contactList);
 			//scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
