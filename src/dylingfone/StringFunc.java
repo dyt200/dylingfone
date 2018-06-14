@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 public class StringFunc {
 	
 	public static boolean isValidDate(String inDate) {
-	    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 	    dateFormat.setLenient(false);
 	    try {
 	      dateFormat.parse(inDate.trim());
@@ -28,4 +28,11 @@ public class StringFunc {
             return false;
         return pat.matcher(email).matches();
     }
+	
+	public static boolean isValidPhoneNumber(String number) {
+		if(number.matches("[0-9.+]*"))
+			return true;
+		else
+			return false;
+	}
 }

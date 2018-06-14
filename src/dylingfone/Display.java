@@ -968,8 +968,6 @@ public class Display extends JFrame implements ActionListener {
 		
 		JLabel lblContactPic = new JLabel();
 		
-		
-		
 		// 777
 		
 		BufferedImage contactImage = null;
@@ -995,13 +993,9 @@ public class Display extends JFrame implements ActionListener {
 		btnChosePic.setRolloverEnabled(false);
 		GridBagConstraints gbc_btnChosePic = new GridBagConstraints();
 		gbc_btnChosePic.anchor = GridBagConstraints.SOUTHEAST;
-		//	gbc_btnSave.fill = GridBagConstraints.HORIZONTAL;
-			gbc_btnChosePic.insets = new Insets(0, 0, 5, 0);
+		gbc_btnChosePic.insets = new Insets(0, 0, 5, 0);
 		gbc_btnChosePic.gridx = 1;
 		gbc_btnChosePic.gridy = 0;
-		
-		//btnChosePic.addActionListener(this);
-		//btnChosePic.setActionCommand("openChoiceGallery");
 		
 		AddContact.add(btnChosePic, gbc_btnChosePic);
 		
@@ -1014,18 +1008,14 @@ public class Display extends JFrame implements ActionListener {
 		
 		JLabel FirstName = new JLabel("First name :");
 		GridBagConstraints gbc_FirstName = new GridBagConstraints();
-		//gbc_lblFirstName.anchor = GridBagConstraints.NORTHWEST;
 		gbc_FirstName.fill=GridBagConstraints.HORIZONTAL;
 		gbc_FirstName.insets = new Insets(22, 0, 5, 0);
 		gbc_FirstName.gridx = 1;
 		gbc_FirstName.gridy = 1;
 		AddContact.add(FirstName, gbc_FirstName);
 		
-		
-		
 		JTextField lblFirstName = new JTextField();
 		GridBagConstraints gbc_lblFirstName = new GridBagConstraints();
-		//gbc_lblFirstName.anchor = GridBagConstraints.NORTHWEST;
 		gbc_lblFirstName.fill=GridBagConstraints.HORIZONTAL;
 		gbc_lblFirstName.insets = new Insets(22, 94, 5, 0);
 		gbc_lblFirstName.gridx = 1;
@@ -1137,32 +1127,30 @@ public class Display extends JFrame implements ActionListener {
 		
 		GridBagConstraints gbc_btnSave = new GridBagConstraints();
 		gbc_btnSave.anchor = GridBagConstraints.CENTER;
-	//	gbc_btnSave.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnSave.insets = new Insets(10, 0, 5, 0);
 		gbc_btnSave.gridx = 1;
 		gbc_btnSave.gridy = 7;
 		AddContact.add(btnSave, gbc_btnSave);
 		
-		   btnChosePic.addMouseListener(new java.awt.event.MouseAdapter() {
+		btnChosePic.addMouseListener(new java.awt.event.MouseAdapter() {
 				
-              public void mouseClicked(java.awt.event.MouseEvent evt) {
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
               	
-                  System.out.println("mouseClicked edit");
-                  System.out.println();
+				System.out.println("mouseClicked edit");
+                System.out.println();
                   
               	frame.remove(activePanel);
            
-                generategallery(-2 ,true);
+              	generategallery(-2 ,true);
                 
               	frame.validate();
-          		frame.repaint();
-          
-                  
-              }});
+              	frame.repaint();
+              	
+			}});
 		
-			  btnSave.addMouseListener(new java.awt.event.MouseAdapter() {
+			btnSave.addMouseListener(new java.awt.event.MouseAdapter() {
 					
-	                public void mouseClicked(java.awt.event.MouseEvent evt) {
+				public void mouseClicked(java.awt.event.MouseEvent evt) {
 	                	
 	                    System.out.println("mouseClicked edit");
 	                    System.out.println();
@@ -1171,24 +1159,66 @@ public class Display extends JFrame implements ActionListener {
 	                    
 	                	if(lblFirstName.getText().equals("")) {
 	                		FirstName.setForeground(Color.red);
-	                		AddContact.add(FirstName, gbc_FirstName);
 	                		error = true;
+	                	} else {
+	                		FirstName.setForeground(Color.black);
 	                	}
+	                	AddContact.add(FirstName, gbc_FirstName);
+	                	
 	                	if(lblLastName.getText().equals("")) {
 	                		LastName.setForeground(Color.red);
-	                		AddContact.add(LastName, LastName);
 	                		error = true;
+			  			} else {
+			  				LastName.setForeground(Color.black);
 			  			}
+	                	AddContact.add(LastName, gbc_LastName);
+	                	
+	                	if(!lblHomeTel.getText().equals("")) {
+		                	if(!StringFunc.isValidPhoneNumber(lblHomeTel.getText())) {
+		                		HomeTel.setForeground(Color.red);
+		                		error = true;
+		                	} else {
+		                		HomeTel.setForeground(Color.black);
+		                	}
+	                	} else {
+	                		HomeTel.setForeground(Color.black);
+	                	}
+	                	AddContact.add(HomeTel, gbc_HomeTel);
+	                	
+	                	if(!lblMobileTel.getText().equals("")) {
+		                	if(!StringFunc.isValidPhoneNumber(lblMobileTel.getText())) {
+		                		MobileTel.setForeground(Color.red);
+		                		error = true;
+		                		System.out.println("mobeerror");
+		                	} else {
+		                		MobileTel.setForeground(Color.black);
+		                	}
+	                	} else {
+	                		MobileTel.setForeground(Color.black);
+	                	}
+	                	AddContact.add(MobileTel, gbc_MobileTel);
+	                	
 	                	if(!StringFunc.isValidDate(lblBirthdate.getText())) {
 	                		Birthdate.setForeground(Color.red);
-	                		AddContact.add(Birthdate, gbc_Birthdate);
 	                		error = true;
+	                	} else {
+	                		Birthdate.setForeground(Color.black);
 	                	}
-	                	if(!StringFunc.isValidEmail(lblEmail.getText())) {
-	                		Email.setForeground(Color.red);
-	                		AddContact.add(Email, gbc_Email);
-	                		error = true;
+	                	AddContact.add(Birthdate, gbc_Birthdate);
+	                	
+	                	if(!lblEmail.getText().equals("")) {
+		                	if(!StringFunc.isValidEmail(lblEmail.getText())) {
+		                		Email.setForeground(Color.red);
+		                		error = true;
+		                		System.out.println("femailnameerror");
+		                	} else {
+		                		Email.setForeground(Color.black);
+		                	}
+	                	} else {
+	                		Email.setForeground(Color.black);
 	                	}
+	                	AddContact.add(Email, gbc_Email);
+	                	
 	                	if(!error){
 	                		frame.remove(activePanel);
 	                		contactsObj.addContact(lblFirstName.getText(), lblLastName.getText(), lblBirthdate.getText(), lblEmail.getText(), lblMobileTel.getText(), lblHomeTel.getText(), caughtContactImageID);
@@ -1204,7 +1234,7 @@ public class Display extends JFrame implements ActionListener {
 		activePanel = AddContact;
 	};
 	
-	  private void generateBackPannel(String head,int id, int type) {
+	private void generateBackPannel(String head,int id, int type) {
 		  
 		  /*	TYPE 1 = contacts
 		   * 	TYPE 2 = images
