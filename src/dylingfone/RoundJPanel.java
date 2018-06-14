@@ -42,7 +42,7 @@ public class RoundJPanel extends JPanel {
             shadowGap = 1;
         }
 
-        graphics.setColor(new Color(216, 216, 216));
+        graphics.setColor(new Color(242, 242, 242));
         graphics.fillRoundRect(0, 0, width - shadowGap,
         height - shadowGap, arcs.width, arcs.height);
         graphics.setColor(getForeground());

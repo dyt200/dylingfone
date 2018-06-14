@@ -407,6 +407,7 @@ public class Display extends JFrame implements ActionListener {
 				countLetters++;
 				
 				JPanel letterHead = new JPanel();
+				letterHead.setBackground(Color.WHITE);
 				letterHead.setPreferredSize(new Dimension(280, 30));
 				letterHead.setLayout(new FlowLayout(FlowLayout.LEFT));
 				
@@ -419,7 +420,7 @@ public class Display extends JFrame implements ActionListener {
 			
 			//creation of each contact panel + label
 			JPanel panTest = new RoundJPanel();
-			//panTest.setBackground(Color.LIGHT_GRAY);
+			panTest.setBackground(Color.WHITE);
 			panTest.setPreferredSize(new Dimension(280, 30));
 			panTest.setLayout(new FlowLayout(FlowLayout.LEFT));
 			
@@ -448,10 +449,12 @@ public class Display extends JFrame implements ActionListener {
 		}
 			
 			contactList.setPreferredSize(new Dimension(280, (30*countLetters) + (countLetters*6) + (30*array.length)+ (array.length*5) + 5));
-		
+			contactList.setBackground(Color.WHITE);
 			JScrollPane scrollPane = new JScrollPane(contactList);
+			
 			//scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 			scrollPane.setBounds(23, 150, 315, 553);
+			
 			
 			contacts.add(scrollPane);
 			
@@ -1245,7 +1248,7 @@ public class Display extends JFrame implements ActionListener {
 		  Backpanel = new JPanel();
 		  Backpanel.setBounds(23, 88, 320, 44);
 		  frame.getContentPane().add(Backpanel);
-		  Backpanel.setBackground(Color.GRAY);
+		  Backpanel.setBackground((new Color(217, 217, 217)));
 		  Backpanel.setLayout(null);
 		  
 		  JButton btnBack = new JButton(); 
@@ -1345,10 +1348,11 @@ public class Display extends JFrame implements ActionListener {
 				// BufferedImage currImage = ImageIO.read(new File(pictures[i].getPath()));
 				
 				//Image scaledImage = img.getScaledInstance(65,65,Image.SCALE_SMOOTH);
-				ImageIcon imageIcon = new ImageIcon(new ImageIcon(pictures[i].getPath()).getImage().getScaledInstance(65, 65, Image.SCALE_DEFAULT));
+				ImageIcon imageIcon = new ImageIcon(new ImageIcon(pictures[i].getPath()).getImage().getScaledInstance(71, 71, Image.SCALE_DEFAULT));
 				
 				JLabel picLabel = new JLabel(imageIcon);
 				//picLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+			
 				
 				// mouse listener for clicking on an image to go into imageDetails.
 				// 1988 THIS SEEMS TO WORK WELL, go to generateImageDetails (below)
@@ -1391,8 +1395,8 @@ public class Display extends JFrame implements ActionListener {
 				
 		}
 		
-		contactList.setBackground(Color.DARK_GRAY);
-		contactList.setPreferredSize(new Dimension(280, ((65*pictures.length) + (5*pictures.length))/4 + 5 ));
+		contactList.setBackground(new Color(242, 242, 242));
+		contactList.setPreferredSize(new Dimension(280, ((71*pictures.length) + (5*pictures.length))/4 + 5 ));
 	
 		JScrollPane scrollPane = new JScrollPane(contactList);
 		//scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
