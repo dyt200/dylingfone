@@ -22,11 +22,20 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
+/**
+ * Object of a "page" which is the parent of Gallery and Contacts
+ * Contains the basic functions that can be done on both types
+ * @author Dylan Thompson & Ben Pocklington
+ *
+ */
 public class Page {
 	
 	protected File xml;
 	protected String[] path;
 	
+	/**
+	 * Formats an XML file to be indented and read by humans
+	 */
 	public void formatXml() {
 		try {
 			String file = xml.getAbsolutePath();
@@ -48,6 +57,10 @@ public class Page {
 		}
 	}
 	
+	/**
+	 * get next id from XML file
+	 * @return XML element attribute ID
+	 */
 	public int getNextId() {
 		int key = 0;
 		try {
@@ -66,6 +79,10 @@ public class Page {
 		return (key+1);
 	}
 	
+	/**
+	 * Add elements to the XML file
+	 * @param elements
+	 */
 	public void addXmlElements(String[][] elements) {
 		String id = Integer.toString(getNextId());
 		try {
@@ -117,15 +134,30 @@ public class Page {
 		}
 	}*/
 	
+	/**
+	 * 
+	 * @return xml
+	 */
 	public File getXml() {
 		return xml;
 	}
+	/**
+	 * set XML file path
+	 * @param xml
+	 */
 	public void setXml(File xml) {
 		this.xml = xml;
 	}
+	/**
+	 * @return String xml file path
+	 */
 	public String[] getPath() {
 		return path;
 	}
+	/**
+	 * set XML file path
+	 * @param path
+	 */
 	public void setPath(String[] path) {
 		this.path = path;
 	}

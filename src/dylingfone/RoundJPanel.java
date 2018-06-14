@@ -3,6 +3,11 @@ package dylingfone;
 import java.awt.*;
 import javax.swing.JPanel;
 
+/**
+ * Extension of JPanel for creating the round panels in contactList
+ * @author Dylan Thompson & Ben Pocklington
+ *
+ */
 public class RoundJPanel extends JPanel {
 	
 	protected int strokeSize = 1;

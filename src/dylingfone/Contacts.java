@@ -16,11 +16,18 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-// HELLO WORLDD
+
+/**
+ * This is an object that manages ALL contacts in an array, and the associated functions for treating them
+ * @author Dylan Thompson & Ben Pocklington
+ *
+ */
 public class Contacts extends Page{
 	private Contact[] contactList;
 	
-	
+	/**
+	 * Creation of contacts object
+	 */
 	public Contacts() {	
 		String[] path = {"contacts", "contact"};
 		super.setXml(new File("./contacts.xml"));
@@ -28,6 +35,9 @@ public class Contacts extends Page{
 		this.contactList = getContactsFromFile();
 	}
 	
+	/**
+	 * toString for all contacts
+	 */
 	public void dumpData() {
 		System.out.println("START OF CONTACTS DATA : ");
 		System.out.println();
@@ -46,6 +56,12 @@ public class Contacts extends Page{
 		}
 	}
 	
+	/**
+	 * Change any element of the XML file, make sure it exists!
+	 * @param id
+	 * @param element
+	 * @param newValue
+	 */
 	public void editContact(int id, String element, String newValue) {
 		int tempId;
 		try {
@@ -79,6 +95,10 @@ public class Contacts extends Page{
 		}
 	}
 	
+	/**
+	 * Delete any contact in the array by ID
+	 * @param id
+	 */
 	public void deleteContact(int id) {
 		
 		int tempId;
@@ -124,7 +144,16 @@ public class Contacts extends Page{
 		
 		
 	}
-	
+	/**
+	 * Add a new contact to the XML file and to the array
+	 * @param firstName
+	 * @param lastName
+	 * @param birthDate
+	 * @param email
+	 * @param telMobile
+	 * @param telHome
+	 * @param pic
+	 */
 	public void addContact(String firstName, String lastName, String birthDate, String email, String telMobile, String telHome, String pic) {
 		try {
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -180,6 +209,10 @@ public class Contacts extends Page{
 		}
 	}
 	
+	/**
+	 * Get all contacts from the XML file contacts.xml
+	 * @return Contact[]
+	 */
 	public Contact[] getContactsFromFile() {
 		Contact[] contactsFF = null;
 		int pic;
@@ -229,10 +262,6 @@ public class Contacts extends Page{
 	         						Integer.parseInt(el.getElementsByTagName("pic").item(0).getTextContent())
 	         						);
 		            }
-		            
-		           
-		           
-		            
 		            contactsFF[temp] = tempCon;
 		        }
 		    }
@@ -241,11 +270,19 @@ public class Contacts extends Page{
 		}
 		return contactsFF;
 	}
-
+	
+	/**
+	 * 
+	 * @return Contact[] 
+	 */
 	public Contact[] getContactList() {
 		return contactList;
 	}
 	
+	/**
+	 * Returns the array of contacts in alphabetical order
+	 * @return Contact[]
+	 */
 	public Contact[] getContactListAlpha() {
 		Contact[] tempC = contactList;
 		int compare;
@@ -280,6 +317,10 @@ public class Contacts extends Page{
 		return tempC;
 	}
 	
+	/**
+	 * Sets the contacts array
+	 * @param contacts
+	 */
 	public void setContacts(Contact[] contacts) {
 		this.contactList = contacts;
 	}

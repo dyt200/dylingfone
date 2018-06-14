@@ -20,11 +20,18 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 
-
+/**
+ * Object which creates an array of all pictures and their associated functions
+ * @author Dylan Thompson & Ben Pocklington
+ *
+ */
 public class Gallery extends Page {
 	
 	private Pictures[] images;
 	
+	/**
+	 * Initialisation of gallery object
+	 */
 	public Gallery() { 
 		String[] path = {"gallery", "image"};
 		super.setXml(new File("./gallery.xml"));
@@ -32,6 +39,9 @@ public class Gallery extends Page {
 		this.images = getImagesFromFile();
 	}
 	
+	/**
+	 * prints all of the picture details to console
+	 */
 	public void dumpData() {
 		System.out.println("START OF DATA : ");
 		System.out.println();
@@ -45,6 +55,12 @@ public class Gallery extends Page {
 		}
 	}
 	
+	/**
+	 * Add a picture to gallery.xml and to the array
+	 * @param title
+	 * @param desc
+	 * @param path
+	 */
 	public void addPicture(String title, String desc, String path) {
 		try {
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -83,6 +99,12 @@ public class Gallery extends Page {
 		}
 	}
 	
+	/**
+	 * edit a single element of a picture, make sure it exists!
+	 * @param id
+	 * @param element The name of the XML element
+	 * @param newValue
+	 */
 	public void editPicture(int id, String element, String newValue) {
 		int tempId;
 		try {
@@ -116,6 +138,10 @@ public class Gallery extends Page {
 		}
 	}
 	
+	/**
+	 * Delete a picture from gallery.xml and from the array
+	 * @param id
+	 */
 	public void deletePicture(int id) {
 		int tempId;
 		Node tempNode;
@@ -168,6 +194,10 @@ public class Gallery extends Page {
 		}
 	}
 	
+	/**
+	 * returns array of pictures
+	 * @return Pictures[]
+	 */
 	public Pictures[] getImagesFromFile() {
 		Pictures[] imagesFF = null;
 		try {
@@ -200,6 +230,11 @@ public class Gallery extends Page {
 		return imagesFF;
 	}
 	
+	/**
+	 * Returns the file location of a picture by id
+	 * @param id ID of picture
+	 * @return String of file path
+	 */
 	public String getPathFromId(int id) {
 		int tempId;
 		for(int i = 0; i < images.length; i++) {
@@ -210,9 +245,17 @@ public class Gallery extends Page {
 		return "./images/placeholder.jpg";
 	}
 	
+	/**
+	 * 
+	 * @return Pictures[]
+	 */
 	public Pictures[] getImages() {
 		return images;
 	}
+	/**
+	 * set image array
+	 * @param images
+	 */
 	public void setImages(Pictures[] images) {
 		this.images = images;
 	}
